@@ -70,6 +70,7 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
     </button>
 </div>
 <button class="nyomkodni">Nyomj meg!</button>
+<button>Új gomb</button>
 <div class="enekek"></div>
 </body>
 
