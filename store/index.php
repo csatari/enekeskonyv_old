@@ -1,6 +1,3 @@
-<?php
-header('Content-Type: text/html; charset=utf-8');
-?>
 <!--/** A Store főoldala
 PHP alapú megjelenítés, kis Javascripttel.
 PHP objektumelvű:
@@ -21,6 +18,7 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
 <head>
     <script src="../js/jquery-1.11.1.js"></script>
     <script src="js/enekpont.js"></script>
+    <script src="objects/felhasznaloKezelo.js"></script>
     <script src="js/masonry.pkgd.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/fooldal.css">
     <link rel="stylesheet" type="text/css" href="css/enekpont.css">
@@ -28,11 +26,16 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
         var megnyomva = false;
         var ujcim = 6;
         $(document).ready(function() {
+            //Lehet, hogy így kell majd hozzáadni egy elemet...
+            felhasznaloKezelo.megjelenit(".Reg");
+
             $(".enekek").masonry({
                 itemSelector: ".enekpont",
-                columnWidth: 150
+                columnWidth: 250
             });
             $( ".nyomkodni" ).click(function() {
+                felhasznaloKezelo.bejelentkezes("Albert");
+
                 $.ajax({
                     url: "enekpont.php"
                 }).done(function (e) {
@@ -72,8 +75,8 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
         <img class="keresoGombKep" src="resources/search.png"/>
     </button>
 </div>
+<div class="Reg"></div>
 <button class="nyomkodni">Nyomj meg!</button>
-<button>Új gomb</button>
 <div class="enekek"></div>
 </body>
 
