@@ -1,3 +1,6 @@
+<?php
+header('Content-Type: text/html; charset=utf-8');
+?>
 <!--/** A Store főoldala
 PHP alapú megjelenítés, kis Javascripttel.
 PHP objektumelvű:

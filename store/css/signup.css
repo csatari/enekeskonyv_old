@@ -1,0 +1,35 @@
+BODY
+{
+	font-family: Calibri;
+}
+#errorMessages
+{
+	border: 1px solid #FF0000;
+	background-color: #FFCACA;
+	height: 19px;
+	margin-left: 10%;
+	width: 313px;
+}
+H1
+{
+	text-align: center;
+}
+FORM
+{
+	font-size: 14.6pt;
+	margin-left: 10%;
+}
+FORM INPUT
+{
+	border: 1px solid #979797;
+	height: 20px;
+	margin-top: 8px;
+	margin-bottom: 5px;
+}
+#submit
+{
+	height: 37px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-top: 30px;
+}
