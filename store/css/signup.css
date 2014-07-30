@@ -65,3 +65,13 @@ FORM INPUT
 	background-color: rgba(0, 0, 0, 0.2);
 	display: none;
 }
+#backgroundImage
+{
+	position: absolute;
+	top: 21%;
+	left: 26%;
+	width: 428px;
+	height: 316px;
+	background-image: url("../resources/kottaBackground.PNG");
+	z-index: -1;
+}

@@ -5,6 +5,7 @@
  * Date: 2014.07.29.
  * Time: 13:26
  */
+require_once('smtpValidateEmail.class.php');
 header('Content-Type: text/html; charset=utf-8');
 date_default_timezone_set('CET');
 $errorMessage="";
@@ -13,42 +14,45 @@ $done = "";
 if(sizeof($_POST)>0 && strlen($_POST["lastname"]) != 0 &&
 strlen($_POST["firstname"]) != 0 &&
 strlen($_POST["username"]) != 0 &&
-strlen($_POST["email"]) != 0 && isEmail($_POST["email"]) &&
+strlen($_POST["email"]) != 0 &&
 strlen($_POST["pass"]) != 0 &&
 strlen($_POST["pass2"]) != 0){
     //Felhasználó elmentése az adatbázisba
-    try {
-        /*
-         *  --
-         *  -- Tábla szerkezet ehhez a táblához `users`
-         *  --
-         *
-         *  CREATE TABLE IF NOT EXISTS `users` (
-         *    `id` bigint(11) NOT NULL AUTO_INCREMENT,
-         *    `lastname` varchar(40) COLLATE utf8_hungarian_ci NOT NULL,
-         *    `firstname` varchar(40) COLLATE utf8_hungarian_ci NOT NULL,
-         *    `username` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-         *    `email` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
-         *    `pass` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
-         *    `date` datetime NOT NULL,
-         *    PRIMARY KEY (`id`)
-         *  ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci COMMENT='A felhasználók itt vannak eltárolva'
-         * AUTO_INCREMENT=1 ;
-         */
-        $db = new PDO('mysql:host=localhost;dbname=enekeskonyv', 'user', '',
-        array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $db->beginTransaction();
-        $db->exec(" INSERT INTO `users` (`id`, `lastname`, `firstname`, `username`, `email`, `pass`, `date`)
-        VALUES ('', '".$_POST["lastname"]."', '".$_POST["firstname"]."', '".$_POST["username"]."', '".$_POST["email"]."', '".
-        md5($_POST["pass"])."', '".date("Y-m-d H:i:s")."')");
-        $db->commit();
+    if(isEmail($_POST["email"])){
+        try {
+            /*
+             *  --
+             *  -- Tábla szerkezet ehhez a táblához `users`
+             *  --
+             *
+             *  CREATE TABLE IF NOT EXISTS `users` (
+             *    `id` bigint(11) NOT NULL AUTO_INCREMENT,
+             *    `lastname` varchar(40) COLLATE utf8_hungarian_ci NOT NULL,
+             *    `firstname` varchar(40) COLLATE utf8_hungarian_ci NOT NULL,
+             *    `username` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+             *    `email` varchar(100) COLLATE utf8_hungarian_ci NOT NULL,
+             *    `pass` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
+             *    `date` datetime NOT NULL,
+             *    PRIMARY KEY (`id`)
+             *  ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci COMMENT='A felhasználók itt vannak eltárolva'
+             * AUTO_INCREMENT=1 ;
+             */
+            $db = new PDO('mysql:host=localhost;dbname=enekeskonyv', 'user', '',
+            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $db->beginTransaction();
+            $db->exec(" INSERT INTO `users` (`id`, `lastname`, `firstname`, `username`, `email`, `pass`, `date`)
+            VALUES ('', '".$_POST["lastname"]."', '".$_POST["firstname"]."', '".$_POST["username"]."', '".$_POST["email"]."', '".
+            md5($_POST["pass"])."', '".date("Y-m-d H:i:s")."')");
+            $db->commit();
 
-    } catch (PDOException $e) {
-        $db->rollBack();
+        } catch (PDOException $e) {
+            $db->rollBack();
+        }
+        $db = NULL;
+        $done = '$("#coverLayer").css("display","block");$("#done").css("display","block");';
     }
-    $db = NULL;
-    $done = '$("#coverLayer").css("display","block");$("#done").css("display","block");';
+    else $errorMessage = 'errorMessage("Érvénytelen a megadott e-mail cím");';
 }
 //Regisztrációs adatok helyességének vizsgálata
 elseif(isset($_POST["pass"])&& ($_POST["pass"] != $_POST["pass2"])){
@@ -58,13 +62,10 @@ elseif(sizeof($_POST)>0){
     $errorMessage = 'errorMessage("Valamelyik cellát üresen hagytad.");';
 }
 
-function isEmail(){
-    /*
-     * Itt kellene az e-mail cím valódiságát ellenőrizni
-     * Eddig még nem találtam kifogástalanul működőt ami az SMTP protokollon keresztül lekérdezi a szolgálttót,
-     * hogy be van e nála jegyezve az adott e-mail cím
-     */
-    return true;
+function isEmail($mail){
+    $SMTP_Validator = new SMTP_validateEmail();
+    $results = $SMTP_Validator->validate(array($mail));
+    return $results[$mail];
 }
 ?>
 <!DOCTYPE html>
@@ -149,11 +150,12 @@ function isEmail(){
         Jelszó mégegyszer:<br><input type="password" id="pass2" name="pass2" onfocus="" onblur="validCheck(this.value,this.id)"><br>
         <input type="submit" id="submit" name="submit" class="gomb" value="Regisztrálok">
     </form>
-<div id="coverLayer"></div>
-<div id="done">
-    <h2>Sikeres Regisztráció</h2>
-    Ezután lehetőséged van saját énekeskönyveket létrehozni, módosítani és letölteni. Így offline is használhatod. De akár új énekeket is feltölthetsz, akár több verzióban is.<br>
-    <button onclick="location.href='index.php'" class="gomb">Bejelentkezés</button>
-</div>
+    <div id="backgroundImage"></div>
+    <div id="coverLayer"></div>
+    <div id="done">
+        <h2>Sikeres Regisztráció</h2>
+        Ezután lehetőséged van saját énekeskönyveket létrehozni, módosítani és letölteni. Így offline is használhatod. De akár új énekeket is feltölthetsz, akár több verzióban is.<br>
+        <button onclick="location.href='index.php'" class="gomb">Bejelentkezés</button>
+    </div>
 </body>
 </html>
