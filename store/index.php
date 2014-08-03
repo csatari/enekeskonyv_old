@@ -16,9 +16,10 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
 
 <html>
 <head>
+    <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
     <script src="../js/jquery-1.11.1.js"></script>
-    <script src="js/enekpont.js"></script>
-    <script src="objects/felhasznaloKezelo.js"></script>
+    <script src="js/enekpont.js" charset="utf-8"></script>
+    <script src="objects/felhasznaloKezelo.js" charset="utf-8"></script>
     <script src="js/masonry.pkgd.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/fooldal.css">
     <link rel="stylesheet" type="text/css" href="css/enekpont.css">
@@ -59,11 +60,31 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
                 });
             });
             $(".keresoGomb").click(function() {
+
+
                 var ujenek = "<div class=\"enekpont\" id=\""+ujcim+"\">"+$(".keresoInput").val()+"</div>";
                 $('.enekek').append(ujenek);
                 $('.enekek').masonry( 'addItems', $('#'+ujcim+".enekpont"));
                 $('.enekek').masonry();
                 ujcim++;
+            });
+            $(".keresoInput").keyup(function() {
+                console.log("elindult: "+$(".keresoInput").val());
+                $.ajax({
+                    type: "POST",
+                    url:"php/enekKereso.php",
+                    data: {
+                        "cim": $(".keresoInput").val()
+                    }
+                }).done(function(e) {
+                    var enekek = JSON.parse(e);
+                    $('.enekek').html("");
+                    for(var i=0; i<enekek.length; i++) {
+                        $('.enekek').append(enekpont.megjelenit(enekek[i]));
+                        $('.enekek').masonry( 'addItems', $('#'+enekek[i].id));
+                        $('.enekek').masonry();
+                    }
+                });
             });
         });
     </script>
