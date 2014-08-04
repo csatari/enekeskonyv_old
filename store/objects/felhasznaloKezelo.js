@@ -9,7 +9,7 @@ felhasznaloKezelo.cssBeallitas = function() {
     $(felhasznaloKezelo.adatkoto).css({
         'position':'fixed',
         'right':'3%',
-        'top':'5%',
+        'top':'3%',
         'z-index':2,
         'font-size':'20px',
         'border': 'solid',
@@ -33,7 +33,7 @@ felhasznaloKezelo.cssBeallitas = function() {
 };
 felhasznaloKezelo.megjelenit = function(adatkoto) {
     felhasznaloKezelo.adatkoto = adatkoto;
-    felhasznaloKezelo.cssBeallitas(adatkoto);
+    felhasznaloKezelo.cssBeallitas();
 
     felhasznaloKezelo.frissites();
 };

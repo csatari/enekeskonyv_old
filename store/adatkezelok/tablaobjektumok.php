@@ -41,3 +41,31 @@ class EnekTabla implements JsonSerializable {
     }
 
 }
+
+class EnekeskonyvTabla implements JsonSerializable {
+
+    public static $tablaNev = "enekeskonyv";
+    public static $idNev = "id";
+    public static $useridNev = "userid";
+    public static $titleNev = "title";
+
+    public $id;
+    public $userid;
+    public $title;
+
+    function __construct($array) {
+        $this->id = $array[EnekeskonyvTabla::$idNev];
+        $this->userid = $array[EnekeskonyvTabla::$useridNev];
+        $this->title = $array[EnekeskonyvTabla::$titleNev];
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'userid' => $this->userid,
+            'title' => $this->title
+        ];
+    }
+
+}

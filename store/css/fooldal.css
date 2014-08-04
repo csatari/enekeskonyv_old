@@ -6,8 +6,8 @@ body {
     text-align: center;
     position: fixed;
     left: 33%;
-    z-index: 1;
-    margin-top:10px;
+    z-index: 3;
+    top:3%;
 }
 .keresoGomb {
     background-color: transparent;
@@ -61,5 +61,15 @@ body {
     width:400px;
 }
 .enekek {
-    margin-top: 35px;
+    top: 3%;
+    margin-top: 50px;
+    margin-left: 245px;
+}
+a.link {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+a.link:hover {
+    text-decoration: underline;
 }

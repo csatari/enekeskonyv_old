@@ -19,6 +19,7 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
     <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
     <script src="../js/jquery-1.11.1.js"></script>
     <script src="js/enekpont.js" charset="utf-8"></script>
+    <script src="objects/felhasznaloEnekek.js" charset="utf-8"></script>
     <script src="objects/felhasznaloKezelo.js" charset="utf-8"></script>
     <script src="js/masonry.pkgd.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/fooldal.css">
@@ -26,9 +27,11 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
     <script>
         var megnyomva = false;
         var ujcim = 6;
+        var megjelenitettEnekek;
         $(document).ready(function() {
             //Lehet, hogy így kell majd hozzáadni egy elemet...
             felhasznaloKezelo.megjelenit(".Reg");
+            felhasznaloEnekek.megjelenit(".felhasznaloEnekek");
 
             $(".enekek").masonry({
                 itemSelector: ".enekpont",
@@ -72,18 +75,21 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
                 console.log("elindult: "+$(".keresoInput").val());
                 $.ajax({
                     type: "POST",
-                    url:"php/enekKereso.php",
+                    url:"jsoncommunicator/enekKereso.php",
                     data: {
                         "cim": $(".keresoInput").val()
                     }
                 }).done(function(e) {
                     var enekek = JSON.parse(e);
-                    $('.enekek').html("");
-                    for(var i=0; i<enekek.length; i++) {
-                        $('.enekek').append(enekpont.megjelenit(enekek[i]));
-                        $('.enekek').masonry( 'addItems', $('#'+enekek[i].id));
-                        $('.enekek').masonry();
+                    if(megjelenitettEnekek != e) {
+                        $('.enekek').html("");
+                        for(var i=0; i<enekek.length; i++) {
+                            $('.enekek').append(enekpont.megjelenit(enekek[i]));
+                            $('.enekek').masonry( 'addItems', $('#'+enekek[i].id));
+                            $('.enekek').masonry();
+                        }
                     }
+                    megjelenitettEnekek = e;
                 });
             });
         });
@@ -96,8 +102,37 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
         <img class="keresoGombKep" src="resources/search.png"/>
     </button>
 </div>
+<div class="felhasznaloEnekek">
+    <!--<table class="enekeim">
+        <tr>
+            <td><img src="resources/songbooks.png" width="32"/></td>
+            <td class="cim">Énekeim</td>
+            </tr>
+        <tr>
+            <td></td>
+            <td><a href="#" class="link ujenek">Új</a></td>
+            </tr>
+        <tr>
+            <td></td>
+            <td><a href="#" class="link">Összes</td>
+        </tr>
+    </table>
+    <table class="enekeskonyveim">
+        <tr>
+            <td><img src="resources/note.png" height="32" width="32"/></td>
+            <td class="cim">Énekeskönyveim</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <a href="#" class="link ujenekeskonyvLink">Új</a>
+                <input class="ujenekeskonyvInput" type="text" placeholder="Énekeskönyv címe"/>
+            </td>
+        </tr>
+    </table>-->
+</div>
 <div class="Reg"></div>
-<button class="nyomkodni">Nyomj meg!</button>
+<!--<button class="nyomkodni">Nyomj meg!</button>-->
 <div class="enekek"></div>
 </body>
 
