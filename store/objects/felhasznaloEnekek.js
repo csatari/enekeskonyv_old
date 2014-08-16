@@ -117,25 +117,29 @@ felhasznaloEnekek.frissites = function() {
     $(felhasznaloEnekek.adatkoto + " .ujenekeskonyvInput").keyup(function(key) {
         if(key["keyCode"] == 13) {
             var title = $(felhasznaloEnekek.adatkoto + " .ujenekeskonyvInput").val();
-            $.ajax({
-                type: "POST",
-                url:"jsoncommunicator/enekeskonyvKereso.php",
-                data: {
-                    "add": title,
-                    "userid": 0
-                }
-            }).done(function(e) {
-                felhasznaloEnekek.frissites();
-            });
+            if(title != "") {
+                $.ajax({
+                    type: "POST",
+                    url:"jsoncommunicator/enekeskonyvKereso.php",
+                    data: {
+                        "add": title,
+                        "userid": 0
+                    }
+                }).done(function(e) {
+                    felhasznaloEnekek.frissites();
+                });
+            }
             $(this).css("display","none");
             $(felhasznaloEnekek.adatkoto + " .ujenekeskonyvLink").css("display","inline");
             $(this).val("");
-
         }
         else if(key["keyCode"] == 27) {
             $(this).css("display","none");
             $(felhasznaloEnekek.adatkoto + " .ujenekeskonyvLink").css("display","inline");
             $(this).val("");
         }
+    });
+    $(felhasznaloEnekek.adatkoto + " .ujenek").click(function(key) {
+        window.location.href = "./edit.php";
     });
 };
