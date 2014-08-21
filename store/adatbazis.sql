@@ -6,8 +6,12 @@ CREATE TABLE IF NOT EXISTS `enek` (
   `cim` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `leiro` text COLLATE utf8_unicode_ci NOT NULL,
   `kotta` text COLLATE utf8_unicode_ci NOT NULL,
+  `nyelv` int(11) NOT NULL,
+  `masnyelven` int(11) DEFAULT NULL,
+  `cimkek` text COLLATE utf8_unicode_ci NOT NULL,
+  `megjegyzes` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- tesztadatok
 INSERT INTO `enek` (`id`, `cim`, `leiro`, `kotta`, `nyelv`) VALUES
@@ -26,3 +30,21 @@ CREATE TABLE IF NOT EXISTS `enekeskonyv` (
   `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Tábla szerkezet ehhez a táblához `nyelv`
+--
+
+CREATE TABLE IF NOT EXISTS `nyelv` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nev` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- A tábla adatainak kiíratása `nyelv`
+--
+
+INSERT INTO `nyelv` (`id`, `nev`) VALUES
+(1, 'Magyar'),
+(2, 'English');

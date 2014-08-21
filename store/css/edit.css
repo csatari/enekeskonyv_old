@@ -47,6 +47,12 @@
     background-image: -ms-linear-gradient(top, #F7F5F6, #DDDDDD);
     background-image: -o-linear-gradient(top, #F7F5F6, #DDDDDD);
     background-image: linear-gradient(to bottom, #F7F5F6, #DDDDDD);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#F7F5F6, endColorstr=#DDDDDD);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .enekSzerkeszto > .szerkesztoBeallitasok > .gomb:hover {
     border:1px solid #ADADAD;
@@ -56,6 +62,7 @@
     background-image: -ms-linear-gradient(top, #E0E0E0, #BDBBBC);
     background-image: -o-linear-gradient(top, #E0E0E0, #BDBBBC);
     background-image: linear-gradient(to bottom, #E0E0E0, #BDBBBC);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#E0E0E0, endColorstr=#BDBBBC);
+    cursor: hand;
 }
 .beallitasok > table {
     width: 100%;
@@ -79,10 +86,17 @@
     vertical-align: top;
     padding-top: 12px;
 }
-a.link {
+.link {
     color: black;
     text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
-a.link:hover {
+.link:hover {
     text-decoration: underline;
+    cursor: hand;
 }

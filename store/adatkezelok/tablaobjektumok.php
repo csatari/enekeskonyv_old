@@ -13,6 +13,9 @@ class EnekTabla implements JsonSerializable {
     public static $leiroNev = "leiro";
     public static $kottaNev = "kotta";
     public static $nyelvNev = "nyelv";
+    public static $masnyelvenNev = "masnyelven";
+    public static $cimkekNev = "cimkek";
+    public static $megjegyzesNev = "megjegyzes";
 
     public $tabla;
     public $id;
@@ -20,6 +23,9 @@ class EnekTabla implements JsonSerializable {
     public $leiro;
     public $kotta;
     public $nyelv;
+    public $masnyelven;
+    public $cimkek;
+    public $megjegyzes;
 
     function __construct($array) {
         $this->id = $array[EnekTabla::$idNev];
@@ -27,6 +33,9 @@ class EnekTabla implements JsonSerializable {
         $this->leiro = $array[EnekTabla::$leiroNev];
         $this->kotta = $array[EnekTabla::$kottaNev];
         $this->nyelv = $array[EnekTabla::$nyelvNev];
+        $this->masnyelven = $array[EnekTabla::$masnyelvenNev];
+        $this->cimkek = $array[EnekTabla::$cimkekNev];
+        $this->megjegyzes = $array[EnekTabla::$megjegyzesNev];
     }
 
     public function jsonSerialize()
@@ -36,7 +45,10 @@ class EnekTabla implements JsonSerializable {
             'cim' => $this->cim,
             'leiro' => $this->leiro,
             'kotta' => $this->kotta,
-            'nyelv' => $this->nyelv
+            'nyelv' => $this->nyelv,
+            'masnyelven' => $this->masnyelven,
+            'cimkek' => $this->cimkek,
+            'megjegyzes' => $this->megjegyzes
         ];
     }
 
@@ -67,5 +79,26 @@ class EnekeskonyvTabla implements JsonSerializable {
             'title' => $this->title
         ];
     }
+}
 
+class NyelvTabla implements JsonSerializable {
+
+    public static $tablaNev = "nyelv";
+    public static $idNev = "id";
+    public static $nevNev = "nev";
+
+    public $id;
+    public $nev;
+
+    function __construct($array) {
+        $this->id = $array[NyelvTabla::$idNev];
+        $this->nev = $array[NyelvTabla::$nevNev];
+    }
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'nev' => $this->nev
+        ];
+    }
 }

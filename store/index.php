@@ -12,7 +12,17 @@ PHP objektumelvű:
 Feladat általában: Adatbáziskezelés, Linkek kezelése,
 Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
 -->
-
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Albert
+ * Date: 2014.08.14.
+ * Time: 20:04
+ */
+require_once("db.php");
+$token = md5(rand(1000,9999)); //you can use any encryption
+$_SESSION['token'] = $token; //store it as session variable
+?>
 
 <html>
 <head>
@@ -32,7 +42,26 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
             //Lehet, hogy így kell majd hozzáadni egy elemet...
             var felhasznaloKezelo = new FelhasznaloKezelo(".Reg");
             felhasznaloKezelo.megjelenit();
-            felhasznaloEnekek.megjelenit(".felhasznaloEnekek");
+
+            var felhasznaloEnekek = new FelhasznaloEnekek(".felhasznaloEnekek");
+            felhasznaloEnekek.megjelenit();
+            document.addEventListener("osszesenek",function(e) {
+                console.log("Az összes énekeskönyv letöltése!");
+                $.ajax({
+                    type: "POST",
+                    url:"jsoncommunicator/enekeskonyvLetolto.php",
+                    data: {
+                        "token": "<?php echo $token; ?>"
+                    }
+                }).done(function(e) {
+                    if(e != "") {
+                        alert("Nem sikerült a letöltés!");
+                    }
+                    else {
+                        alert("Sikerült a letöltés!");
+                    }
+                });
+            });
             $(".enekek").masonry({
                 itemSelector: ".enekpont",
                 columnWidth: 250
@@ -103,33 +132,6 @@ Javascript feladata: Megjelenítés, JSON-nal lekérdezés, feltöltés
     </button>
 </div>
 <div class="felhasznaloEnekek">
-    <!--<table class="enekeim">
-        <tr>
-            <td><img src="resources/songbooks.png" width="32"/></td>
-            <td class="cim">Énekeim</td>
-            </tr>
-        <tr>
-            <td></td>
-            <td><a href="#" class="link ujenek">Új</a></td>
-            </tr>
-        <tr>
-            <td></td>
-            <td><a href="#" class="link">Összes</td>
-        </tr>
-    </table>
-    <table class="enekeskonyveim">
-        <tr>
-            <td><img src="resources/note.png" height="32" width="32"/></td>
-            <td class="cim">Énekeskönyveim</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <a href="#" class="link ujenekeskonyvLink">Új</a>
-                <input class="ujenekeskonyvInput" type="text" placeholder="Énekeskönyv címe"/>
-            </td>
-        </tr>
-    </table>-->
 </div>
 <div class="Reg"></div>
 <!--<button class="nyomkodni">Nyomj meg!</button>-->

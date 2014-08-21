@@ -87,7 +87,7 @@ var FelhasznaloKezelo = function(Adatkoto) {
             if(!bejelentkezve) {
                 $(adatkoto).html(
                     "<table><tr><td>Bejelentkezés</td><td>Regisztráció</td></tr>" +
-                        "<tr><td><a class='link mentes' href='#'>Mentés</a></td><td><a class='link elvetes' href='#'>Elvetés</a></td></tr></table>"
+                        "<tr><td><span class='link mentes'>Mentés</span></td><td><span class='link elvetes'>Elvetés</span></td></tr></table>"
 
                    /* "<span class='bejelentkezes'>Bejelentkezés</span><span class='regisztracio'>Regisztráció</span>" +
                     "<br><span class='szerkesztesMentes'>Mentés</span><span class='szerkesztesElvetes'>Elvetés</span>"*/
@@ -96,7 +96,7 @@ var FelhasznaloKezelo = function(Adatkoto) {
             else {
                 $(adatkoto).html(
                     "<table><tr><td>Kép</td><td>Név</td></tr>" +
-                        "<tr><td><a class='link mentes' href='#'>Mentés</a></td><td><a class='link elvetes' href='#'>Elvetés</a></td></tr></table>"
+                        "<tr><td><span class='link mentes'>Mentés</span></td><td><span class='link elvetes'>Elvetés</span></td></tr></table>"
                 );
             }
         }
@@ -111,4 +111,6 @@ var FelhasznaloKezelo = function(Adatkoto) {
             document.dispatchEvent(event);
         });
     };
+
+
 };
