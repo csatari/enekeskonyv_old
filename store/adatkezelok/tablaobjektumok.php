@@ -9,6 +9,7 @@ class EnekTabla implements JsonSerializable {
 
     public static $tablaNev = "enek";
     public static $idNev = "id";
+    public static $verzioNev = "verzio";
     public static $cimNev = "cim";
     public static $leiroNev = "leiro";
     public static $kottaNev = "kotta";
@@ -19,6 +20,7 @@ class EnekTabla implements JsonSerializable {
 
     public $tabla;
     public $id;
+    public $verzio;
     public $cim;
     public $leiro;
     public $kotta;
@@ -29,6 +31,7 @@ class EnekTabla implements JsonSerializable {
 
     function __construct($array) {
         $this->id = $array[EnekTabla::$idNev];
+        $this->verzio = $array[EnekTabla::$verzioNev];
         $this->cim = $array[EnekTabla::$cimNev];
         $this->leiro = $array[EnekTabla::$leiroNev];
         $this->kotta = $array[EnekTabla::$kottaNev];
@@ -42,6 +45,7 @@ class EnekTabla implements JsonSerializable {
     {
         return [
             'id' => $this->id,
+            'verzio' => $this->verzio,
             'cim' => $this->cim,
             'leiro' => $this->leiro,
             'kotta' => $this->kotta,

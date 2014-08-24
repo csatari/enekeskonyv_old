@@ -3,6 +3,7 @@
 -- enek tábla
 CREATE TABLE IF NOT EXISTS `enek` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `verzio` int(11) NOT NULL DEFAULT '1',
   `cim` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `leiro` text COLLATE utf8_unicode_ci NOT NULL,
   `kotta` text COLLATE utf8_unicode_ci NOT NULL,

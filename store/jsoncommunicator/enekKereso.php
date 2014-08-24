@@ -7,6 +7,12 @@
  */
 require_once("../adatkezelok/enek.php");
 $sql = new EnekSQL($db);
-//$sql->add("ebben is benne van, hogy cím","ez meg egy leíró", "na ez meg egy kotta");
-$enektabla = $sql->getByTitlePart($_POST["cim"]);
-echo json_encode($enektabla);
+if(isset($_POST["cim"])) {
+    $enektabla = $sql->getByTitlePart($_POST["cim"]);
+    echo json_encode($enektabla);
+}
+else if(isset($_REQUEST["id"])) {
+    $enektabla = $sql->getById($_REQUEST["id"]);
+    echo json_encode($enektabla);
+}
+
