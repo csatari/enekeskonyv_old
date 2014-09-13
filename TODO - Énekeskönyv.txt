@@ -19,7 +19,7 @@ Megjelenés:
 													- Minden akkord megjelenik
 													- Csak az új részeknél jelenik meg akkord
 													- Nincs akkord
-												- Kottás verzió (jobbra gombra is mûködhetne és átúszhatna a jobb oldalra)
+												- Kottás verzió (jobbra nyílra is mûködhetne és átúszhatna a jobb oldalra)
 												- Sablon
 												- Megjegyzések
 												- Nyomtatási kép
@@ -28,6 +28,7 @@ Megjelenés:
 												- Billentyûkombinációk beállítása
 												- Háttérképek
 - Ha van beállítva háttérkép, akkor az elsõ belépésnél csak egy nagy háttérkép legyen (szépen diavetítéssel, ha több)
+- Igazodjon a képernyõ méretéhez a szöveg mindig
 Keresés:
 - Úgy mint a store-ban, mûködjön a keresés:	1. Címben
 											2. Címkék közt
