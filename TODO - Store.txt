@@ -1,0 +1,48 @@
+Regisztráció/Bejelentkezés:
+- Regisztráció elmentõdjön az adatbázisba - átnézve legyen minden adat, helyesen bent legyen
+- Regisztrációnál a jelszó megfelelõen legyen elkódolva, és ne menjen át plain textben a neten
+- Bejelentkezés legyen megoldva, legyen egy sessionid, php-ben el lehet menteni
+- Bejelentkezés után legyen egy kis kép, plusz a név a jobb felsõ sarokban
+- A felsõkre kattintva jöjjön be a profilbeállítások (ha nincs teljes név, akkor csak felhasználónév
+- Profilbeállítások: 	- kép átállítása
+						- jelszó átállítása
+						- név beállítása
+- Kijelentkezés mûködjön (valahol legyen ilyen)
+Keresések:
+- Alapból jelenjen meg néhány gyakran látogatott ének (mit jelent, hogy gyakran? még hagyjuk késõbbre)
+- Keresésre bejönnek az énekek:	1. Saját énekeskönyvek nevének keresése - és azok énekeiben keresés
+								2. Névben keresés
+								3. Címkékben keresés
+								4. Szövegben keresés
+								Maximum 100 találat lehessen, hogy gyorsan mûködjön (még változhat)
+- Amikor szûkül a keresés, ne töltsenek be újra az elemek, csak tûnjenek el
+  Ugyanez az új elemekre, csak jöjjenek fel pluszba
+- Valahogy okosan jelenjenek meg egy ének alatt az összes verziói (plusz gombos verzió is legyen meg)
+Megtekintés:
+- Legyen egy megtekintõ ablak: Ének címe és a szöveg jelenjen meg egy új lapon. (Énekes ének megtekintése)
+- Énekre kattintásra jöjjön elõ a megtekintés
+- Kapcsolódó énekek jelenjenek meg legalul
+Énekeskönyvbe rakás/kivétel:
+- Énekeskönyvre kattintással jelenjenek meg a következõk:	- alul egy sötétebb sáv letöltéssel, megosztással, törléssel
+															- az összes megjelenõ ének bal felsõ sarkában egy plusz gomb (mínusz, ha már benne van)
+- Mûködjön a letöltés gomb, rakja össze egy zip-be a kész énekeskönyvet
+- Mûködjön a megosztás gomb 
+	-> hozza fel az összes felhasználót, és lehessen kiválasztani, 
+	   hogy kivel osztom meg, plusz, hogy milyen jogokat kap:	- szerkesztés
+																- törlés
+	-> ténylegesen ossza is meg a felhasználóval
+- Lehessen törölni énekeskönyvet
+- Plusz gombbal lehessen éneket berakni az énekeskönyvbe, mínusz gombbal kivenni belõle
+Megtekintés - szerkesztések:
+- 3 gomb jelenjen meg:	- Módosítás
+						- Új verzió (fork)
+						- Törlés
+- Ezekre a gombokra a sima szerkesztõ jöjjön fel, ha saját énekrõl van szó (saját akkor, ha admin vagy, vagy te töltötted fel)
+- Ha nem saját az ének, akkor legyen kiemelve, hogy csak kérelmet küldesz el!
+Kérelmek:
+- Ha érkezett kérelem, akkor jelenjen meg mint fb-on kis piros számlálóval a jobb felsõ sarokban a profilon
+- Kattintásra hozza be a kérelemre váró énekeket
+Címke:
+- Kezelje címkének a nyelvet
+Szerkesztés:
+- Amit kihagytunk belõle, majd ide jön

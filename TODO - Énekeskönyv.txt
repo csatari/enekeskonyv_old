@@ -1,0 +1,40 @@
+Installáció:
+- Töltse le az összes éneket, ami szerepel benne, adatbázisba tegye is bele
+- Tudjon betölteni valamilyen függvényre adott éneket
+- Automatikusan, pl minden fél óra eltelt idõ után ugorjon fel a netre, és ellenõrizze, hogy:	- Van-e új ének - töltse is le
+																								- Módosult-e ének
+																								- Pluszban töltsön föl statisztikákat is
+																								- Van-e új sablon
+Megjelenés:
+- Jelenjen meg felül középen egy keresõ, ami valami gombnyomásra ússzon fel
+- Jelenjen meg alul egy sáv a fontos gombokkal:	- Hasábozás jobbra-balra
+												- Inverz
+												- Transzponálás fel-le
+												- Off
+												- Versszakos mód
+													- A lapozás úgy legyen megoldva, hogy az elõzõ versszak felül látszik (egy része), a köv vsz is látszik alul
+													- Lapozáskor felúszik az egész, mint egy filmszalag
+												- Nagyítás-kicsinyítés
+												- Akkordok ki-be kapcsolása
+													- Minden akkord megjelenik
+													- Csak az új részeknél jelenik meg akkord
+													- Nincs akkord
+												- Kottás verzió (jobbra gombra is mûködhetne és átúszhatna a jobb oldalra)
+												- Sablon
+												- Megjegyzések
+												- Nyomtatási kép
+												- Megjelenítés módja:	- Teljes: kiír mindent
+																		- Rövid: pl. refrénismétlés helyett "Refrén"
+												- Billentyûkombinációk beállítása
+												- Háttérképek
+- Ha van beállítva háttérkép, akkor az elsõ belépésnél csak egy nagy háttérkép legyen (szépen diavetítéssel, ha több)
+Keresés:
+- Úgy mint a store-ban, mûködjön a keresés:	1. Címben
+											2. Címkék közt
+											3. Szövegben
+- Kattintásra töltse be az éneket, és csak ekkor jelenjen meg az alsó sáv
+Kottás verzió:
+- Jelenjen meg a kottás verziójú ének
+- Minden mûködjön ugyanúgy, mint a sima éneknél
+Sablonok:
+- Ami sablont elmentek, azt, amint van net, töltse is fel
