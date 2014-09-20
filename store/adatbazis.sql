@@ -49,3 +49,18 @@ CREATE TABLE IF NOT EXISTS `nyelv` (
 INSERT INTO `nyelv` (`id`, `nev`) VALUES
 (1, 'Magyar'),
 (2, 'English');
+
+--
+-- Tábla szerkezet ehhez a táblához `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lastname` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `firstname` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `username` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `pass` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='A felhasználók itt vannak eltárolva' AUTO_INCREMENT=1 ;

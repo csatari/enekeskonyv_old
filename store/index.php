@@ -42,6 +42,10 @@ $_SESSION['token'] = $token; //store it as session variable
             //Lehet, hogy így kell majd hozzáadni egy elemet...
             var felhasznaloKezelo = new FelhasznaloKezelo(".Reg");
             felhasznaloKezelo.megjelenit();
+            document.addEventListener("login",function(e) {
+                //FIXME "ez az esemény nem akar bekövetkzni"
+                console.log("Bejelentkezés gombot megnyomták");
+            });
 
             var felhasznaloEnekek = new FelhasznaloEnekek(".felhasznaloEnekek");
             felhasznaloEnekek.megjelenit();
