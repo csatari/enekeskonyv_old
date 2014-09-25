@@ -43,8 +43,10 @@ $_SESSION['token'] = $token; //store it as session variable
             var felhasznaloKezelo = new FelhasznaloKezelo(".Reg");
             felhasznaloKezelo.megjelenit();
             document.addEventListener("login",function(e) {
-                //FIXME "ez az esemény nem akar bekövetkzni"
-                console.log("Bejelentkezés gombot megnyomták");
+                $(".loginPanel").css("display","block");
+            });
+            document.addEventListener("signup",function(e) {
+                $(location).attr('href','signup.php');
             });
 
             var felhasznaloEnekek = new FelhasznaloEnekek(".felhasznaloEnekek");
@@ -138,6 +140,11 @@ $_SESSION['token'] = $token; //store it as session variable
 <div class="felhasznaloEnekek">
 </div>
 <div class="Reg"></div>
+<div class="loginPanel">
+    <input type="text" placeholder="Felhasználónév"/>
+    <input type="text" placeholder="Jelszó"/>
+    <button onclick="">Bejelentkezés</button>
+</div>
 <!--<button class="nyomkodni">Nyomj meg!</button>-->
 <div class="enekek"></div>
 </body>

@@ -73,3 +73,18 @@ a.link {
 a.link:hover {
     text-decoration: underline;
 }
+.loginPanel{
+    position: absolute;
+    top: 8%;
+    right: 7%;
+    width: 180px;
+    height: 100px;
+    background-color: white;
+    border: 1px solid rgb(202, 202, 202);
+
+    z-index: 4;
+    display: none;
+}
+.loginPanel input{}
+.loginPanel button{}
+
