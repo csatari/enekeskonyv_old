@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <script src="../js/jquery-1.11.1.js"></script>
+    <script src="objects/EventCreator.js" charset="utf-8"></script>
+    <script src="objects/AbstractElement.js" charset="utf-8"></script>
+    <script src="objects/AccountFlyer.js" charset="utf-8"></script>
+    <script>
+        $(document).ready(function() {
+
+            var accountFlyer = new AccountFlyer(".accountFlyer");
+            $(".asd").click(function(e) {
+                EventCreator.CallEvent("nyomas");
+            });
+            EventCreator.EventListener("nyomas",function() {
+                accountFlyer.Update();
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="accountFlyer"></div>
+    <button class="asd">Megnyomni!</button>
+</body>
+</html>

@@ -59,11 +59,12 @@ $_SESSION['token'] = $token; //store it as session variable
                 }
             });
             document.addEventListener("elvetes",function(e) {
-                window.location.href = "index.php";
+                //window.location.href = "index.php";
+				myFunction();
             });
 
             var szerkesztoCim = new CsoportCim(".csoportcim","Szerkesztő");
-            szerkesztoCim.megjelenit();
+            //szerkesztoCim.megjelenit();
             var elonezetCim = new CsoportCim(".elonezetCim","Előnézet");
             elonezetCim.megjelenit();
             var beallitasokCim = new CsoportCim(".beallitasokCim","Beállítások");
@@ -93,7 +94,6 @@ $_SESSION['token'] = $token; //store it as session variable
                 enekSzovegHozzaadasKurzorhoz("[b]","[/b]");
                 return false;
             });
-
         });
         function enekSzovegHozzaadasKurzorhoz(kezdotag,vegtag) {
             var caretPosStart = $(".enekSzoveg")[0].selectionStart;
@@ -137,6 +137,35 @@ $_SESSION['token'] = $token; //store it as session variable
         function enekElonezet(enek) {
             $(".elonezetEnekSzoveg").text(enek);
         }
+		
+		var text = "options stave-distance=10 space=10 scale=0.6\ntabstave notation=true tablature=false key=C time=4/4\n notes";
+		function myFunction() {
+			alertFunc();
+		}
+		var counter = 0;
+		function alertFunc() {
+			console.log("megy");
+			var hang = Math.floor((Math.random() * 8) + 1);
+			var hangjegy;
+			
+			if(counter >= 100) { text = text + "\ntabstave notation=true tablature=false\nnotes "; counter = 0;}
+			counter++;
+			if(hang == 1) { hangjegy = " C/4"; }
+			if(hang == 2) { hangjegy = " D/4"; }
+			if(hang == 3) { hangjegy = " E/4"; }
+			if(hang == 4) { hangjegy = " F/4"; }
+			if(hang == 5) { hangjegy = " G/4"; }
+			if(hang == 6) { hangjegy = " A/4"; }
+			if(hang == 7) { hangjegy = " B/4"; }
+			if(hang == 8) { hangjegy = " |"; }
+			
+			text = text + hangjegy;
+			var tabdiv = new Vex.Flow.TabDiv("div.vex-tabdiv"); 
+			tabdiv.code = text; 
+			tabdiv.redraw(); 
+			$(".editor").val(text);
+			setTimeout(function() { alertFunc() }, 10);
+		}
     </script>
 </head>
 <body>
