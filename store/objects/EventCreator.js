@@ -17,6 +17,12 @@ EventCreator.CallEvent = function(binding) {
     document.dispatchEvent(event);
 };
 
+/**
+ * A binding string azonosítóval meghívott események esetén futtatja le az f függvény
+ * @param binding
+ * @param f
+ * @constructor
+ */
 EventCreator.EventListener = function(binding,f) {
     document.addEventListener(binding,f);
 };

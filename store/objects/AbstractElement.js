@@ -10,21 +10,21 @@ function AbstractElement() {
     if (this.constructor === AbstractElement) {
         throw new Error("Can't instantiate abstract class!");
     }
-    /**
-     * alapkinézetre vonatkozó CSS beállítások
-     * @constructor
-     */
-    var CssStructure = function() {
-        throw new Error("Abstract method!");
-    };
-    /**
-     * Designra vonatkozó CSS beállítások
-     * @constructor
-     */
-    var CssVisual = function() {
-        throw new Error("Abstract method!");
-    };
 }
+
+/**
+ * alapkinézetre vonatkozó CSS beállítások
+ * @constructor
+ */
+AbstractElement.prototype.CssStructure = function() {
+};
+
+/**
+ * Designra vonatkozó CSS beállítások
+ * @constructor
+ */
+AbstractElement.prototype.CssVisual = function() {
+};
 
 /**
  * Visszaadja az elem HTML kódját
@@ -34,10 +34,12 @@ AbstractElement.prototype.ToHTML = function() {
 }
 
 /**
- * Kirajzolja az elemet
+ * Újrarajzolja az elemet
  * @constructor
  */
 AbstractElement.prototype.Update = function() {
     $(this.binding).html(this.ToHTML());
+    this.CssStructure();
+    this.CssVisual();
 }
 

@@ -138,7 +138,7 @@ $_SESSION['token'] = $token; //store it as session variable
             $(".elonezetEnekSzoveg").text(enek);
         }
 		
-		var text = "options stave-distance=10 space=10 scale=0.6\ntabstave notation=true tablature=false key=C time=4/4\n notes";
+		var text = "options stave-distance=10 space=10 scale=1.2\ntabstave notation=true tablature=false key=C time=4/4\n notes";
 		function myFunction() {
 			alertFunc();
 		}
@@ -148,7 +148,7 @@ $_SESSION['token'] = $token; //store it as session variable
 			var hang = Math.floor((Math.random() * 8) + 1);
 			var hangjegy;
 			
-			if(counter >= 100) { text = text + "\ntabstave notation=true tablature=false\nnotes "; counter = 0;}
+			if(counter >= 50) { text = text + "\ntabstave notation=true tablature=false\nnotes "; counter = 0;}
 			counter++;
 			if(hang == 1) { hangjegy = " C/4"; }
 			if(hang == 2) { hangjegy = " D/4"; }
@@ -190,7 +190,7 @@ $_SESSION['token'] = $token; //store it as session variable
     <span class="kottaCim"></span>
     <div class="kotta">
         <div style="width:700; margin-left: auto; margin-right: auto;">
-            <div class="vex-tabdiv" width="680" scale="1.0" editor="true" editor_width="680" editor_height="330" style="position: relative;">options stave-distance=30 space=10
+            <div class="vex-tabdiv" width="1000" scale="1.0" editor="true" editor_width="680" editor_height="330" style="position: relative;">options stave-distance=30 space=10
 tabstave notation=true tablature=false key=C time=4/4</div>
         </div>
     </div>
