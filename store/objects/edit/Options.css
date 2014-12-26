@@ -1,0 +1,22 @@
+.beallitasok > table {
+    width: 100%;
+}
+.beallitasok > table > tbody > tr > td > span.beallitasokCimke {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size:18px;
+}
+.beallitasok > table > tbody > tr > td > span.beallitasokLeiro > input, .beallitasok > table > tbody > tr > td > span.beallitasokLeiro > select,
+.beallitasok > table > tbody > tr > td > span.beallitasokLeiro > textarea {
+    padding:7px;
+    width: 100%;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size:18px;
+}
+.beallitasok > table > tbody > tr > td > span.beallitasokLeiro > textarea {
+    height:200px;
+}
+.beallitasok > table > tbody > tr > td:first-child {
+    text-align: left;
+    vertical-align: top;
+    padding-top: 12px;
+}
