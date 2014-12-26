@@ -25,7 +25,8 @@ GroupTitle.prototype.CssStructure = function() {
     });
     $(this.binding + " .vonal").css({
         "margin-top": "3px",
-        "margin-bottom":"15px"
+        "margin-bottom":"15px",
+        "border-style": "solid"
     });
 };
 
@@ -35,7 +36,6 @@ GroupTitle.prototype.CssVisual = function() {
         "font-size": "22px"
     });
     $(this.binding + " .vonal").css({
-        "border-style": "solid",
         "border-width": "0px",
         "border-bottom-width": "1px"
     });

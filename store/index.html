@@ -6,15 +6,32 @@
     <script src="../js/jquery-1.11.1.js"></script>
     <script src="objects/EventCreator.js" charset="utf-8"></script>
     <script src="objects/AbstractElement.js" charset="utf-8"></script>
+    <script src="objects/AbstractEmbeddedElement.js" charset="utf-8"></script>
     <script src="objects/AccountFlyer.js" charset="utf-8"></script>
     <script src="objects/GroupTitle.js" charset="utf-8"></script>
     <script src="objects/SearchBar.js" charset="utf-8"></script>
+    <script src="objects/SearchElement.js" charset="utf-8"></script>
+    <script src="objects/CssStateSetter.js" charset="utf-8"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="objects/SearchResultGroup.js" charset="utf-8"></script>
     <script>
         $(document).ready(function() {
 
             var accountFlyer = new AccountFlyer(".accountFlyer");
-            var testTitle = new GroupTitle(".testTitle","Cím");
+            //var testTitle = new GroupTitle(".testTitle","Cím");
             var searchBar = new SearchBar(".kereso");
+            //var searchElement = new SearchElement(".enek");
+            //var searchElement = new SearchElement(".enek2");
+            var testGroup = new SearchResultGroup(".testTitle");
+            //var testGroup2 = new SearchResultGroup(".testTitle2");
+            testGroup.Append("asd");
+            testGroup.Append("AAAA");
+            testGroup.Append("ABBdsaasdasB");
+            testGroup.Append("ACCdsfdffffffffffffCCAAA");
+            testGroup.Append("AAWDSDAA");
+            testGroup.Append("GSDAAAA");
+            testGroup.Append("WFESAAAA");
+            testGroup.Update();
             $(".asd").click(function(e) {
                 EventCreator.CallEvent("nyomas");
             });
@@ -27,7 +44,10 @@
 <body>
     <div class="accountFlyer"></div>
     <button class="asd">Megnyomni!</button>
-    <span class="testTitle"></span>
+    <div class="testTitle"></div>
+    <div class="testTitle2"></div>
     <div class="kereso"></div>
+    <div class="enek"></div>
+    <div class="enek2"></div>
 </body>
 </html>

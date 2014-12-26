@@ -64,7 +64,7 @@ $_SESSION['token'] = $token; //store it as session variable
             });
 
             var szerkesztoCim = new CsoportCim(".csoportcim","Szerkesztő");
-            //szerkesztoCim.megjelenit();
+            szerkesztoCim.megjelenit();
             var elonezetCim = new CsoportCim(".elonezetCim","Előnézet");
             elonezetCim.megjelenit();
             var beallitasokCim = new CsoportCim(".beallitasokCim","Beállítások");
