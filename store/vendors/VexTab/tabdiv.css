@@ -1,0 +1,29 @@
+div.vex-tabdiv {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  color: #554;
+  white-space: pre;
+}
+
+div.vex-tabdiv .editor {
+  background: #FAFAFA;
+  border: 0 solid 0;
+  border-left: 6px solid #D1D1D1;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 12px;
+}
+
+div.vex-tabdiv .editor-error .text {
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 12px;
+  color: red;
+  padding: 3px;
+  word-wrap: break-word;
+}
+
+div.vex-tabdiv .title {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  padding: 10px;
+  color: #554;
+}

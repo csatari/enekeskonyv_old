@@ -1,53 +1,239 @@
-<!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Store</title>
-    <script src="../js/jquery-1.11.1.js"></script>
-    <script src="objects/EventCreator.js" charset="utf-8"></script>
-    <script src="objects/AbstractElement.js" charset="utf-8"></script>
-    <script src="objects/AbstractEmbeddedElement.js" charset="utf-8"></script>
-    <script src="objects/AccountFlyer.js" charset="utf-8"></script>
-    <script src="objects/GroupTitle.js" charset="utf-8"></script>
-    <script src="objects/SearchBar.js" charset="utf-8"></script>
-    <script src="objects/SearchElement.js" charset="utf-8"></script>
-    <script src="objects/CssStateSetter.js" charset="utf-8"></script>
-    <script src="js/masonry.pkgd.min.js"></script>
-    <script src="objects/SearchResultGroup.js" charset="utf-8"></script>
-    <script>
-        $(document).ready(function() {
-
-            var accountFlyer = new AccountFlyer(".accountFlyer");
-            //var testTitle = new GroupTitle(".testTitle","Cím");
-            var searchBar = new SearchBar(".kereso");
-            //var searchElement = new SearchElement(".enek");
-            //var searchElement = new SearchElement(".enek2");
-            var testGroup = new SearchResultGroup(".testTitle");
-            //var testGroup2 = new SearchResultGroup(".testTitle2");
-            testGroup.Append("asd");
-            testGroup.Append("AAAA");
-            testGroup.Append("ABBdsaasdasB");
-            testGroup.Append("ACCdsfdffffffffffffCCAAA");
-            testGroup.Append("AAWDSDAA");
-            testGroup.Append("GSDAAAA");
-            testGroup.Append("WFESAAAA");
-            testGroup.Update();
-            $(".asd").click(function(e) {
-                EventCreator.CallEvent("nyomas");
-            });
-            EventCreator.EventListener("nyomas",function() {
-                accountFlyer.Update();
-            });
-        });
-    </script>
+<head>
+	<link rel="stylesheet" type="text/css" href="vendors/materialize/css/materialize.css" media="screen,projection">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" type="text/css" href="registration.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="vendors/colorpicker/css/colorpicker.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<!-- Vextab css -->
+    <link href="vendors/VexTab/vextab.css" rel="stylesheet" type="text/css">
+    <link href="vendors//VexTab//tabdiv.css" media="screen" rel="Stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
 </head>
-<body>
-    <div class="accountFlyer"></div>
-    <button class="asd">Megnyomni!</button>
-    <div class="testTitle"></div>
-    <div class="testTitle2"></div>
-    <div class="kereso"></div>
-    <div class="enek"></div>
-    <div class="enek2"></div>
+<body class="body-background">
+	<!-- sidenav -->
+	<ul id="slide-out" class="side-nav">
+		<li class="logo" id="logo">
+			<div class="logo-container brand-logo">
+				<img src="resources/musical-notes.png" />
+				<div class="js-user-details"></div>
+			</div>
+		</li>
+		<li class="bold js-not-logged-in"><a href="#js-login" class="waves-effect waves-light-blue js-login conf-login">Bejelentkezés_</a></li>
+		<li class="bold js-not-logged-in"><a href="#js-registration-modal" class="waves-effect waves-light-blue js-registration conf-registration">Regisztráció_</a></li>
+
+		<li class="bold js-logged-in"><a class="waves-effect waves-light-blue js-create-songbook conf-create-songbook">Énekeskönyv létrehozása_</a></li>
+		<!--<li class="bold js-logged-in"><a class="waves-effect waves-light-blue js-my-songbooks conf-my-songbooks">Énekeskönyveim</a></li>-->
+		<li class="no-padding js-logged-in">
+	    	<ul class="collapsible collapsible-accordion">
+	    		<li class="bold">
+			    	<a href="#!" class="collapsible-header waves-effect waves-light-blue js-my-songbooks conf-my-songbooks">Énekeskönyveim_</a>
+			    	<div class="collapsible-body">
+						<ul class="js-my-songbooks-ul">
+							<li><a href="#!" class="waves-effect waves-light-blue">Egyik énekeskönyv</a></li>
+						</ul>
+			    	</div>
+		   		</li>
+		    </ul>
+	    </li>
+		<li class="bold js-logged-in"><a class="waves-effect waves-light-blue js-new-song conf-add-new-song">Új ének hozzáadása_</a></li>
+		<li class="bold js-logged-in"><a class="waves-effect waves-light-blue js-settings conf-settings">Beállítások_</a></li>
+		<li class="bold js-logged-in"><a class="waves-effect waves-light-blue js-log-out conf-log-out">Kijelentkezés_</a></li>
+	</ul>
+	<!-- felső kereső sáv -->
+	<nav class="searchbar-background">
+		<div class="nav-wrapper">
+			<form>
+				<a id="side-nav-button" href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+				<div class="input-field center-align search-bar">
+					<input id="search" type="text" required class="js-search">
+					<label for="search"><i class="mdi-action-search"></i></label>
+				</div>
+			</form>
+
+		</div>
+		<div class="progress search-progress js-search-progress">
+			<div class="indeterminate search-progress-indeterminate"></div>
+		</div>
+	</nav>
+	<!-- regisztrációs modal ablak -->
+	<div id="js-registration-modal" class="modal">
+		<div class="modal-content">
+			<form class="col s12">
+				<h4 class="conf-registration">Regisztráció</h4>
+				<div class="js-form-error form-error"></div>
+				<span class="js-form-checking-loader">
+					<div class="preloader-wrapper small active">
+						<div class="spinner-layer spinner-blue-only">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div><div class="gap-patch">
+								<div class="circle"></div>
+							</div><div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+					</div>
+				</span>
+				<div class="row">
+					<div class="input-field col s6">
+						<input type="text" id="lastname" class="validate"/> 
+						<label for="lastname" class="conf-lastname">Vezetéknév</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" id="firstname" class="validate"/>
+						<label for="firstname" class="conf-firstname">Keresztnév</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="text" id="username"/> 
+						<label for="username" class="conf-username">Felhasználónév</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="email" id="email" class="validate"/> 
+						<label for="email" class="conf-email">E-mail cím</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="password" id="password"/> 
+						<label for="password" class="conf-password">Jelszó</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="password" id="password-re" /> 
+						<label for="password-re" class="conf-password-re">Jelszó még egyszer</label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="js-registration-model-send modal-action waves-effect waves-light-blue btn-flat conf-registration">Regisztráció</a>
+		</div>
+	</div>
+	
+	<!-- login modal ablak -->
+	<div id="js-login-modal" class="modal">
+		<div class="modal-content">
+			<form class="col s12">
+				<h4 class="conf-login">Belépés</h4>
+				<span class="js-form-checking-loader">
+					<div class="preloader-wrapper small active">
+						<div class="spinner-layer spinner-blue-only">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div><div class="gap-patch">
+								<div class="circle"></div>
+							</div><div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+					</div>
+				</span>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="text" id="login-username"/> 
+						<label for="login-username" class="conf-username">Felhasználónév</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="password" id="login-password"/> 
+						<label for="login-password" class="conf-password">Jelszó</label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="js-login-model-send modal-action waves-effect waves-light-blue btn-flat conf-login">Belépés</a>
+		</div>
+	</div>
+	<!-- result modal page -->
+	<div id="js-registration-result-modal" class="modal">
+		<div class="modal-content">
+			<h4 class="js-registration-result-modal-title"></h4>
+			<div class="valign-wrapper">
+				<i class="small mdi-action-done light-green-text accent-3 js-registration-result-good"></i>
+				<i class="small mdi-action-report-problem red-text accent-3 js-registration-result-bad"></i>
+				<span class="valign" id="js-registration-result"></span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class=" modal-action modal-close waves-effect waves-light-blue btn-flat">OK</a>
+		</div>
+	</div>
+	<!-- egy szöveges dialog -->
+	<div class="modal js-modal-textbox">
+		<div class="modal-content">
+			<form class="col s12">
+				<h4 class="js-modal-textbox-title"></h4>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="text" id="textbox-text"/> 
+						<label for="textbox-text" class="conf-text js-modal-textbox-textname">Szöveg</label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="js-modal-textbox-cancel modal-action waves-effect waves-light-blue btn-flat conf-cancel">Mégse_</a>
+			<a href="#!" class="js-modal-textbox-ok modal-action waves-effect waves-light-blue btn-flat conf-ok">OK</a>
+		</div>
+	</div>
+	<!-- page -->
+	<div class="js-page page">
+		<div class="js-song-card-collection">
+			 <!--Így fog kinézni egy éneket tartalmazó kártya
+			<div class="card song-card js-song-card waves-effect waves-dark">
+	            <div class="card-content">
+					<span class="card-title black-text">Atyám két kezedben</span>
+					<p>Atyám, két kezedben, csak ott lakhatom,</p>
+					<p>Biztonságot csak Tőled kapok.</p>
+					<p>Újjá így teremtesz, sebem ápolod, </p>
+					<p>Boldogság, hogy itt van otthonom...</p>
+	            </div>
+	            <div class="card-action">
+	            	<table>
+	            		<tr>
+	            			<td class="no-padding">
+				            	<span class="waves-effect waves-light btn song-label text-orange">#Magyar</span>
+				            	<span class="waves-effect waves-light btn song-label">#Dicsőítő</span>
+		            		</td>
+		            		<td class="no-padding song-button-space">
+		            			<span class="waves-effect waves-light btn-floating btn-large song-button">
+			            		<i class="material-icons">settings</i>
+			            	</span>
+		            		</td>
+		        		</tr>
+		            </table>
+	            </div>
+	        </div>
+			-->
+        </div>
+	</div>
+
+	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="config.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="registration.js"></script>
+	<script type="text/javascript" src="login.js"></script>
+	<script type="text/javascript" src="sidenav.js"></script>
+	<script type="text/javascript" src="modaltextbox.js"></script>
+	<script type="text/javascript" src="userData.js"></script>
+	<script type="text/javascript" src="getData.js"></script>
+	<script type="text/javascript" src="songData.js"></script>
+	<script type="text/javascript" src="songCard.js"></script>
+	<script type="text/javascript" src="search.js"></script>
+	<script type="text/javascript" src="themes.js"></script>
+	<script type="text/javascript" src="vendors/jquery.color.js"></script>
+	<script type="text/javascript" src="vendors/colorpicker/js/colorpicker.js"></script>
+	<!--<script type="text/javascript" src="vendors/masonry/masonry.pkgd.min.js"></script>-->
+	<script type="text/javascript" src="vendors/materialize/js/materialize.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,108 @@
+<!-- Vextab css -->
+<link href="vendors/VexTab/vextab.css" rel="stylesheet" type="text/css">
+<link href="vendors//VexTab//tabdiv.css" media="screen" rel="Stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="edit.css">
+<div class="js-edit-root edit-root">
+	<div class="js-edited-song"></div>
+	<div class="card-panel">
+		<div class="card-title conf-editor">Szerkesztő_</div>
+		<div class="divider"></div>
+		<div class="card-body">
+			<div class="row">
+				<div class="input-field col s12">
+					<input type="text" id="edit-title conf-title" class="js-edit-title"/>
+					<label for="edit-title" class="conf-title">Cím_</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="edit-text-buttons col s12">
+		            <a class="waves-effect waves-light blue lighten-2 btn  js-edit-text-chord conf-chord">Akkord_</a>
+		            <a class="js-edit-text-verse conf-verse waves-effect waves-light blue lighten-2 btn">Versszak_</a>
+		            <a class="js-edit-text-chorus conf-chorus waves-effect waves-light blue lighten-2 btn">Refrén_</a>
+		            <a class="js-edit-text-bridge conf-bridge waves-effect waves-light blue lighten-2 btn">Átvezető_</a>
+		        </div>
+		    </div>
+		    <div class="row">
+		    	<div class="input-field col s12">
+		          <textarea id="edit-text-textarea" class="materialize-textarea js-edit-text-textarea"></textarea>
+		          <label for="edit-text-textarea" class="conf-text-textarea">Ének szövege_</label>
+		        </div>
+		    </div>
+		</div>
+		<div class="card-title conf-preview">Előnézet_</div>
+		<div class="divider"></div>
+		<div class="row card-preview">
+		</div>
+	</div>
+	<div class="card-panel">
+		<div class="card-title conf-notes">Kotta_</div>
+		<div class="divider"></div>
+		<div class="card-body">
+			<div class="vextab-container js-vextab-container">
+            <div class="vex-tabdiv" scale="1.0" editor="true" editor_width="800" editor_height="330" style="position: relative;">options stave-distance=30 space=10 width=800
+tabstave notation=true tablature=false key=C time=4/4
+notes C-D-E-F-G-A-B/4 | C-D-E-F-G-A-B/4 | C-D-E-F-G-A-B/4</div>
+        </div>
+		</div>
+	</div>
+	<div class="card-panel">
+		<div class="card-title conf-settings">Beállítások_</div>
+		<div class="divider"></div>
+		<div class="card-body">
+			<table>
+				<tbody>
+					<tr>
+						<td class="settings-size"><span class="conf-language">Nyelv_</span><span>:</span></td>
+						<td>
+							<div class="col s12">
+								<select class="big-select browser-default js-choose-language">
+									<option class="conf-choose-one" value="" disabled selected>Válassz egyet_</option>
+								</select>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="settings-size"><span class="conf-other-language">Más nyelven_</span><span>:</span></td>
+						<td>
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="text" id="edit-other-language" class="js-edit-other-language"/>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="settings-size"><span class="conf-labels">Címkék_</span><span>:</span></td>
+						<td>
+							<div class="row">
+								<div class="input-field col s12">
+									<input type="text" id="edit-labels" class="js-edit-labels"/>
+									<label for="edit-labels" class="conf-labels">Címkék_</label>
+								</div>
+							</div>
+						</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="settings-size"><span class="conf-comment">Megjegyzés_</span><span>:</span></td>
+						<td>
+							<div class="row">
+								<div class="input-field col s12">
+									<textarea id="edit-comment" class="materialize-textarea js-edit-comment"></textarea>
+									<label for="edit-comment" class="conf-labels-details">Szöveg, link, kép, videó_</label>
+								</div>
+							</div>
+							<div class="row">
+						</select>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+		<a class="waves-effect waves-light btn-floating btn-large js-edit-button circle-button-background">
+			<i class="large mdi-editor-mode-edit"></i>
+		</a>
+	</div>
+</div>

@@ -1,0 +1,172 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="vendors/materialize/css/materialize.css" media="screen,projection">
+	<script src="vendors/bower_components/webcomponentsjs/webcomponents.js"></script>
+	<link rel="import" href="vendors/bower_components/paper-input/paper-input.html">
+	<link rel="import" href="vendors/bower_components/paper-toolbar/paper-toolbar.html">
+	<link rel="import" href="vendors/bower_components/iron-icons/iron-icons.html">
+	<link rel="import" href="vendors/bower_components/iron-iconset/iron-iconset.html">
+	<link rel="import" href="vendors/bower_components/paper-icon-button/paper-icon-button.html">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" type="text/css" href="registration.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<style is="custom-style">
+		:root {
+				--paper-input-container-color: white;
+				--paper-input-container-focus-color: white;
+				--paper-input-container-input-color: white;
+		}
+	</style>
+</head>
+<body>
+	<!-- sidenav -->
+	<ul id="slide-out" class="side-nav">
+		<li class="logo" id="logo">
+			<div class="logo-container brand-logo">
+				<img src="resources/musical-notes.png" />
+				<div class="js-user-details"></div>
+			</div>
+		</li>
+		<li class="bold js-not-logged-in"><a href="#js-login" class="waves-effect waves-light-blue js-login">Bejelentkezés</a></li>
+		<li class="bold js-not-logged-in"><a href="#js-registration-modal" class="waves-effect waves-light-blue js-registration">Regisztráció</a></li>
+	    <!--<li class="bold"><a href="#!" class="waves-effect waves-light-blue">Second Sidebar Link</a></li>-->
+	</ul>
+	<!-- felső kereső sáv -->
+	<!--<nav>
+		<div class="nav-wrapper">
+			<form>
+				<a id="side-nav-button" href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+				<div class="input-field center-align search-bar">
+					<input id="search" type="text" required>
+					<label for="search"><i class="mdi-action-search"></i></label>
+				</div>
+			</form>
+		</div>
+	</nav>-->
+	<paper-toolbar>
+		<paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
+		<iron-icon icon="search"></iron-icon>
+		<paper-input class="search" noLabelFloat="false"></paper-input>
+	</paper-toolbar>
+	
+	<!-- regisztrációs modal ablak -->
+	<div id="js-registration-modal" class="modal">
+		<div class="modal-content">
+			<form class="col s12">
+				<h4>Regisztráció</h4>
+				<div class="js-form-error form-error"></div>
+				<span class="js-form-checking-loader">
+					<div class="preloader-wrapper small active">
+						<div class="spinner-layer spinner-blue-only">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div><div class="gap-patch">
+								<div class="circle"></div>
+							</div><div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+					</div>
+				</span>
+				<div class="row">
+					<div class="input-field col s6">
+						<input type="text" id="lastname" class="validate"/> 
+						<label for="lastname">Vezetéknév</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" id="firstname" class="validate"/>
+						<label for="firstname">Keresztnév</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="text" id="username"/> 
+						<label for="username">Felhasználónév</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="email" id="email" class="validate"/> 
+						<label for="email">E-mail cím</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="password" id="password"/> 
+						<label for="password">Jelszó</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="password" id="password-re" /> 
+						<label for="password-re">Jelszó még egyszer</label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="js-registration-model-send modal-action waves-effect waves-light-blue btn-flat">Regisztráció</a>
+		</div>
+	</div>
+	
+	<!-- login modal ablak -->
+	<div id="js-login-modal" class="modal">
+		<div class="modal-content">
+			<form class="col s12">
+				<h4>Belépés</h4>
+				<span class="js-form-checking-loader">
+					<div class="preloader-wrapper small active">
+						<div class="spinner-layer spinner-blue-only">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div><div class="gap-patch">
+								<div class="circle"></div>
+							</div><div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+					</div>
+				</span>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="text" id="login-username"/> 
+						<label for="login-username">Felhasználónév</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="password" id="login-password"/> 
+						<label for="login-password">Jelszó</label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="js-login-model-send modal-action waves-effect waves-light-blue btn-flat">Belépés</a>
+		</div>
+	</div>
+	<!-- result modal page -->
+	<div id="js-registration-result-modal" class="modal">
+		<div class="modal-content">
+			<h4 class="js-registration-result-modal-title"></h4>
+			<div class="valign-wrapper">
+				<i class="small mdi-action-done light-green-text accent-3 js-registration-result-good"></i>
+				<i class="small mdi-action-report-problem red-text accent-3 js-registration-result-bad"></i>
+				<span class="valign" id="js-registration-result"></span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class=" modal-action modal-close waves-effect waves-light-blue btn-flat">OK</a>
+		</div>
+	</div>
+	<!-- page -->
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="config.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="registration.js"></script>
+	<script type="text/javascript" src="login.js"></script>
+	<script type="text/javascript" src="userData.js"></script>
+    <script type="text/javascript" src="vendors/materialize/js/materialize.min.js"></script>
+</body>
+</html>

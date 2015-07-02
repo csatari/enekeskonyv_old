@@ -1,0 +1,22 @@
+div.card-title {
+	font-size:30px;
+}
+div.card-body {
+	margin-top: 20px;
+}
+div.vextab-container {
+	width:800px; 
+	margin-left: auto; 
+	margin-right: auto;
+}
+div.card-panel {
+	margin-top:30px;
+}
+.settings-size {
+	font-size:18px;
+}
+#edit-text-textarea {
+	font-family: 'Droid Sans Mono', sans-serif;
+	font-family: Consolas, monospace;
+	overflow-y: auto;
+}

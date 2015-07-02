@@ -1,0 +1,58 @@
+body {
+	margin: 0;
+}
+#side-nav-button {
+	font-size:28px;
+	margin-left: 15px;
+}
+ul.side-nav {
+	overflow: scroll;
+}
+ul.side-nav::-webkit-scrollbar { 
+    display: none; 
+}
+ul.side-nav li {
+  line-height: 44px;
+}
+.bold > a {
+  font-weight: bold;
+}
+ul.side-nav li a {
+	display: block;
+}
+ul.side-nav a {
+  display: block;
+  padding: 0 15px;
+  color: #444;
+}
+div.logo-container {
+	width:auto;
+	margin-top:20px;
+	margin-bottom:20px;
+	border-bottom: 1px solid #ddd;
+	padding: 15px 0px;
+}
+div.logo-container img {
+	max-width:100%;
+	max-height: 100%;
+}
+li#logo:hover {
+	background-color:transparent;
+}
+/* navigation bar */
+nav {
+	background-color: #64b5f6;
+}
+div.search-bar {
+	margin-left:71px;
+}
+/* custom wave */
+.waves-effect.waves-light-blue .waves-ripple {
+ /* The alpha value allows the text and background color
+ of the button to still show through. */
+	background-color: #64b5f6;
+}
+
+.search {
+	width: 500px;
+}

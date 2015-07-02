@@ -1,0 +1,27 @@
+body {
+    overflow:hidden;
+}
+div.anim-next
+{
+	text-align:center;
+	margin-top:0px;
+	-webkit-animation-name: center;
+    /*-webkit-animation-duration: 2s;*/
+	-webkit-animation-delay: 2s;
+	-webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes center {
+    from {margin-top: 0px;}
+    to {margin-top: 250px;}
+}
+div.anim-center
+{
+	text-align:center;
+	margin-top:100px;
+	
+}
+div.anim-previous
+{
+	text-align:center;
+	margin-top:100px;
+}

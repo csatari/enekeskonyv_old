@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Music notes </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">   
+            #container{
+                width:960px;
+                margin: 0 auto;
+                position:relative;
+            }
+            .music-line-container{
+                position:relative; 
+                top:65px; 
+                z-index: 3;
+            }
+            .line-borders{
+                width:100%; 
+                height:20px; 
+                border-top:3px solid #000; 
+                border-bottom:3px solid #000; 
+                margin-bottom: 18px;
+            }
+            .line-border{
+                width:100%; 
+                height:0px; 
+                border-top:3px solid #000; 
+            }
+            .notes-container{
+                position: relative; 
+                z-index: 1
+            }
+            .circle{
+                width:20px;
+                height:20px;
+                background: #000;
+                border-radius: 50px 30px 45px 30px;
+                float:left;
+            }
+            .stick{
+                width:1px;
+                height:60px;
+                border-left:3px solid #000;
+                float:left;
+                margin-top:-50px;
+                margin-left:-3px;
+            }
+            .tail-container{
+                float:left;
+                position: relative;
+                top:-50px;
+                left: -1px;
+            }
+            .tail{
+                width:15px;
+                height:25px;
+                background: #000; 
+                border-radius: 0 80px 70px 0;
+                z-index: 1;
+                position: absolute;
+            }
+            .tail-mask{
+                width:12px;
+                height:23px;
+                background: #fff; 
+                border-radius: 0 100px 40px 0;
+                z-index: 2;
+                position: absolute;
+                top:4px
+            }
+            .line{
+                width:30px;
+                height:3px;
+                background: #000;
+                position: relative;
+                z-index: 5;
+                top:8px;
+                left:-5px;
+ 
+            }
+            .do{
+                position:relative;
+                top:75px;
+                left:25px
+            }
+            .re{
+                position:relative;
+                top:65px;
+                left:55px
+            }
+            .mi{
+                position:relative;
+                top:55px;
+                left:85px
+            }
+            .fa{
+                position:relative;
+                top:45px;
+                left:115px
+            }
+            .sol{
+                position:relative;
+                top:35px;
+                left:145px
+            }
+            .la{
+                position:relative;
+                top:23px;
+                left:175px
+            }
+            .si{
+                position:relative;
+                top:10px;
+                left:205px
+            }
+            .do2{position:relative;
+                 top:0px;
+                 left:235px
+            }
+ 
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div class="music-line-container">
+                <div class="line-borders"></div>
+                <div class="line-borders"></div>
+                <div class="line-border"></div>
+            </div>
+            <div class="notes-container">
+                <div class="do">
+                    <div class="circle"></div>
+                    <div class="stick"></div>
+                    <div class="tail-container">
+                        <div class="tail"></div>                       
+                        <div class="tail-mask"></div>                       
+                    </div>
+                    <div class="line"></div>
+                </div>
+                <div class="re">
+                    <div class="circle"></div>
+                    <div class="stick"></div>
+                    <div class="tail-container">
+                        <div class="tail"></div>                       
+                        <div class="tail-mask"></div>                   
+                    </div>
+                </div>
+                <div class="mi">
+                    <div class="circle"></div>
+                    <div class="stick"></div>
+                    <div class="tail-container">
+                        <div class="tail"></div>                       
+                        <div class="tail-mask"></div>                   
+                    </div>
+                </div>
+                <div class="fa">
+                    <div class="circle"></div>
+                    <div class="stick"></div>
+                    <div class="tail-container">
+                        <div class="tail"></div>                       
+                        <div class="tail-mask"></div>                   
+                    </div>
+                </div>
+                <div class="sol">
+                    <div class="circle"></div>
+                    <div class="stick"></div>
+                    <div class="tail-container">
+                        <div class="tail"></div>                       
+                        <div class="tail-mask"></div>                   
+                    </div>
+                </div>
+                <div class="la">
+                    <div class="circle"></div>
+                    <div class="stick"></div>
+                    <div class="tail-container">
+                        <div class="tail"></div>                       
+                        <div class="tail-mask"></div>                   
+                    </div>
+                </div>
+                <div class="si">
+                    <div class="circle"></div>
+                    <div class="stick"></div>
+                    <div class="tail-container">
+                        <div class="tail"></div>                       
+                        <div class="tail-mask"></div>                   
+                    </div>
+                </div>
+                <div class="do2">
+                    <div class="circle"></div>
+                    <div class="stick"></div>
+                    <div class="tail-container">
+                        <div class="tail"></div>                       
+                        <div class="tail-mask"></div>                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

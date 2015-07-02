@@ -1,0 +1,110 @@
+body {
+	margin: 0;
+}
+#side-nav-button {
+	font-size:28px;
+	margin-left: 15px;
+}
+ul.side-nav {
+	overflow: scroll;
+}
+ul.side-nav::-webkit-scrollbar { 
+    display: none; 
+}
+ul.side-nav li {
+  line-height: 44px;
+}
+.bold > a {
+  font-weight: bold;
+}
+ul.side-nav li a {
+	display: block;
+}
+ul.side-nav a {
+  display: block;
+  padding: 0 15px;
+  color: #444;
+}
+div.logo-container {
+	width:auto;
+	margin-top:20px;
+	margin-bottom:20px;
+	border-bottom: 1px solid #ddd;
+	padding: 15px 0px;
+}
+div.logo-container img {
+	max-width:100%;
+	max-height: 100%;
+}
+li#logo:hover {
+	background-color:transparent;
+}
+/* navigation bar */
+nav {
+	background-color: #64b5f6;
+}
+div.search-bar {
+	margin-left:71px;
+}
+/* custom wave */
+.waves-effect.waves-light-blue .waves-ripple {
+ /* The alpha value allows the text and background color
+ of the button to still show through. */
+	background-color: #64b5f6;
+}
+div.page {
+	margin: 0px 60px;
+}
+.big-select {
+	font-size:18px;
+	width: 100%;
+	background-color:white;
+	border: 1px solid black;
+	margin-left: 0.75rem;
+}
+body {
+	background-color: aliceblue;
+}
+.js-edited-song {
+	display: none;
+}
+.song-card {
+	width:350px;
+	margin:15px;
+	/*background-color: #4F6D7A;*/
+}
+.song-label {
+	color:rgb(255, 223, 0);
+	transition: 0.2s ease-out;
+	background-color:#4F6D7A;
+	padding: 0 3px;
+	font-size:12px;
+	line-height: 24px;
+	height: 22px;
+	margin-right:5px;
+}
+.song-label:hover {
+	background-color:#4F6D7A;
+}
+.song-button, .song-button:hover {
+	background-color:#4F6D7A;
+}
+.no-padding {
+	padding: 0px;
+}
+.song-button-space {
+	width: 56px;
+}
+.search-progress {
+	position: absolute;
+	margin: 0px;
+	margin-top: -2px;
+	height:2px;
+	background-color: #64b5f6;
+}
+.search-progress-indeterminate {
+	background-color: white !important;
+}
+.circle-button-background {
+	background-color: #F44336;
+}

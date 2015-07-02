@@ -1,0 +1,16 @@
+/* js-login-result */
+#js-login-result {
+	margin-left:5px;
+}
+.form-error {
+	color:#F44336;
+}
+.js-form-checking-loader {
+	display:none;
+}
+.js-login-result-good {
+	display:none;
+}
+.js-login-result-bad {
+	display:none;
+}

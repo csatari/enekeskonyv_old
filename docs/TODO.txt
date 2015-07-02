@@ -1,0 +1,21 @@
+Store:
+- kitalálni a jogokat, pontosabban specifikálni: hogy lehet az lenni, mi jár vele, hogy lehet megszüntetni
+- email verifikációs üzenetet küldeni
+- kijelentkezés X
+Fontosak:
+- keresésnél legyen egy indeterminate progressbar a keresõ alatt X
+- az énekeknél ha csak a sorrend változik, akkor is frissüljenek az énekek X
+- Szerkesztésnél lehetnek majd egyéb funkciók: Módosítás, Új verzió, Törlés 
+- jogok legyenek meg az adatbázisban, meg kitalálva, hogy kinek mikor milyen jog jár és mit lehet vele csinálni
+- énekeskönyvekhez:
+	- legyen valahogy beállítás gomb, amivel átnevezni, törölni, megosztani, letölteni lehet
+- ének szerkesztése
+Kliens:
+- legyen meg az alapja, hogy hogy néz ki
+- legyenek meg benne a szükséges énekek id-i
+
+#A49E8D (háttér v lapok)
+#504136 (címkék)
+#689689 (címkék betûi)
+#B2E6D4 (háttér v lapok)
+#83E8BA (fölül csík) -- ez a szín jó egyedül
