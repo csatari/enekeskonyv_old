@@ -10,6 +10,7 @@ Fontosak:
 - énekeskönyvekhez:
 	- legyen valahogy beállítás gomb, amivel átnevezni, törölni, megosztani, letölteni lehet
 - ének szerkesztése
+- a keresõ csak a legfrissebb verziójú éneket adja vissza
 Kliens:
 - legyen meg az alapja, hogy hogy néz ki
 - legyenek meg benne a szükséges énekek id-i
@@ -19,3 +20,27 @@ Kliens:
 #689689 (címkék betûi)
 #B2E6D4 (háttér v lapok)
 #83E8BA (fölül csík) -- ez a szín jó egyedül
+
+Jogok:
+Énekekre vonatkozólag:
+1 - Felhasználó: 1,3,5,6
+2 - Készítõ: 1,2,4,6,7
+3 - Admin: 1,2,4,6,7
+Énekeskönyvekre vonatkozólag:
+1 - Felhasználó: 1,ha publikus: 5,8
+2 - Tulajdonos: 1,2,3,4,5,6,7,8,9
+3 - Megosztott: 1,4,5,6,8
+4 - Admin: 1,2,3,4,5,6,7,8,9
+
+Mûveletek énekekkel: 1:létrehozás, 2:módosítás, 3:módosítás requesttel, 4:törlés, 5:törlés requesttel, 6:új verzió (fork), 7:request elfogadása
+Mûveletek énekeskönyvekkel: 1:létrehozás, 2:átnevezés, 3:törlés, 4:hozzáadás, 5:böngészés, 6:elem törlése, 7:megosztás, 8:letöltés, 9:publikus vagy privát
+
+Jogok tárolása adatbázisban:
+Énekekre:
+- Ének mellett ott van, hogy ki a készítõ
+- A request egy songrequest táblába kerül, ha elfogadódik, akkor létrejön egy új ének, és növelõdik a verziószám
+
+Énekeskönyvekre:
+- énekeskönyv mellett ott a tulajdonos
+- új tábla, ahol tárolódik, hogy melyik énekeskönyvhöz tartozik megosztott jogú user és ki az
+- énekeskönyv mellett tárolódik, hogy publikus-e
