@@ -5,7 +5,7 @@ Store:
 Fontosak:
 - keresésnél legyen egy indeterminate progressbar a kereső alatt X
 - az énekeknél ha csak a sorrend változik, akkor is frissüljenek az énekek X
-- a témáknál a themesArray-ben a kulcs ne egy random id legyen, hanem a MARKER és az alapján is működjön
+- amikor a beállításokba lépek, akkor válassza ki a beállított témámat, illetve ha váltok témát, akkor mentse el
 - Szerkesztésnél lehetnek majd egyéb funkciók: Módosítás, Új verzió, Törlés 
 - jogok legyenek meg az adatbázisban, meg kitalálva, hogy kinek mikor milyen jog jár és mit lehet vele csinálni
 - énekeskönyvekhez:
