@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.1
+-- version 4.3.11
 -- http://www.phpmyadmin.net
 --
--- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2015. Júl 06. 22:58
--- Szerver verzió: 5.5.32
--- PHP verzió: 5.4.19
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2015. Júl 09. 17:20
+-- Kiszolgáló verziója: 5.6.24
+-- PHP verzió: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Adatbázis: `enekeskonyv`
 --
-CREATE DATABASE IF NOT EXISTS `enekeskonyv` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `enekeskonyv`;
 
 -- --------------------------------------------------------
 
@@ -29,10 +27,9 @@ USE `enekeskonyv`;
 --
 
 CREATE TABLE IF NOT EXISTS `language` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+  `id` int(11) NOT NULL,
+  `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- A tábla adatainak kiíratása `language`
@@ -49,7 +46,7 @@ INSERT INTO `language` (`id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `song` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `version` int(11) NOT NULL DEFAULT '1',
   `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
   `song` text COLLATE utf8_unicode_ci NOT NULL,
@@ -57,9 +54,8 @@ CREATE TABLE IF NOT EXISTS `song` (
   `language` int(11) NOT NULL,
   `other_languages` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
   `labels` text COLLATE utf8_unicode_ci NOT NULL,
-  `comment` text COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+  `comment` text COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- A tábla adatainak kiíratása `song`
@@ -83,11 +79,10 @@ INSERT INTO `song` (`id`, `version`, `title`, `song`, `sheet_music`, `language`,
 --
 
 CREATE TABLE IF NOT EXISTS `songbook` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
-  `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+  `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- A tábla adatainak kiíratása `songbook`
@@ -113,13 +108,23 @@ INSERT INTO `songbook` (`id`, `userid`, `title`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `themes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `public` int(1) NOT NULL DEFAULT '1',
   `creator` int(11) NOT NULL,
-  `theme` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'in json',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  `theme` text COLLATE utf8_unicode_ci NOT NULL COMMENT 'in custom definition'
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- A tábla adatainak kiíratása `themes`
+--
+
+INSERT INTO `themes` (`id`, `title`, `public`, `creator`, `theme`) VALUES
+(1, 'Rózsaszín', 1, 18, 'Kereső háttér:searchbar-background:background-color:#e765f5;Háttér:body-background:background-color:#F0F8FF;Kör gomb háttér:circle-button-background:background-color:#F44336;Kártya háttér:card-panel:background-color:#FFFFFF'),
+(2, 'próba', 0, 18, 'Kereső háttér:searchbar-background:background-color:#85c3f2;Háttér:body-background:background-color:#F0F8FF;Kör gomb háttér:circle-button-background:background-color:#F44336;Kártya háttér:card-panel:background-color:#FFFFFF'),
+(3, 'próba2', 1, 18, 'Kereső háttér:searchbar-background:background-color:#64b5f6;Háttér:body-background:background-color:#F0F8FF;Kör gomb háttér:circle-button-background:background-color:#F44336;Kártya háttér:card-panel:background-color:#FFFFFF'),
+(4, 'próba6', 0, 18, 'Kereső háttér:searchbar-background:background-color:#59a2d9;Háttér:body-background:background-color:#F0F8FF;Kör gomb háttér:circle-button-background:background-color:#F44336;Kártya háttér:card-panel:background-color:#FFFFFF'),
+(5, 'próba7', 1, 18, 'Kereső háttér:searchbar-background:background-color:#eb7ef7;Háttér:body-background:background-color:#abcdeb;Kör gomb háttér:circle-button-background:background-color:#38f2ba;Kártya háttér:card-panel:background-color:#fafaed');
 
 -- --------------------------------------------------------
 
@@ -128,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `themes` (
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `session` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
   `lastname` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `firstname` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
@@ -136,22 +141,84 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `pass` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `date` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='A felhasználók itt vannak eltárolva' AUTO_INCREMENT=21 ;
+  `chosentheme` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='A felhasználók itt vannak eltárolva';
 
 --
 -- A tábla adatainak kiíratása `users`
 --
 
-INSERT INTO `users` (`id`, `session`, `lastname`, `firstname`, `username`, `email`, `pass`, `date`) VALUES
-(12, 'asd', 'Albert', 'Csat', 'abc3', 'asd@sad.hu', 'NocNbz6oZYtUI', '2015-06-29 09:31:17'),
-(15, '', 'Csatári', 'Albert', 'csatari2', 'albert.csatari@gmail.com', 'NoTYSsIs4GzBs', '0000-00-00 00:00:00'),
-(16, '', 'Csatári', 'Albert', 'asdasd', 'albert.csatari@gmail.com', 'NoSML2UrO5JCc', '0000-00-00 00:00:00'),
-(18, 'acd638df15eb3b7494f21d066ef05f7ca05f27ccdb600479c52c1adf2b8a8367', 'Csatári', 'Albert', 'csatari', 'csatari2864@gmail.com', 'NoTYSsIs4GzBs', '2015-07-03 08:44:40'),
-(19, '', 'Réti', 'Noémi', 'ananasliget', 'noemireti73@gmail.com', 'NoMqp.IKiwJbs', '2015-04-06 15:56:55'),
-(20, '619976ab557aab88dc58a51874adf144424585afb0dfd597082653281763f000', 'Varga ', 'Ferenc', 'korház22', 'ferenc@gmail.com', 'NouU/0WbQyy/w', '2015-07-03 17:33:19');
+INSERT INTO `users` (`id`, `session`, `lastname`, `firstname`, `username`, `email`, `pass`, `date`, `chosentheme`) VALUES
+(12, 'asd', 'Albert', 'Csat', 'abc3', 'asd@sad.hu', 'NocNbz6oZYtUI', '2015-07-09 09:31:17', 0),
+(15, '', 'Csatári', 'Albert', 'csatari2', 'albert.csatari@gmail.com', 'NoTYSsIs4GzBs', '0000-00-00 00:00:00', 0),
+(16, '', 'Csatári', 'Albert', 'asdasd', 'albert.csatari@gmail.com', 'NoSML2UrO5JCc', '0000-00-00 00:00:00', 0),
+(18, 'a8cb626ac6781433e406005c4baff96621d4e7867ea29b36c36b6ccbb34b0f9c', 'Csatári', 'Albert', 'csatari', 'csatari2864@gmail.com', 'NoTYSsIs4GzBs', '2015-07-09 14:59:47', 5),
+(19, '', 'Réti', 'Noémi', 'ananasliget', 'noemireti73@gmail.com', 'NoMqp.IKiwJbs', '2015-04-06 15:56:55', 0),
+(20, '619976ab557aab88dc58a51874adf144424585afb0dfd597082653281763f000', 'Varga ', 'Ferenc', 'korház22', 'ferenc@gmail.com', 'NouU/0WbQyy/w', '2015-07-03 17:33:19', 0);
 
+--
+-- Indexek a kiírt táblákhoz
+--
+
+--
+-- A tábla indexei `language`
+--
+ALTER TABLE `language`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `song`
+--
+ALTER TABLE `song`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `songbook`
+--
+ALTER TABLE `songbook`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `themes`
+--
+ALTER TABLE `themes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `username` (`username`);
+
+--
+-- A kiírt táblák AUTO_INCREMENT értéke
+--
+
+--
+-- AUTO_INCREMENT a táblához `language`
+--
+ALTER TABLE `language`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT a táblához `song`
+--
+ALTER TABLE `song`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT a táblához `songbook`
+--
+ALTER TABLE `songbook`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT a táblához `themes`
+--
+ALTER TABLE `themes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT a táblához `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
