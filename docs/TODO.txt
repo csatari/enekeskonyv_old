@@ -1,17 +1,38 @@
 Store:
-- kitalálni a jogokat, pontosabban specifikálni: hogy lehet az lenni, mi jár vele, hogy lehet megszüntetni
+- kitalálni a jogokat, pontosabban specifikálni: hogy lehet az lenni, mi jár vele, hogy lehet megszüntetni X
 - email verifikációs üzenetet küldeni
 - kijelentkezés X
 Fontosak:
 - keresésnél legyen egy indeterminate progressbar a kereső alatt X
 - az énekeknél ha csak a sorrend változik, akkor is frissüljenek az énekek X
-- amikor a beállításokba lépek, akkor válassza ki a beállított témámat, illetve ha váltok témát, akkor mentse el
-- Szerkesztésnél lehetnek majd egyéb funkciók: Módosítás, Új verzió, Törlés 
+- amikor a beállításokba lépek, akkor válassza ki a beállított témámat, illetve ha váltok témát, akkor mentse el X
+- Szerkesztésnél lehetnek majd egyéb funkciók: Módosítás, Új verzió, Törlés
 - jogok legyenek meg az adatbázisban, meg kitalálva, hogy kinek mikor milyen jog jár és mit lehet vele csinálni
-- énekeskönyvekhez:
-	- legyen valahogy beállítás gomb, amivel átnevezni, törölni, megosztani, letölteni lehet
-- ének szerkesztése
-- a kereső csak a legfrissebb verziójú éneket adja vissza
+
+
+Következő lépések:
+- legyen meg a kliensen az összes énekművelet valahol
+- le lehessen kérdezni, hogy milyen jogom van adott énekre vonatkozólag
+- jog alapján jelenítse meg a műveleteket (kliens oldalon kezelve)
+- csinálja meg a műveleteket (szerver oldali jogellenőrzés)
+	- módosítás -> új sorként kerüljön be a táblába új verziószámmal
+	- csak a legfrissebb énekek között keressen
+	- a készítés is azért legyen ellenőrizve jogilag
+  eddig fontos
+	- songrequest tábla elkészítése, plusz a hozzá tartozó műveletek
+	- jelenjen meg a request a táblában
+	- kérdezze le egy embernek, hogy van-e requestje bizonyos időnként
+	- ha van, akkor jelenítse meg valahol
+	- új verzió készítése -> jelenjen meg a songs táblában, hogy az egy létező ének másik verziója
+	- request elfogadása esetén módosuljon a tábla
+- énekeskönyvek keresése, oldalsávban legyen egy összes énekeskönyv menüpont, ami rákeres az énekeskönyvekre
+- az énekeskönyveknek legyen külön oldala: hozza ki kártyákon a következő adatokkal: 
+  Énekeskönyv neve, Tulajdonos, Jogom hozzá (megtekintés (felhasználó), tulajdonos, szerkesztő (megosztott), admin), énekek száma, beállítások gomb
+- A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés
+- Ha rányomok az énekeskönyvre, akkor válassza ki (ha felhasználó, akkor csak az énekeket mutassa belőle), ez látszódjon, hogy ki van választva (footer pl)
+- minden egyes éneknél legyen plusz vagy mínusz gomb, attól függően, hogy benne van-e már az énekeskönyvben, ha ki van választva énekeskönyv
+- kiválasztott énekeskönyv esetében legyen egy letöltés és egy befejezés gomb
+
 Kliens:
 - legyen meg az alapja, hogy hogy néz ki
 - legyenek meg benne a szükséges énekek id-i
