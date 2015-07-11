@@ -62,7 +62,10 @@ var SideNav = {
 	goToThemes: function() {
 		$(".js-page").load("themes.html", function() {
 			Config.runConfig();
-			jQuery.getScript("themes.js").done(function() { });
+			var mytheme = Themes.myChosenTheme;
+			jQuery.getScript("themes.js").done(function() {
+				Themes.myChosenTheme = mytheme;
+			});
 			jQuery('.button-collapse').sideNav('hide');
 		});
 	}

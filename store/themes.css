@@ -1,3 +1,6 @@
 div.card-title {
 	font-size:30px;
 }
+div.editing-id {
+	display:none;
+}

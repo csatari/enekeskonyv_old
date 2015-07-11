@@ -108,3 +108,9 @@ body {
 .circle-button-background {
 	background-color: #F44336;
 }
+.card-settings {
+	height:auto !important;
+}
+.card-content {
+	width:100%;
+}

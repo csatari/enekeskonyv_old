@@ -32,6 +32,9 @@ var Config = {
 	circleButtonBg: "Kör gomb háttér",
 	cardBg: "Kártya háttér",
 
+	//témaszerkesztés
+	missingTitle: "Hiányzik a név!",
+
 	runConfig: function() {
 		//Statikus stringek
 		$(".conf-login").html("Bejelentkezés");
@@ -69,5 +72,9 @@ var Config = {
 		$(".conf-themes").html("Témák");
 		$(".conf-choosen-theme").html("Választott téma");
 		$(".conf-custom").html("Egyedi");
+		$(".conf-choosen-theme-name").html("Név");
+		$(".conf-choosen-theme-public").html("Publikus");
+		$(".conf-public").html("Publikus");
+		$(".conf-default").html("Alapbeállítás");
 	}
 };

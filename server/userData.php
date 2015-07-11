@@ -1,9 +1,11 @@
 <?php
 require_once("/tabledata/users.php");
 require_once("/tabledata/songbook.php");
+require_once("/tabledata/themes.php");
 require_once("error.php");
 $users = new Users($db);
 $songbook = new Songbook($db);
+$themes = new Themes($db);
 if(!isset($_REQUEST["sessionid"]) || $_REQUEST["sessionid"] == "") {
     echo json_encode(new ErrorTable("Hiányzó sessionid!"));
     return;
@@ -42,5 +44,33 @@ else if(isset($_REQUEST["add-songbook"])) {
     else {
         echo json_encode(new ErrorTable("Már van ilyen énekeskönyved!"));
     }
-    
+}
+else if(isset($_REQUEST["get-themes"])) {
+    $usertable = $users->getBySession($_REQUEST["sessionid"]);
+    $result = $themes->getAllForUser($usertable->id);
+    if($result) {
+        echo json_encode($result);
+    }
+    else {
+        echo json_encode(new ErrorTable("Nincs téma"));
+    }
+}
+else if(isset($_REQUEST["add-theme"])) {
+    $usertable = $users->getBySession($_REQUEST["sessionid"]);
+    $result = $themes->saveTheme($_REQUEST["theme-id"],$usertable->id,$_REQUEST["theme-name"],$_REQUEST["theme-public"],$_REQUEST["theme"]);
+    if($result) {
+        echo $result;
+    }
+    else {
+        echo json_encode(new ErrorTable("Már van ilyen nevű témád!"));
+    }
+}
+else if(isset($_REQUEST["set-theme"])) {
+    $usertable = $users->getBySession($_REQUEST["sessionid"]);
+    $result = $users->updateTheme($usertable->id,$_REQUEST["set-theme"]);
+    echo "true";
+}
+else if(isset($_REQUEST["get-theme"])) {
+    $usertable = $users->getBySession($_REQUEST["sessionid"]);
+    echo $usertable->theme;
 }

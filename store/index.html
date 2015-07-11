@@ -1,5 +1,6 @@
 <html>
 <head>
+	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="vendors/materialize/css/materialize.css" media="screen,projection">
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<link rel="stylesheet" type="text/css" href="registration.css">
@@ -188,9 +189,9 @@
 	<!-- page -->
 	<div class="js-page page">
 		<div class="js-song-card-collection">
-			 <!--Így fog kinézni egy éneket tartalmazó kártya
-			<div class="card song-card js-song-card waves-effect waves-dark">
-	            <div class="card-content">
+			 <!--Így fog kinézni egy éneket tartalmazó kártya-->
+			<div class="card song-card js-song-card">
+	            <div class="card-content  waves-effect waves-dark">
 					<span class="card-title black-text">Atyám két kezedben</span>
 					<p>Atyám, két kezedben, csak ott lakhatom,</p>
 					<p>Biztonságot csak Tőled kapok.</p>
@@ -205,18 +206,36 @@
 				            	<span class="waves-effect waves-light btn song-label">#Dicsőítő</span>
 		            		</td>
 		            		<td class="no-padding song-button-space">
-		            			<span class="waves-effect waves-light btn-floating btn-large song-button">
+		            			<span class="waves-effect waves-light btn-floating btn-large song-button activator">
 			            		<i class="material-icons">settings</i>
 			            	</span>
 		            		</td>
 		        		</tr>
 		            </table>
 	            </div>
+	            <div class="card-reveal card-settings">
+					<span class="card-title grey-text text-darken-4">
+						<span class="waves-effect waves-light btn-floating btn-large song-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="Módosítás_">
+			            	<i class="material-icons">mode_edit</i>
+			        	</span>
+			        	<!--<span class="waves-effect waves-light btn-floating btn-large song-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="Módosítás kérése_">
+			            	<i class="material-icons">mode_edit</i>
+			        	</span>-->
+			        	<span class="waves-effect waves-light btn-floating btn-large song-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="Törlés_">
+			            	<i class="material-icons">delete</i>
+			        	</span>
+			        	<!--<span class="waves-effect waves-light btn-floating btn-large song-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="Törlés kérése_">
+			            	<i class="material-icons">delete</i>
+			        	</span>-->
+			        	<span class="waves-effect waves-light btn-floating btn-large song-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="Új verzió_">
+			            	<i class="material-icons">call_split</i>
+			        	</span>
+					</span>
+		        </div>
 	        </div>
-			-->
+			<!---->
         </div>
 	</div>
-
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="config.js"></script>
 	<script type="text/javascript" src="index.js"></script>

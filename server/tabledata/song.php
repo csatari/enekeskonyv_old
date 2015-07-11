@@ -26,10 +26,10 @@ class Song {
      * @param $leiro
      * @param $kotta
      */
-    function add($cim,$leiro,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes) {
-        $sql = "INSERT INTO ".SongTable::$tableName." (".SongTable::$titleName.",".SongTable::$textName.",".SongTable::$notesName.",".SongTable::$langName.",".SongTable::$otherlangName.",".SongTable::$labelsName.",".SongTable::$commentName.") VALUES (?,?,?,?,?,?,?)";
+    function add($creator,$cim,$leiro,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes) {
+        $sql = "INSERT INTO ".SongTable::$tableName." (".SongTable::$creatorName.",".SongTable::$titleName.",".SongTable::$textName.",".SongTable::$notesName.",".SongTable::$langName.",".SongTable::$otherlangName.",".SongTable::$labelsName.",".SongTable::$commentName.") VALUES (?,?,?,?,?,?,?,?)";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(array($cim,$leiro,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes));
+        $stmt->execute(array($creator,$cim,$leiro,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes));
         $stmt->fetch(PDO::FETCH_ASSOC);
         return $this->getLast()->id;
     }

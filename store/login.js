@@ -46,6 +46,7 @@ var Login = {
 				data: {"username": username, "password": password}
 			})
 		.done(function(result) {
+			console.log(result);
 			var res = JSON.parse(result);
 			console.log("session: "+result);
 			if(res["error"] == "" || res["error"] == undefined) {
@@ -124,6 +125,7 @@ var Login = {
 		$('.js-logged-in').css({"display":"block"});
 		Login.setNameInUserDetails();
 		SideNav.refreshSongbooks();
+		Themes.applyUserTheme();
 	},
 	notLoggedIn: function() {
 		console.log("notLoggedIn");

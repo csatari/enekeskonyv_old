@@ -113,6 +113,12 @@ class Users {
         $this->updateSessionid($usertable->id,$sessionid);
         return $sessionid;
     }
+    // beállítja a usernek a megadott témát
+    function updateTheme($id,$theme) {
+        $sql = "UPDATE ".UsersTable::$tableName." SET ".UsersTable::$themeName."= ? WHERE ".UsersTable::$idName." = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($theme,$id));
+    }
 
     function isUsernameExists($username) {
         $sql = "SELECT ".UsersTable::$usernameName." FROM ".UsersTable::$tableName." WHERE ".UsersTable::$usernameName." = ?";

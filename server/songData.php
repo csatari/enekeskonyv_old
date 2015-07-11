@@ -9,6 +9,7 @@ header('Content-Type: text/html; charset=utf-8');
 require_once("/tabledata/song.php");
 require_once("error.php");
 $song = new Song($db);
+$users = new Users($db);
 if(!isset($_REQUEST["sessionid"]) || $_REQUEST["sessionid"] == "") {
     echo json_encode(new ErrorTable("Hiányzó sessionid!"));
     return;
@@ -47,7 +48,8 @@ if(isset($_REQUEST["addSong"])) {
     if(isset($_REQUEST['otherlang'])) { $masnyelven = $_REQUEST['otherlang']; }
     if(isset($_REQUEST['labels'])) { $cimkek = $_REQUEST['labels']; }
     if(isset($_REQUEST['comment'])) { $megjegyzes = $_REQUEST['comment']; }
-    $id = $song->add($cim,$szoveg,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes);
+    $usertable = $users->getBySession($_REQUEST["sessionid"]);
+    $id = $song->add($usertable->id,$cim,$szoveg,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes);
     echo json_encode($id);
 }
 else if(isset($_REQUEST["searchSong"])) {

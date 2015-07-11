@@ -15,3 +15,11 @@ $(function(){
       }
   });
 });
+
+var Index = {
+  showError: function(string) {
+    $('#js-registration-result').text(string);
+    Registration.setRegistrationResultIcon(false);
+    jQuery('#js-registration-result-modal').openModal();
+  }
+};
