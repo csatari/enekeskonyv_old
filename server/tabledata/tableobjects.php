@@ -76,6 +76,7 @@ class SongTable implements JsonSerializable {
     public $otherlang;
     public $labels;
     public $comment;
+    public $permissions;
 
     function __construct($array) {
         $this->id = $array[SongTable::$idName];
@@ -102,7 +103,8 @@ class SongTable implements JsonSerializable {
             'language' => $this->language,
             'other_languages' => $this->otherlang,
             'labels' => $this->labels,
-            'comment' => $this->comment
+            'comment' => $this->comment,
+            'permissions' => $this->permissions
         ];
     }
 

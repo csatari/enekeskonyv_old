@@ -8,7 +8,7 @@ var Search = {
 			function(result) {
 				SongCard.cards = [];
 				result.map(function(item) {
-					SongCard.addCard(item.id,item.title, item.song,item.labels);
+					SongCard.addCard(item.id,item.title, item.song,item.labels, item.permissions);
 				});
 				SongCard.drawCards();
 				Search.toggleSearchProgress(false);
@@ -30,7 +30,6 @@ var Search = {
 		}
 		word = word.toLowerCase();
 		if($.inArray(word,words) == -1) {
-			console.log("nincsbenne");
 			var searchedElements = "";
 			words.map(function(item) {
 				searchedElements = searchedElements + item + " ";

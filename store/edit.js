@@ -27,7 +27,7 @@ var Edit = {
     sendSong: function(sessionid, title, text, notes, lang, otherlang, labels, comment) {
     	SongData.addSong(sessionid,title, text, notes, lang, otherlang, labels, comment,
     		function(result) {
-    			console.log("siker: "+result);
+    			console.log(result);
     			Materialize.toast(Config.newSongSuccessful, 2000);
     			Edit.setEditedSong(result);
     		},

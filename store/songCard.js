@@ -4,7 +4,6 @@ $(function(){
 	    columnWidth: 200
 	});*/
 	$(document).on('click','.song-label',function(){
-		console.log("rányomott");
 		Search.addWordToSearchbar($(this).text());
 	});
 });
@@ -27,12 +26,13 @@ var SongCard = {
 		    columnWidth: 200
 		});*/
 	},
-	addCard: function(id_, title_, text_, labels_) {
+	addCard: function(id_, title_, text_, labels_, permissions_) {
 		SongCard.cards.push({
 			id: id_,
 			title:title_,
 			text:text_,
-			labels:labels_
+			labels:labels_,
+			permissions:permissions_
 		});
 	},
 	drawCards: function() {
@@ -97,12 +97,13 @@ var SongCard = {
 		$('.js-song-card-collection').html("");
 		SongCard.cards.map(function(item) {
 	    	if($('#'+item.id+'.js-song-card').length == 0) {
-		        $('.js-song-card-collection').append(SongCard.cardHtml(item.id,item.title,item.text,item.labels));
+		        $('.js-song-card-collection').append(SongCard.cardHtml(item.id,item.title,item.text,item.labels,item.permissions));
 	    	}
 		});
+		jQuery('.tooltipped').tooltip({delay: 50});
 
 	},
-	cardHtml: function(id,title,text,labels) {
+	cardHtml: function(id,title,text,labels,permissions) {
 		var textsHTML = "";
 		var textSplit = text.split("\n");
 		var textdotdotdot = "";
@@ -128,9 +129,42 @@ var SongCard = {
 				labelsHTML = labelsHTML + '<span class="waves-effect waves-light btn song-label js-song-label text-orange">#' + item +'</span>';
 			});
 		}
+		var permissionsHTML = "";
+		if(permissions != []) {
+			if(permissions.indexOf(Permissions.SongOperation.Edit) != -1) {
+				permissionsHTML = permissionsHTML + 
+				'<span class="waves-effect waves-light btn-floating btn-large song-settings-button activator tooltipped js-song-edit-button" data-position="bottom" data-delay="50" data-tooltip="' + Config.edit + '">' +
+			    	'<i class="material-icons">mode_edit</i>' +
+			    '</span>';
+			}
+			if(permissions.indexOf(Permissions.SongOperation.EditRequest) != -1) {
+				permissionsHTML = permissionsHTML + 
+				'<span class="waves-effect waves-light btn-floating btn-large song-settings-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="' + Config.editRequest + '">' +
+			    	'<i class="material-icons">mode_edit</i>' +
+			    '</span>';
+			}
+			if(permissions.indexOf(Permissions.SongOperation.Delete) != -1) {
+				permissionsHTML = permissionsHTML + 
+				'<span class="waves-effect waves-light btn-floating btn-large song-settings-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="' + Config.delete + '">' +
+			    	'<i class="material-icons">delete</i>' +
+			    '</span>';
+			}
+			if(permissions.indexOf(Permissions.SongOperation.DeleteRequest) != -1) {
+				permissionsHTML = permissionsHTML + 
+				'<span class="waves-effect waves-light btn-floating btn-large song-settings-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="' + Config.deleteRequest + '">' +
+			    	'<i class="material-icons">delete</i>' +
+			    '</span>';
+			}
+			if(permissions.indexOf(Permissions.SongOperation.Fork) != -1) {
+				permissionsHTML = permissionsHTML + 
+				'<span class="waves-effect waves-light btn-floating btn-large song-settings-button activator tooltipped" data-position="bottom" data-delay="50" data-tooltip="' + Config.fork + '">' +
+			    	'<i class="material-icons">call_split</i>' +
+			    '</span>';
+			}
+		}	
 		var html = 
-		'<div class="card song-card js-song-card waves-effect waves-dark" id="' + id +'">\n' +
-			'<div class="card-content">\n' +
+		'<div class="card song-card js-song-card" id="' + id +'">\n' +
+			'<div class="card-content waves-effect waves-dark">\n' +
 				'<span class="card-title black-text">' + title + '</span>\n'
 				 + textsHTML + 
 			'</div>\n' +
@@ -141,15 +175,31 @@ var SongCard = {
     						 + labelsHTML + 
     					'</td>\n' +
 		        		'<td class="no-padding song-button-space">\n' +
-		        			'<span class="waves-effect waves-light btn-floating btn-large song-button">\n' +
+		        			'<span class="waves-effect waves-light btn-floating btn-large song-button activator">\n' +
 		            			'<i class="material-icons">settings</i>\n' +
 		            		'</span>\n' +
         				'</td>\n' +
         			'</tr>\n' +
         		'</table>\n' +
     		'</div>\n' +
+    		'<div class="card-reveal card-settings">' +
+				'<span class="card-title grey-text text-darken-4">' +
+					permissionsHTML + 
+				'</span>' +
+	        '</div>' +
 		'</div>';
 		return html;
 
+	}
+};
+var Permissions = {
+	SongOperation : {
+		Create:1,
+		Edit:2,
+		EditRequest:3,
+		Delete:4,
+		DeleteRequest:5,
+		Fork:6,
+		AcceptRequest:7
 	}
 };

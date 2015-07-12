@@ -7,9 +7,11 @@
  */
 header('Content-Type: text/html; charset=utf-8');
 require_once("/tabledata/song.php");
+require_once("/tabledata/permissions.php");
 require_once("error.php");
 $song = new Song($db);
 $users = new Users($db);
+$permission = new Permission($db);
 if(!isset($_REQUEST["sessionid"]) || $_REQUEST["sessionid"] == "") {
     echo json_encode(new ErrorTable("Hiányzó sessionid!"));
     return;
@@ -80,8 +82,8 @@ else if(isset($_REQUEST["searchSong"])) {
         
     }
     arsort($searchArray);
-
-    $res = $song->getSongsFromArray($searchArray);
+    $usertable = $users->getBySession($_REQUEST["sessionid"]);
+    $res = $song->getSongsFromArray($searchArray,$usertable);
     echo json_encode($res);
     //$songs = $song->getByTitlePartOld($_REQUEST["title"]);
     //echo json_encode($songs);
@@ -95,6 +97,13 @@ else if(isset($_REQUEST["getSong"])) {
         echo json_encode($songTable);
     }
 }
+else if(isset($_REQUEST["get-operations"])) {
+    $usertable = $users->getBySession($_REQUEST["sessionid"]);
+    $permissionLevel = $permission->getPermissionOfSong($usertable,$_REQUEST["get-operations"]);
+    $operations = $permission->getSongOperations($permissionLevel);
+    echo json_encode($operations);
+}
+
 
 /**
 ** Az első paraméterben egy olyan tömb van, ahol az index jelenti az ének id-t, az érték pedig, hogy hány találat van rá

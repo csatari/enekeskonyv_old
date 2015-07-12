@@ -14,6 +14,17 @@ $(function(){
         Search.searchSong($(".js-search").val());
       }
   });
+  $('body').on('click', '.js-song-edit-button', function() {
+      var id = $(this).parent().parent().parent().attr("id");
+      console.log("megnyomom az editet");
+      SideNav.goToEdit(function() {
+        $('.material-tooltip').remove();
+        Edit.setEditedSong(id,true);
+      });
+  });
+  $('.js-song-edit-button').click(function() {
+    console.log("clicked?");
+  })
 });
 
 var Index = {

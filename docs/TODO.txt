@@ -11,11 +11,15 @@ Fontosak:
 
 
 Következő lépések:
-- legyen meg a kliensen az összes énekművelet valahol
-- le lehessen kérdezni, hogy milyen jogom van adott énekre vonatkozólag
-- jog alapján jelenítse meg a műveleteket (kliens oldalon kezelve)
+- legyen meg a kliensen az összes énekművelet valahol X
+- le lehessen kérdezni, hogy milyen jogom van adott énekre vonatkozólag X
+- jog alapján jelenítse meg a műveleteket (kliens oldalon kezelve) X
 - csinálja meg a műveleteket (szerver oldali jogellenőrzés)
 	- módosítás -> új sorként kerüljön be a táblába új verziószámmal
+		- nyissa meg a szerkesztőt, amiben már be van állítva az id
+		- töltse be a szerkesztőbe az adatokat
+		- a szerver tudjon új verziójú éneket menteni
+		- küldje el az adatokat a szerverre
 	- csak a legfrissebb énekek között keressen
 	- a készítés is azért legyen ellenőrizve jogilag
   eddig fontos

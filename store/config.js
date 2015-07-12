@@ -26,6 +26,12 @@ var Config = {
 	giveTitle: "Cím megadása",
 	newSongSuccessful: "A mentés sikeres",
 
+	edit: "Módosítás",
+	editRequest: "Módosítás kérése",
+	delete: "Törlés",
+	deleteRequest: "Törlés kérése",
+	fork: "Új verzió",
+
 	//témákhoz tartozó stringek
 	searchBarBg: "Kereső háttér",
 	background: "Háttér",

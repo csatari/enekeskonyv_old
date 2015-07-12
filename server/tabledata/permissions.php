@@ -2,7 +2,7 @@
 $ROOT = dirname(__FILE__)."\\";
 require_once($ROOT."..\\db.php");
 require_once("tableobjects.php");
-require_once("/tabledata/songs.php");
+require_once("song.php");
 
 abstract class SongPermissionLevel {
 	const User = 1;
@@ -15,6 +15,7 @@ abstract class SongbookPermissionLevel {
     const Shared = 3;
     const Admin = 4;
 }
+//Ezek az id-k a kliensen is megvannak, úgyhogy a sorrendet nem szabad felcserélni
 abstract class SongOperation {
 	const Create = 1;
 	const Edit = 2;
@@ -126,5 +127,22 @@ class Permission {
 	public function getPermissionOfSongbook() {
 		//TODO az ehhez tartozó dolgokat még meg kell csinálni -> felhasználó, tulajdonos, megosztott, hozzá adatbázis, stb
 		return SongbookPermissionLevel::Admin;
+	}
+	public function getSongOperations($permissionLevel) {
+		if($permissionLevel == SongPermissionLevel::User) {
+			return array(SongOperation::Create,SongOperation::EditRequest,SongOperation::DeleteRequest,SongOperation::Fork);
+		}
+		else if($permissionLevel == SongPermissionLevel::Creator) {
+			return array(SongOperation::Create,SongOperation::Edit,SongOperation::Delete,SongOperation::Fork,SongOperation::AcceptRequest);
+		}
+		else if($permissionLevel == SongPermissionLevel::Admin) {
+			return array(SongOperation::Create,SongOperation::Edit,SongOperation::Delete,SongOperation::Fork,SongOperation::AcceptRequest);
+		}
+	}
+	public function addPermissionToSongTable($songtable,$usertable) {
+		$permissionLevel = $this->getPermissionOfSong($usertable,$songtable->id);
+    	$operations = $this->getSongOperations($permissionLevel);
+    	$songtable->permissions = $operations;
+		return $songtable;
 	}
 }

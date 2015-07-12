@@ -9,7 +9,7 @@ $ROOT = dirname(__FILE__)."\\";
 require_once($ROOT."..\\db.php");
 require_once("language.php");
 require_once("tableobjects.php");
-
+require_once("permissions.php");
 
 class Song {
 
@@ -142,8 +142,9 @@ class Song {
         }
         return $enekTablaArray;
     }
-    function getSongsFromArray($array) {
+    function getSongsFromArray($array,$usertable) {
         $enekTablaArray = array();
+        $permissions = new Permission($this->db);
         foreach($array as $enekid => $value) {
             $enektabla = $this->getById($enekid);
             $lang = new Language($this->db);
@@ -158,6 +159,7 @@ class Song {
                     $enektabla->labels = $labelParts;
                 }
             }
+            $enektabla = $permissions->addPermissionToSongTable($enektabla, $usertable);
             array_push($enekTablaArray,$enektabla);
         }
         return $enekTablaArray;

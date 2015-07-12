@@ -50,11 +50,15 @@ var SideNav = {
 		//console.log(lastState);
 		$(".js-my-songbooks-ul").html(lastState);
 	},
-	goToEdit: function() {
+	goToEdit: function(after) {
 		$(".js-page").load("edit.html", function() {
 			Config.runConfig();
 			jQuery.getScript("vendors/Vextab/vextab-div.js").done(function() {
-					jQuery.getScript("edit.js").done(function() {});
+					jQuery.getScript("edit.js").done(function() {
+						if(after != undefined) {
+							after();
+						}
+					});
 			});
 			jQuery('.button-collapse').sideNav('hide');
 		});
