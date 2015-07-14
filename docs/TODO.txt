@@ -14,14 +14,14 @@ Következő lépések:
 - legyen meg a kliensen az összes énekművelet valahol X
 - le lehessen kérdezni, hogy milyen jogom van adott énekre vonatkozólag X
 - jog alapján jelenítse meg a műveleteket (kliens oldalon kezelve) X
-- csinálja meg a műveleteket (szerver oldali jogellenőrzés)
-	- módosítás -> új sorként kerüljön be a táblába új verziószámmal
-		- nyissa meg a szerkesztőt, amiben már be van állítva az id
-		- töltse be a szerkesztőbe az adatokat
-		- a szerver tudjon új verziójú éneket menteni
-		- küldje el az adatokat a szerverre
-	- csak a legfrissebb énekek között keressen
-	- a készítés is azért legyen ellenőrizve jogilag
+- csinálja meg a műveleteket (+szerver oldali jogellenőrzés)
+	- módosítás -> új sorként kerüljön be a táblába új verziószámmal X
+		- nyissa meg a szerkesztőt, amiben már be van állítva az id X
+		- töltse be a szerkesztőbe az adatokat X
+		- a szerver tudjon új verziójú éneket menteni X
+		- küldje el az adatokat a szerverre X
+	- csak a legfrissebb énekek között keressen X
+	- a készítés is azért legyen ellenőrizve jogilag X
   eddig fontos
 	- songrequest tábla elkészítése, plusz a hozzá tartozó műveletek
 	- jelenjen meg a request a táblában
@@ -29,10 +29,12 @@ Következő lépések:
 	- ha van, akkor jelenítse meg valahol
 	- új verzió készítése -> jelenjen meg a songs táblában, hogy az egy létező ének másik verziója
 	- request elfogadása esetén módosuljon a tábla
+- tesztelni, hogy a szerver jó énekeskönyveket ad-e vissza
 - énekeskönyvek keresése, oldalsávban legyen egy összes énekeskönyv menüpont, ami rákeres az énekeskönyvekre
+- ha adminként keresek rá, jelenjen meg, hogy kié az énekeskönyv
 - az énekeskönyveknek legyen külön oldala: hozza ki kártyákon a következő adatokkal: 
   Énekeskönyv neve, Tulajdonos, Jogom hozzá (megtekintés (felhasználó), tulajdonos, szerkesztő (megosztott), admin), énekek száma, beállítások gomb
-- A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés
+- A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés X
 - Ha rányomok az énekeskönyvre, akkor válassza ki (ha felhasználó, akkor csak az énekeket mutassa belőle), ez látszódjon, hogy ki van választva (footer pl)
 - minden egyes éneknél legyen plusz vagy mínusz gomb, attól függően, hogy benne van-e már az énekeskönyvben, ha ki van választva énekeskönyv
 - kiválasztott énekeskönyv esetében legyen egy letöltés és egy befejezés gomb
