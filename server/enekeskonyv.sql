@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2015. Júl 14. 15:06
+-- Létrehozás ideje: 2015. Júl 15. 15:16
 -- Kiszolgáló verziója: 5.6.24
 -- PHP verzió: 5.6.8
 
@@ -102,12 +102,12 @@ INSERT INTO `songbook` (`id`, `userid`, `title`, `public`) VALUES
 (3, 12, 'Valami új', 0),
 (4, 12, 'Hozzáadom', 0),
 (5, 12, 'Nev', 1),
-(6, 18, 'kitaláltam', 0),
+(6, 18, 'kitaláltam', 1),
 (8, 18, 'kitaláltam2', 0),
 (9, 18, 'ABC', 0),
 (10, 18, 'ASD', 0),
 (11, 18, '1 hónap múlva lesz a szülinapom!!!!!!!!!!!44négy', 0),
-(12, 18, '', 0);
+(12, 18, 'Név', 0);
 
 -- --------------------------------------------------------
 
@@ -125,8 +125,9 @@ CREATE TABLE IF NOT EXISTS `songbook-shared` (
 --
 
 INSERT INTO `songbook-shared` (`userid`, `songbookid`) VALUES
-(18, 1),
-(18, 2);
+(12, 8),
+(18, 2),
+(19, 1);
 
 -- --------------------------------------------------------
 
@@ -178,10 +179,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `session`, `lastname`, `firstname`, `username`, `email`, `pass`, `date`, `chosentheme`, `admin`) VALUES
-(12, 'asd', 'Albert', 'Csat', 'abc3', 'asd@sad.hu', 'NocNbz6oZYtUI', '2015-07-12 09:31:17', 0, 0),
+(12, 'asd', 'Albert', 'Csat', 'abc3', 'asd@sad.hu', 'NocNbz6oZYtUI', '2015-07-15 09:31:17', 0, 0),
 (15, '', 'Csatári', 'Albert', 'csatari2', 'albert.csatari@gmail.com', 'NoTYSsIs4GzBs', '0000-00-00 00:00:00', 0, 0),
 (16, '', 'Csatári', 'Albert', 'asdasd', 'albert.csatari@gmail.com', 'NoSML2UrO5JCc', '0000-00-00 00:00:00', 0, 0),
-(18, 'edcc5400686c0d0f816da38e3b90c43e5b1953592431ba01e63de783625bcf26', 'Csatári', 'Albert', 'csatari', 'csatari2864@gmail.com', 'NoTYSsIs4GzBs', '2015-07-14 10:22:01', 0, 1),
+(18, 'f3597904d3a25b74278aa2a8934113e200a73e6f43370add6bf5f6d492e2e93a', 'Csatári', 'Albert', 'csatari', 'csatari2864@gmail.com', 'NoTYSsIs4GzBs', '2015-07-15 10:11:47', 0, 1),
 (19, '', 'Réti', 'Noémi', 'ananasliget', 'noemireti73@gmail.com', 'NoMqp.IKiwJbs', '2015-04-06 15:56:55', 0, 0),
 (20, '619976ab557aab88dc58a51874adf144424585afb0dfd597082653281763f000', 'Varga ', 'Ferenc', 'korház22', 'ferenc@gmail.com', 'NouU/0WbQyy/w', '2015-07-03 17:33:19', 0, 0);
 
