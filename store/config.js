@@ -26,11 +26,20 @@ var Config = {
 	giveTitle: "Cím megadása",
 	newSongSuccessful: "A mentés sikeres",
 
+
 	edit: "Módosítás",
 	editRequest: "Módosítás kérése",
 	delete: "Törlés",
 	deleteRequest: "Törlés kérése",
 	fork: "Új verzió",
+	songs: "ének",
+	rename: 'Átnevezés',
+	share: 'Megosztás',
+	download: 'Letöltés',
+	User:"Felhasználó",
+	Owner:"Tulajdonos",
+	Shared:"Megosztott",
+	Admin:"Admin",
 
 	//témákhoz tartozó stringek
 	searchBarBg: "Kereső háttér",
@@ -48,6 +57,7 @@ var Config = {
 		$(".conf-create-songbook").html("Énekeskönyv létrehozása");
 		$(".conf-my-songbooks").html("Énekeskönyveim");
 		$(".conf-add-new-song").html("Új ének hozzáadása");
+		$(".conf-all-songbook").html("Összes énekeskönyv");
 		$(".conf-log-out").html("Kijelentkezés");
 		$(".conf-lastname").html("Vezetéknév");
 		$(".conf-firstname").html("Keresztnév");

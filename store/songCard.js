@@ -36,7 +36,7 @@ var SongCard = {
 		});
 	},
 	drawCards: function() {
-		//TODO ha csak a sorrend történik, akkor át kell állítani a sorrendet, majd a következővel frissíteni:
+		//ha csak a sorrend történik, akkor át kell állítani a sorrendet, majd a következővel frissíteni:
 		/*
 				$grid.masonry('reloadItems')
 				var $grid = jQuery('.js-song-card-collection').masonry({
@@ -190,16 +190,5 @@ var SongCard = {
 		'</div>';
 		return html;
 
-	}
-};
-var Permissions = {
-	SongOperation : {
-		Create:1,
-		Edit:2,
-		EditRequest:3,
-		Delete:4,
-		DeleteRequest:5,
-		Fork:6,
-		AcceptRequest:7
 	}
 };

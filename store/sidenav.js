@@ -23,6 +23,9 @@ $(function(){
 	$(".js-settings").click(function() {
 		SideNav.goToThemes();
 	});
+	$(".js-all-songbook").click(function() {
+		SideNav.goToSongbooks();
+	});
 });
 
 var SideNav = {
@@ -71,6 +74,15 @@ var SideNav = {
 				Themes.myChosenTheme = mytheme;
 			});
 			jQuery('.button-collapse').sideNav('hide');
+		});
+	},
+	goToSongbooks: function() {
+		$(".js-page").load("songbooks.html", function() {
+			Config.runConfig();
+			jQuery('.button-collapse').sideNav('hide');
+			jQuery.getScript("songbooks.js").done(function() {
+				Songbooks.showAllVisibleSongbooks();
+			});
 		});
 	}
 };

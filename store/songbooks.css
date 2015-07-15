@@ -1,0 +1,16 @@
+.songbook-card {
+	width:350px;
+	margin:15px;
+	display:inline-block;
+	vertical-align: middle;
+}
+.songbook-permission, .songbook-permission:hover {
+	color:rgb(255, 223, 0);
+	transition: 0.2s ease-out;
+	background-color:#4F6D7A;
+	padding: 0 3px;
+	font-size:12px;
+	line-height: 24px;
+	height: 22px;
+	margin-right:5px;
+}

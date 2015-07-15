@@ -1,9 +1,9 @@
 var SongData = {
-	addSong: function(sessionid,title, text, notes, lang, otherlang, labels, comment, afterGood,afterBad) {
+	addSong: function(sessionid, songid, title, text, notes, lang, otherlang, labels, comment, afterGood,afterBad) {
 		$.ajax({method: "POST", 
 			url: Config.url+Config.songDataPage, 
 			data: {"sessionid": sessionid, "addSong": "1", "title": title, "text": text, "notes": notes, "lang": lang, "otherlang": otherlang,
-					"labels": labels, "comment": comment}
+					"labels": labels, "comment": comment, "songid": songid}
 		})
 		.done(function(result) {
 			var res = JSON.parse(result);

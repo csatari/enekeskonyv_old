@@ -17,22 +17,19 @@ var Edit = {
             var caretPosStart = $(".js-edit-text-textarea")[0].selectionStart;
             var caretPosEnd = $(".js-edit-text-textarea")[0].selectionEnd;
             var textAreaTxt = $(".js-edit-text-textarea").val();
-            console.log(textAreaTxt);
             $(".js-edit-text-textarea").val(
                 textAreaTxt.substring(0, caretPosStart) + starttag + textAreaTxt.substring(caretPosStart, caretPosEnd) +
                 endtag + textAreaTxt.substring(caretPosEnd));
             $(".js-edit-text-textarea")[0].selectionStart = caretPosEnd+3;
             $(".js-edit-text-textarea")[0].selectionEnd = caretPosEnd+3;
     },
-    sendSong: function(sessionid, title, text, notes, lang, otherlang, labels, comment) {
-    	SongData.addSong(sessionid,title, text, notes, lang, otherlang, labels, comment,
+    sendSong: function(sessionid, songid, title, text, notes, lang, otherlang, labels, comment) {
+    	SongData.addSong(sessionid, songid, title, text, notes, lang, otherlang, labels, comment,
     		function(result) {
-    			console.log(result);
     			Materialize.toast(Config.newSongSuccessful, 2000);
     			Edit.setEditedSong(result);
     		},
     		function(result) {
-    			console.log("nincssiker: "+result);
     			Materialize.toast(result, 5000);
     		});
     },
@@ -46,12 +43,16 @@ var Edit = {
     		SongData.getSong(Login.getSessionId(),songId,
     			function(result) {
     				console.log(result);
+    				Edit.loadSongObject(result);
     			}),
     			function(result) {
     				console.log(result);
     			}
     	}
 
+    },
+    getEditedSong: function() {
+    	return $(".js-edited-song").html();
     },
     clearEditedSong: function() {
     	$(".js-edited-song").html("");
@@ -69,6 +70,25 @@ var Edit = {
 		$(".js-edit-other-language").val("");
 		$(".js-edit-labels").val("");
 		$(".js-edit-comment").val("");
+    },
+    loadSongObject: function(song) {
+    	//title
+    	Common.setInputValue(".js-edit-title",song.title);
+    	//song
+    	Common.setInputValue(".js-edit-text-textarea",song.song);
+    	//sheet
+    	var tabdiv = new Vex.Flow.TabDiv("div.vex-tabdiv"); 
+		tabdiv.code = song.sheet_music; 
+		tabdiv.redraw(); 
+		$(".editor").val(song.sheet_music);
+		//language
+		$(".js-choose-language").val(song.language);
+		//other language
+		Common.setInputValue(".js-edit-other-language",song.other_languages);
+		//labels
+		Common.setInputValue(".js-edit-labels",song.labels);
+		//comments
+		Common.setInputValue(".js-edit-comment",song.comment);
     }
 };
 
@@ -101,10 +121,10 @@ $(function(){
 		return false;
 	});
 	$(".js-edit-button").click(function() {
-		console.log(Login.getSessionId() + " " +  $(".js-edit-title").val() + " " + $(".js-edit-text-textarea").val() + " " + 
+		/*console.log(Login.getSessionId() + " " +  $(".js-edit-title").val() + " " + $(".js-edit-text-textarea").val() + " " + 
 			$("textarea.editor").val() + " " + $(".js-choose-language").val() + " " + $(".js-edit-other-language").val() + " " + $(".js-edit-labels").val()
-			+ " " + $(".js-edit-comment").val());
-		Edit.sendSong(Login.getSessionId(), $(".js-edit-title").val(), $(".js-edit-text-textarea").val(), $("textarea.editor").val(), $(".js-choose-language").val(),
+			+ " " + $(".js-edit-comment").val());*/
+		Edit.sendSong(Login.getSessionId(), Edit.getEditedSong(), $(".js-edit-title").val(), $(".js-edit-text-textarea").val(), $("textarea.editor").val(), $(".js-choose-language").val(),
 			$(".js-edit-other-language").val(), $(".js-edit-labels").val(), $(".js-edit-comment").val());
 	});
 });

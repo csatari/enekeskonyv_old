@@ -26,12 +26,33 @@ class Song {
      * @param $leiro
      * @param $kotta
      */
-    function add($creator,$cim,$leiro,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes) {
-        $sql = "INSERT INTO ".SongTable::$tableName." (".SongTable::$creatorName.",".SongTable::$titleName.",".SongTable::$textName.",".SongTable::$notesName.",".SongTable::$langName.",".SongTable::$otherlangName.",".SongTable::$labelsName.",".SongTable::$commentName.") VALUES (?,?,?,?,?,?,?,?)";
+    function add($userTable,$songid,$cim,$leiro,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes) {
+        $nextId = $songid;
+        $version = 1;
+        $permission = new Permission($this->db);
+        //új ének létrehozása
+        if($songid == 0) {
+            //jogi ellenőrzés készítésre
+            if(!$permission->isOperationValidForUserSong($userTable,$songid,SongOperation::Create)) {
+                return 0; //nincs jog
+            }
+            $nextId = $this->getNextId();
+            
+        }
+        //új verzió létrehozása
+        else {
+            //jogi ellenőrzés módosításra
+            if(!$permission->isOperationValidForUserSong($userTable,$songid,SongOperation::Edit)) {
+                return 0; //nincs jog
+            }
+            $song = $this->getById($songid);
+            $version = $song->version+1;
+        }
+        $sql = "INSERT INTO ".SongTable::$tableName." (".SongTable::$idName.",".SongTable::$versionName.",".SongTable::$creatorName.",".SongTable::$titleName.",".SongTable::$textName.",".SongTable::$notesName.",".SongTable::$langName.",".SongTable::$otherlangName.",".SongTable::$labelsName.",".SongTable::$commentName.") VALUES (?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute(array($creator,$cim,$leiro,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes));
+        $stmt->execute(array($nextId,$version,$userTable->id,$cim,$leiro,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes));
         $stmt->fetch(PDO::FETCH_ASSOC);
-        return $this->getLast()->id;
+        return $nextId;
     }
     public function getLast() {
         $sql = "SELECT * FROM ".SongTable::$tableName." ORDER BY ".SongTable::$idName." DESC LIMIT 0,1";
@@ -47,7 +68,7 @@ class Song {
      * @return SongTable
      */
     function getById($id) {
-        $sql = "SELECT * FROM ".SongTable::$tableName." WHERE ".SongTable::$idName." = ?";
+        $sql = "SELECT * FROM ".SongTable::$tableName." WHERE ".SongTable::$idName." = ? ORDER BY ".SongTable::$versionName." DESC LIMIT 0,1";
         $stmt = $this->db->prepare($sql);
         $stmt->execute(array($id));
         $enektabla = new SongTable($stmt->fetch(PDO::FETCH_ASSOC));
@@ -163,5 +184,12 @@ class Song {
             array_push($enekTablaArray,$enektabla);
         }
         return $enekTablaArray;
+    }
+    function getNextId() {
+        $sql = "SELECT ".SongTable::$idName." FROM ".SongTable::$tableName." ORDER BY ".SongTable::$idName." DESC LIMIT 0,1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $idArray = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $idArray[SongTable::$idName]+1;
     }
 };

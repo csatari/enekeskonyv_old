@@ -156,14 +156,15 @@ var Themes = {
 	setThemeById: function(themeid) {
 		Themes.setCurrentId(themeid);
 		if(themeid == "0") {
-			$(".js-chosen-theme-name").val("");
+			Common.setInputValue(".js-chosen-theme-name","");
+			//$(".js-chosen-theme-name").val("");
 			Themes.themeArray = Themes.defaultArray;
 			Themes.setCurrentTheme(true);
 			UserData.setTheme(Login.getSessionId(),themeid,function(res){},function(res){});
 		}
 		else if(themeid == "-1") {
 			//egyedi
-			$(".js-chosen-theme-name").val("");
+			Common.setInputValue(".js-chosen-theme-name","");
 			Themes.setCurrentId("");
 		}
 		else {
@@ -173,7 +174,8 @@ var Themes = {
 					chosenTheme = value;
 				}
 			});
-			$(".js-chosen-theme-name").val(chosenTheme["title"]);
+			Common.setInputValue(".js-chosen-theme-name",chosenTheme["title"]);
+			//$(".js-chosen-theme-name").val(chosenTheme["title"]);
 			if(chosenTheme["public"] == "1") {
 				$(".js-chosen-theme-public").prop('checked', true);
 			}

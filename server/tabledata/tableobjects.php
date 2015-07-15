@@ -21,36 +21,6 @@ class LanguageTable implements JsonSerializable {
         ];
     }
 }
-class SongbookTable implements JsonSerializable {
-
-    public static $tableName = "songbook";
-    public static $idName = "id";
-    public static $useridName = "userid";
-    public static $titleName = "title";
-    public static $publicName = "public";
-
-    public $id;
-    public $userid;
-    public $title;
-    public $public;
-
-    function __construct($array) {
-        $this->id = $array[SongbookTable::$idName];
-        $this->userid = $array[SongbookTable::$useridName];
-        $this->title = $array[SongbookTable::$titleName];
-        $this->public = $array[SongbookTable::$publicName];
-    }
-
-    public function jsonSerialize()
-    {
-        return [
-            'id' => $this->id,
-            'userid' => $this->userid,
-            'title' => $this->title,
-            'public' => $this->public
-        ];
-    }
-}
 class SongTable implements JsonSerializable {
 
     public static $tableName = "song";
@@ -76,7 +46,7 @@ class SongTable implements JsonSerializable {
     public $otherlang;
     public $labels;
     public $comment;
-    public $permissions;
+    public $permissions; //plusz információ, hogy milyen műveletek megengedettek egy usernek
 
     function __construct($array) {
         $this->id = $array[SongTable::$idName];
@@ -108,6 +78,64 @@ class SongTable implements JsonSerializable {
         ];
     }
 
+}
+class SongbookTable implements JsonSerializable {
+
+    public static $tableName = "songbook";
+    public static $idName = "id";
+    public static $useridName = "userid";
+    public static $titleName = "title";
+    public static $publicName = "public";
+
+    public $id;
+    public $userid;
+    public $title;
+    public $public;
+    public $username; //csak az adminoknak kell plusz információnak
+    public $permissions; //csak plusz információ, hogy milyen jog megengedett az adott usernek
+    public $permissionlevel; // csak plusz információ, ki tudja deríteni belőle a kliens a jog nevét
+
+    function __construct($array) {
+        $this->id = $array[SongbookTable::$idName];
+        $this->userid = $array[SongbookTable::$useridName];
+        $this->title = $array[SongbookTable::$titleName];
+        $this->public = $array[SongbookTable::$publicName];
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'id' => $this->id,
+            'userid' => $this->userid,
+            'title' => $this->title,
+            'public' => $this->public,
+            'username' => $this->username,
+            'permissions' => $this->permissions,
+            'permissionlevel' => $this->permissionlevel
+        ];
+    }
+}
+class SongbookSharedTable implements JsonSerializable {
+
+    public static $tableName = "`songbook-shared`";
+    public static $useridName = "userid";
+    public static $songbookidName = "songbookid";
+
+    public $userid;
+    public $songbookid;
+
+    function __construct($array) {
+        $this->userid = $array[SongbookSharedTable::$useridName];
+        $this->title = $array[SongbookSharedTable::$songbookidName];
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'userid' => $this->userid,
+            'songbookid' => $this->songbookid
+        ];
+    }
 }
 
 class ThemesTable implements JsonSerializable {

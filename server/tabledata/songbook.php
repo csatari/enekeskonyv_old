@@ -8,6 +8,8 @@
 $ROOT = dirname(__FILE__)."\\";
 require_once($ROOT."..\\db.php");
 require_once("tableobjects.php");
+require_once("permissions.php");
+require_once("users.php");
 
 class Songbook {
 
@@ -43,6 +45,13 @@ class Songbook {
         }
         return $enekeskonyvTablaArray;
     }
+    function getById($id) {
+        $sql = "SELECT * FROM ".SongbookTable::$tableName." WHERE ".SongbookTable::$idName." = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($id));
+        $songbookTable = new SongbookTable($stmt->fetch(PDO::FETCH_ASSOC));
+        return $songbookTable;
+    }
     function isSongbookExists($userid,$songbook) {
         $sql = "SELECT ".SongbookTable::$titleName." FROM ".SongbookTable::$tableName." WHERE ".
                 SongbookTable::$useridName." = ? AND ".SongbookTable::$titleName." = ?";
@@ -51,5 +60,79 @@ class Songbook {
         $stmt->fetch(PDO::FETCH_ASSOC);
         $count = $stmt->rowCount();
         return ($count == 0 ? false : true);
+    }
+    function shareSongbook($userid,$songbookid) {
+        $sql = "INSERT INTO ".SongbookSharedTable::$tableName." (".SongbookSharedTable::$useridName.",".SongbookSharedTable::$songbookidName.") VALUES (?,?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($userid,$songbookid));
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return true;
+    }
+    function isSharedWithUser($songbookid,$userid) {
+        $sql = "SELECT * FROM ".SongbookSharedTable::$tableName." WHERE ".
+                SongbookSharedTable::$useridName." = ? AND ".SongbookSharedTable::$songbookidName." = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($userid,$songbookid));
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        $count = $stmt->rowCount();
+        return ($count == 0 ? false : true);
+    }
+    function getAllSharedSongbooksByUserid($userid) {
+        $sql = "SELECT * FROM ".SongbookSharedTable::$tableName." WHERE ".
+                SongbookSharedTable::$useridName." = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($userid));
+        $resultArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $userArray = array();
+        foreach($resultArray as $result) {
+            $tabla = new SongbookSharedTable($result);
+            array_push($userArray,$tabla);
+        }
+        return $userArray;
+    }
+
+    function getAllVisibleSongbooksForUser($usertable) {
+        //TODO TESZTELNI
+        $permission = new Permission($this->db);
+        $users = new Users($this->db);
+        //admin, tehát minden énekeskönyv
+        if($usertable->admin == 1) {
+            $sql = "SELECT * FROM ".SongbookTable::$tableName;
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            $songbookTable = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $sbArray = array();
+            foreach($songbookTable as $result) {
+                $tabla = new SongbookTable($result);
+                $tabla = $permission->addPermissionToSongbookTable($tabla,$usertable);
+                $permlevel = $permission->getPermissionOfSongbook($usertable,$tabla->id);
+                $songbookOwner = $users->getById($tabla->userid);
+                $tabla->username = $songbookOwner->firstname." ".$songbookOwner->lastname;
+                $tabla->permissionlevel  = $permlevel;
+                array_push($sbArray,$tabla);
+            }
+            return $sbArray;
+        }
+        //saját, velem megosztott, publikus - ha nem admin
+        else {
+            //SELECT * FROM `songbook` WHERE userid = 18 OR public = 1 OR id in 
+            //(SELECT songbookid FROM `songbook-shared` WHERE userid = 18)
+            $sql = "SELECT * FROM ".SongbookTable::$tableName." WHERE ".SongbookTable::$useridName." = ? OR ".SongbookTable::$publicName." = 1 OR ".SongbookTable::$idName.
+                    " in (SELECT ".SongbookSharedTable::$songbookidName." FROM ".SongbookSharedTable::$tableName." WHERE ".SongbookSharedTable::$useridName." = ?)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute(array($usertable->id,$usertable->id));
+            $songbookTable = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $sbArray = array();
+            foreach($songbookTable as $result) {
+                $tabla = new SongbookTable($result);
+                $tabla = $permission->addPermissionToSongbookTable($tabla,$usertable);
+                $permlevel = $permission->getPermissionOfSongbook($usertable,$tabla->id);
+                $songbookOwner = $users->getById($tabla->userid);
+                $tabla->username = $songbookOwner->firstname." ".$songbookOwner->lastname;
+                $tabla->permissionlevel  = $permlevel;
+                array_push($sbArray,$tabla);
+            }
+            return $sbArray;
+        }
     }
 };

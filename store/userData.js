@@ -5,7 +5,6 @@ var UserData = {
 				data: {"sessionid": sessionid, "name": ""}
 			})
 		.done(function(result) {
-			//console.log("name: "+result);
 			var res = JSON.parse(result);
 			if(res["error"] == "" || res["error"] == undefined) {
 				afterGood(res["lastname"]+" "+res["firstname"]);
@@ -34,6 +33,21 @@ var UserData = {
 		$.ajax({method: "POST", 
 				url: Config.url+Config.userDataPage, 
 				data: {"sessionid": sessionid, "get-songbooks": ""}
+			})
+		.done(function(result) {
+			var res = JSON.parse(result);
+			if(res["error"] == "" || res["error"] == undefined) {
+				afterGood(res);
+			}
+			else {
+				afterBad(res["error"]);
+			}
+		});
+	},
+	getAllVisibleSongbooks: function(sessionid,afterGood,afterBad) {
+		$.ajax({method: "POST", 
+				url: Config.url+Config.userDataPage, 
+				data: {"sessionid": sessionid, "get-all-visible-songbooks": ""}
 			})
 		.done(function(result) {
 			var res = JSON.parse(result);

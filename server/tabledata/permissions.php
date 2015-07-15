@@ -3,6 +3,7 @@ $ROOT = dirname(__FILE__)."\\";
 require_once($ROOT."..\\db.php");
 require_once("tableobjects.php");
 require_once("song.php");
+require_once("songbook.php");
 
 abstract class SongPermissionLevel {
 	const User = 1;
@@ -112,21 +113,48 @@ class Permission {
 		}
 	}
 	public function getPermissionOfSong($usertable,$songid) {
-		if($usertable->admin == 1) {
-			return SongPermissionLevel::Admin;
+		if($songid == 0) {
+			if($usertable->admin == 1) {
+				return SongPermissionLevel::Admin;
+			}
+			return SongPermissionLevel::User;
 		}
 		else {
-			$songs = new Song($this->db);
-			$song = $songs->getById($songid);
-			if($song->creator == $usertable->id) {
-				return SongPermissionLevel::Creator;
+			if($usertable->admin == 1) {
+				return SongPermissionLevel::Admin;
 			}
+			else {
+				$songs = new Song($this->db);
+				$song = $songs->getById($songid);
+				if($song->creator == $usertable->id) {
+					return SongPermissionLevel::Creator;
+				}
+			}
+			return SongPermissionLevel::User;
 		}
-		return SongPermissionLevel::User;
+		
 	}
-	public function getPermissionOfSongbook() {
-		//TODO az ehhez tartozó dolgokat még meg kell csinálni -> felhasználó, tulajdonos, megosztott, hozzá adatbázis, stb
-		return SongbookPermissionLevel::Admin;
+	public function getPermissionOfSongbook($usertable,$songbookid) {
+		if($songbookid == 0) {
+			if($usertable->admin == 1) {
+				return SongbookPermissionLevel::Admin;
+			}
+			return SongbookPermissionLevel::User;
+		}
+		else {
+			if($usertable->admin == 1) {
+				return SongbookPermissionLevel::Admin;
+			}
+			$songbook = new Songbook($this->db);
+			$songbookTable = $songbook->getById($songbookid);
+			if($songbookTable->userid == $usertable->id) {
+				return SongbookPermissionLevel::Owner;
+			}
+			if($songbook->isSharedWithUser($songbookid,$usertable->id)) {
+				return SongbookPermissionLevel::Shared;
+			}
+			return SongbookPermissionLevel::User;
+		}
 	}
 	public function getSongOperations($permissionLevel) {
 		if($permissionLevel == SongPermissionLevel::User) {
@@ -139,10 +167,46 @@ class Permission {
 			return array(SongOperation::Create,SongOperation::Edit,SongOperation::Delete,SongOperation::Fork,SongOperation::AcceptRequest);
 		}
 	}
+	public function getSongbookOperations($permissionLevel,$ispublic) {
+		if($permissionLevel == SongbookPermissionLevel::User) {
+			if($ispublic) {
+				return array(SongbookOperation::Create,SongbookOperation::Browse,SongbookOperation::Download);
+			}
+			else {
+				return array(SongbookOperation::Create);
+			}
+		}
+		else if($permissionLevel == SongbookPermissionLevel::Owner) {
+			return array(SongbookOperation::Create,SongbookOperation::Rename,SongbookOperation::Delete,SongbookOperation::Add,SongbookOperation::Browse
+						 ,SongbookOperation::DeleteElement,SongbookOperation::Share,SongbookOperation::Download,SongbookOperation::Visibility);
+		}
+		else if($permissionLevel == SongbookPermissionLevel::Admin) {
+			return array(SongbookOperation::Create,SongbookOperation::Rename,SongbookOperation::Delete,SongbookOperation::Add,SongbookOperation::Browse
+						 ,SongbookOperation::DeleteElement,SongbookOperation::Share,SongbookOperation::Download,SongbookOperation::Visibility);
+		}
+		else if($permissionLevel == SongbookPermissionLevel::Shared) {
+			return array(SongbookOperation::Create,SongbookOperation::Add,SongbookOperation::Browse,SongbookOperation::DeleteElement,SongbookOperation::Download);
+		}
+	}
+	/**
+	** A usernek el lehet-e végeznie az adott műveletet az adott éneken
+	**/
+	public function isOperationValidForUserSong($usertable,$songid,$operation) {
+		$permissionLevel = $this->getPermissionOfSong($usertable,$songid);
+		return $this->isSongPermissionValid($permissionLevel,$operation);
+	}
+
+
 	public function addPermissionToSongTable($songtable,$usertable) {
 		$permissionLevel = $this->getPermissionOfSong($usertable,$songtable->id);
     	$operations = $this->getSongOperations($permissionLevel);
     	$songtable->permissions = $operations;
 		return $songtable;
+	}
+	public function addPermissionToSongbookTable($songbooktable,$usertable) {
+		$permissionLevel = $this->getPermissionOfSongbook($usertable,$songbooktable->id);
+    	$operations = $this->getSongbookOperations($permissionLevel,$songbooktable->public);
+    	$songbooktable->permissions = $operations;
+		return $songbooktable;
 	}
 }

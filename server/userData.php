@@ -74,3 +74,8 @@ else if(isset($_REQUEST["get-theme"])) {
     $usertable = $users->getBySession($_REQUEST["sessionid"]);
     echo $usertable->theme;
 }
+else if(isset($_REQUEST["get-all-visible-songbooks"])) {
+    $usertable = $users->getBySession($_REQUEST["sessionid"]);
+    $songbooks = $songbook->getAllVisibleSongbooksForUser($usertable);
+    echo json_encode($songbooks);
+}

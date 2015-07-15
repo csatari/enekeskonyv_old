@@ -31,6 +31,7 @@ if(isset($_REQUEST["addSong"])) {
     $masnyelven = "";
     $cimkek = "";
     $megjegyzes = "";
+    $songid = 0;
     if(isset($_REQUEST['title']) && $_REQUEST["title"] != "")  { 
         $cim = $_REQUEST['title']; 
     }
@@ -50,9 +51,23 @@ if(isset($_REQUEST["addSong"])) {
     if(isset($_REQUEST['otherlang'])) { $masnyelven = $_REQUEST['otherlang']; }
     if(isset($_REQUEST['labels'])) { $cimkek = $_REQUEST['labels']; }
     if(isset($_REQUEST['comment'])) { $megjegyzes = $_REQUEST['comment']; }
+    if(isset($_REQUEST['songid'])) {
+        if($_REQUEST['songid'] == null || $_REQUEST['songid'] == "") {
+
+        }
+        else {
+            $songid = $_REQUEST['songid'];
+        }
+    }
     $usertable = $users->getBySession($_REQUEST["sessionid"]);
-    $id = $song->add($usertable->id,$cim,$szoveg,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes);
-    echo json_encode($id);
+    $id = $song->add($usertable,$songid,$cim,$szoveg,$kotta,$nyelv,$masnyelven,$cimkek,$megjegyzes);
+    if($id == 0) {
+        echo json_encode(new ErrorTable("Nincs jogod ehhez a művelethez"));
+    }
+    else {
+        echo json_encode($id);
+    }
+    
 }
 else if(isset($_REQUEST["searchSong"])) {
     if(isset($_REQUEST['title']) && $_REQUEST["title"] != "")  { 
