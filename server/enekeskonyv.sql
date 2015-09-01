@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2015. Júl 10. 17:50
+-- Létrehozás ideje: 2015. Júl 15. 15:16
 -- Kiszolgáló verziója: 5.6.24
 -- PHP verzió: 5.6.8
 
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `song` (
   `other_languages` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL,
   `labels` text COLLATE utf8_unicode_ci NOT NULL,
   `comment` text COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- A tábla adatainak kiíratása `song`
@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS `song` (
 
 INSERT INTO `song` (`id`, `version`, `creator`, `title`, `song`, `sheet_music`, `language`, `other_languages`, `labels`, `comment`) VALUES
 (1, 1, 0, 'ez egy cím', 'ez meg egy leíró', 'na ez meg egy kotta', 1, '0', '', ''),
+(1, 2, 0, 'ez egy cím2', 'ez meg egy leíró2', 'na ez meg egy kotta', 1, '0', '', ''),
+(1, 3, 18, 'ez egy cím3', 'ez meg egy leíró3', 'na ez meg egy kotta', 1, '0', '', ''),
 (2, 1, 0, 'ez egy keres', 'ez meg egy leíró', 'na ez meg egy kotta', 1, '0', '', ''),
 (3, 1, 0, 'ez egy másik', 'ez meg egy leíró', 'na ez meg egy kotta', 1, '0', '', ''),
 (4, 1, 0, 'ebben is benne van, hogy cím', 'ez meg egy leíró', 'na ez meg egy kotta', 1, '0', '', ''),
@@ -72,7 +74,10 @@ INSERT INTO `song` (`id`, `version`, `creator`, `title`, `song`, `sheet_music`, 
 (7, 1, 0, 'Példaének', 'Atyám két kezedben, te vagy a lakhatom...[a][v][r][b][/b][/r][/v][/a]', 'options stave-distance=30 space=10\ntabstave notation=true tablature=false key=C time=4/4', 2, NULL, '', ''),
 (8, 1, 0, 'Ez egy másik példaének', 'asdasdasd', 'options stave-distance=30 space=10\ntabstave notation=true tablature=false key=C time=4/4', 1, '7', 'ez,egy,címke', 'Ez itt egy megjegyzés'),
 (9, 1, 0, 'Hull a pelyhes fehér hó', '[a] A      /       D     A   D       A      E   A  [/a]\nHull a pelyhes fehér hó, jöjj el kedves Télapó!\n[a]A      /       D     A    D     A    E      A[/a]\nMinden gyermek várva vár, vidám ének hangja száll.\n[a]A      E      A      E   A     E     A    E[/a]\nVan zsákodban minden jó, piros alma, mogyoró,\n[a]A       A7       D      A    A      E        A    [/a]\nJöjj el hozzánk, várunk rád, kedves öreg Télapó.\n\nNagy szakállú Télapó jó gyermek barátja.\nCukrot, diót, mogyorót rejteget a zsákja.\nAmerre jár reggelig kis cipőcske megtelik,\nmegtölti a Télapó, ha üresen látja!', 'options stave-distance=30 space=10\ntabstave notation=true tablature=false key=C time=4/4', 1, '0', 'télapó,hó,fehér,gyerek,vidám', ''),
-(10, 1, 18, 'Creator Teszt', 'most ez nincs[v]asd[/v]', 'options stave-distance=30 space=10 width=1176\ntabstave notation=true tablature=false key=C time=4/4', 1, '0', 'teszt', '');
+(10, 1, 18, 'Creator Teszt', 'most ez nincs[v]asd[/v]', 'options stave-distance=30 space=10 width=1176\ntabstave notation=true tablature=false key=C time=4/4', 1, '0', 'teszt', ''),
+(10, 2, 18, 'Creator Teszt2', 'most ez nincs[v]asd[/v]', 'options stave-distance=30 space=10 width=1176\r\ntabstave notation=true tablature=false key=C time=4/4', 1, '0', 'teszt', ''),
+(11, 1, 18, 'új ének', 'asdasd', 'options stave-distance=30 space=10 width=1176\ntabstave notation=true tablature=false key=C time=4/4', 2, '', '', 'új id teszt'),
+(11, 2, 18, 'új ének', 'asdasd2', 'options stave-distance=30 space=10 width=1176\ntabstave notation=true tablature=false key=C time=4/4', 2, '', '', 'új id teszt módosítás');
 
 -- --------------------------------------------------------
 
@@ -96,13 +101,33 @@ INSERT INTO `songbook` (`id`, `userid`, `title`, `public`) VALUES
 (2, 12, 'EZisöüóőú', 0),
 (3, 12, 'Valami új', 0),
 (4, 12, 'Hozzáadom', 0),
-(5, 12, 'Nev', 0),
-(6, 18, 'kitaláltam', 0),
+(5, 12, 'Nev', 1),
+(6, 18, 'kitaláltam', 1),
 (8, 18, 'kitaláltam2', 0),
 (9, 18, 'ABC', 0),
 (10, 18, 'ASD', 0),
 (11, 18, '1 hónap múlva lesz a szülinapom!!!!!!!!!!!44négy', 0),
-(12, 18, '', 0);
+(12, 18, 'Név', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `songbook-shared`
+--
+
+CREATE TABLE IF NOT EXISTS `songbook-shared` (
+  `userid` int(11) NOT NULL,
+  `songbookid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- A tábla adatainak kiíratása `songbook-shared`
+--
+
+INSERT INTO `songbook-shared` (`userid`, `songbookid`) VALUES
+(12, 8),
+(18, 2),
+(19, 1);
 
 -- --------------------------------------------------------
 
@@ -154,10 +179,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `session`, `lastname`, `firstname`, `username`, `email`, `pass`, `date`, `chosentheme`, `admin`) VALUES
-(12, 'asd', 'Albert', 'Csat', 'abc3', 'asd@sad.hu', 'NocNbz6oZYtUI', '2015-07-09 09:31:17', 0, 0),
+(12, 'asd', 'Albert', 'Csat', 'abc3', 'asd@sad.hu', 'NocNbz6oZYtUI', '2015-07-15 09:31:17', 0, 0),
 (15, '', 'Csatári', 'Albert', 'csatari2', 'albert.csatari@gmail.com', 'NoTYSsIs4GzBs', '0000-00-00 00:00:00', 0, 0),
 (16, '', 'Csatári', 'Albert', 'asdasd', 'albert.csatari@gmail.com', 'NoSML2UrO5JCc', '0000-00-00 00:00:00', 0, 0),
-(18, 'e659f5be50a8b77ef27a9e19fa5351061c18179cb55d462b477ee57e7ab9775e', 'Csatári', 'Albert', 'csatari', 'csatari2864@gmail.com', 'NoTYSsIs4GzBs', '2015-07-10 11:20:26', 0, 0),
+(18, 'f3597904d3a25b74278aa2a8934113e200a73e6f43370add6bf5f6d492e2e93a', 'Csatári', 'Albert', 'csatari', 'csatari2864@gmail.com', 'NoTYSsIs4GzBs', '2015-07-15 10:11:47', 0, 1),
 (19, '', 'Réti', 'Noémi', 'ananasliget', 'noemireti73@gmail.com', 'NoMqp.IKiwJbs', '2015-04-06 15:56:55', 0, 0),
 (20, '619976ab557aab88dc58a51874adf144424585afb0dfd597082653281763f000', 'Varga ', 'Ferenc', 'korház22', 'ferenc@gmail.com', 'NouU/0WbQyy/w', '2015-07-03 17:33:19', 0, 0);
 
@@ -175,13 +200,19 @@ ALTER TABLE `language`
 -- A tábla indexei `song`
 --
 ALTER TABLE `song`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `id_version` (`id`,`version`);
 
 --
 -- A tábla indexei `songbook`
 --
 ALTER TABLE `songbook`
   ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `songbook-shared`
+--
+ALTER TABLE `songbook-shared`
+  ADD UNIQUE KEY `songbook-share-index` (`userid`,`songbookid`);
 
 --
 -- A tábla indexei `themes`
@@ -204,11 +235,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `language`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT a táblához `song`
---
-ALTER TABLE `song`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT a táblához `songbook`
 --

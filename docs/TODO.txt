@@ -29,12 +29,16 @@ Következő lépések:
 	- ha van, akkor jelenítse meg valahol
 	- új verzió készítése -> jelenjen meg a songs táblában, hogy az egy létező ének másik verziója
 	- request elfogadása esetén módosuljon a tábla
+<<<<<<< HEAD
 	- a szervertől való lekérdezések is legyenek ellenőrizve jogokra
+=======
+>>>>>>> origin/master
 - tesztelni, hogy a szerver jó énekeskönyveket ad-e vissza X
 - énekeskönyvek keresése, oldalsávban legyen egy összes énekeskönyv menüpont, ami rákeres az énekeskönyvekre X
 - jelenjen meg, hogy kié az énekeskönyv X
 - az énekeskönyveknek legyen külön oldala: hozza ki kártyákon a következő adatokkal: 
   Énekeskönyv neve, Tulajdonos, Jogom hozzá (megtekintés (felhasználó), tulajdonos, szerkesztő (megosztott), admin), énekek  száma, beállítások gomb X
+<<<<<<< HEAD
   publikus/privát
 - A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés X
 - legyen adatbázis, amiben tárolom, hogy melyik énekeskönyvhöz melyik énekek tartoznak
@@ -54,6 +58,12 @@ Következő lépések:
 	- kilépés gombra tűnjön el animációval X
 	- szerveren lekérhető az összes éneke X
 	- énekeskönyv nevére kattintva hozza be az énekeit X
+=======
+- A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés X
+- legyen adatbázis, amiben tárolom, hogy melyik énekeskönyvhöz melyik énekek tartoznak
+- jelenjen meg az énekeskönyveknél, hogy hány ének van benne
+- Ha rányomok az énekeskönyvre, akkor válassza ki (ha felhasználó, akkor csak az énekeket mutassa belőle), ez látszódjon, hogy ki van választva (footer pl)
+>>>>>>> origin/master
 - minden egyes éneknél legyen plusz vagy mínusz gomb, attól függően, hogy benne van-e már az énekeskönyvben, ha ki van választva énekeskönyv
 	- design-ja a plusz-mínusz gombnak X
 	- legyen egy plusz paramétere a songcard-nak, hogy van-e plusz-mínusz
