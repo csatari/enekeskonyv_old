@@ -192,4 +192,24 @@ class Song {
         $idArray = $stmt->fetch(PDO::FETCH_ASSOC);
         return $idArray[SongTable::$idName]+1;
     }
+    function extendPermissions($songTable,$userTable) {
+        $permissions = new Permission($this->db);
+        $songTable = $permissions->addPermissionToSongTable($songTable, $userTable);
+        return $songTable;
+    }
+    function extendLabels($songTable) {
+        $lang = new Language($this->db);
+        $langName = $lang->getById($songTable->language)->name;
+        if($songTable->labels == "") {
+            $songTable->labels = array($langName);
+        }
+        else {
+            $labelParts = explode(",",$songTable->labels);
+            if($labelParts) {
+                array_unshift($labelParts,$langName);
+                $songTable->labels = $labelParts;
+            }
+        }
+        return $songTable;
+    }
 };

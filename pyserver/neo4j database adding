@@ -1,0 +1,142 @@
+neo4j database adding
+
+--language nodes
+
+CREATE (n:Language { name : 'Magyar'})
+CREATE (n:Language { name : 'English'})
+
+--song nodes
+
+CREATE (n:Song { title: 'ez egy cím', song: 'ez meg a leíró', sheet_music: 'kotta', comment: 'nocomment'})
+CREATE (n:Song { title: 'ez egy cím2', song: 'ez meg a leíró2', sheet_music: 'kotta', comment: 'új verzió'})
+CREATE (n:Song { title: 'ez egy angol', song: 'ez meg az angol leíró', sheet_music: 'sheet', comment: 'nocomment'})
+
+--language-song relationship LANGUAGE
+
+MATCH (a:Song),(b:Language)
+WHERE b.name = 'Magyar' AND a.title = 'ez egy cím'
+CREATE (a)-[r:LANGUAGE]->(b)
+RETURN r
+
+MATCH (a:Song),(b:Language)
+WHERE b.name = 'English' AND a.title = 'ez egy angol'
+CREATE (a)-[r:LANGUAGE]->(b)
+RETURN r
+
+--song-song relation NEXT_VERSION
+
+MATCH (a:Song),(b:Song)
+WHERE a.title = 'ez egy cím' AND b.title = 'ez egy cím2'
+CREATE (a)-[r:NEXT_VERSION]->(b)
+RETURN r
+
+--song-song relation PREVIOUS_VERSION
+
+MATCH (a:Song),(b:Song)
+WHERE a.title = 'ez egy cím' AND b.title = 'ez egy cím2'
+CREATE (b)-[r:PREVIOUS_VERSION]->(a)
+RETURN r
+
+--song-song relation OTHER_LANGUAGE
+
+MATCH (a:Song),(b:Song)
+WHERE a.title = 'x' AND b.title = 'y'
+CREATE (b)-[r:OTHER_LANGUAGE]->(a)
+RETURN r
+
+--label node
+
+CREATE (n:Label { name : 'teszt'})
+CREATE (n:Label { name : 'címke'})
+CREATE (n:Label { name : 'télapó'})
+--languages
+CREATE (n:Label { name : 'Magyar'})
+CREATE (n:Label { name : 'English'})
+
+--song-label relation LABELLED,USED_BY
+
+MATCH (s:Song),(l:Label)
+WHERE s.title = 'ez egy cím2' AND l.name = 'Magyar'
+CREATE (s)-[r:LABELLED]->(l)
+CREATE (l)-[r2:USED_BY]->(s)
+RETURN s,l
+
+MATCH (s:Song),(l:Label)
+WHERE s.title = 'ez egy angol' AND l.name = 'English'
+CREATE (s)-[r:LABELLED]->(l)
+CREATE (l)-[r2:USED_BY]->(s)
+RETURN s,l
+
+--songbook node
+
+CREATE (n:Songbook { title : 'Énekeskönyvem', public: 0})
+CREATE (n:Songbook { title : 'ABC', public: 0})
+CREATE (n:Songbook { title : 'Hozzáadom', public: 1})
+CREATE (n:Songbook { title : 'Másik énekeskönyvem', public: 0})
+
+--songbook-song relation CONTAINED_IN, CONTAINS
+
+MATCH (s:Song),(sb:Songbook)
+WHERE s.title = 'ez egy angol' AND sb.title = 'Énekeskönyvem'
+CREATE (s)-[r:CONTAINED_IN]->(sb)
+CREATE (sb)-[r2:CONTAINS]->(s)
+RETURN s,sb
+
+--user node
+
+CREATE (u:User { session:'asd', lastname:'Csatári',firstname:'Albert',username:'csatari',email:'csatari2864@gmail.com',pass:'NoTYSsIs4GzBs', date:'2015-08-10 10:00:00',admin:1})
+CREATE (u:User { session:'dsa', lastname:'Csatári2',firstname:'Albert2',username:'csatari2',email:'csatari2864@gmail.com',pass:'NoTYSsIs4GzBs', date:'2015-08-28 10:00:00',admin:1})
+
+--theme node
+
+CREATE (t:Theme { title: 'Rózsaszín', public:1, theme:'Kereső háttér:searchbar-background:background-color:#e765f5;Háttér:body-background:background-color:#F0F8FF;Kör gomb háttér:circle-button-background:background-color:#d038f2;Kártya háttér:card-panel:background-color:#FFFFFF' })
+
+--user-song relation CREATED, CREATED_BY
+
+MATCH (u:User),(s:Song)
+WHERE u.username = 'csatari' AND s.title = 'Énekeskönyvem'
+CREATE (u)-[r:CREATED]->(s)
+CREATE (s)-[r2:CREATED_BY]->(u)
+RETURN s,u
+
+--user-theme relation CREATED_BY
+
+MATCH (u:User),(t:Theme)
+WHERE u.username = 'csatari' AND t.title = 'Rózsaszín'
+CREATE (t)-[r2:CREATED_BY]->(u)
+RETURN t,u
+
+--user-theme relation CHOSE
+
+MATCH (u:User),(t:Theme)
+WHERE u.username = 'csatari' AND t.title = 'Rózsaszín'
+CREATE (u)-[r2:CHOSE]->(t)
+RETURN t,u
+
+--user-songbook relation CREATED,CREATED_BY
+
+MATCH (u:User),(sb:Songbook)
+WHERE u.username = 'csatari' AND sb.title = 'Énekeskönyvem'
+CREATE (u)-[r:CREATED]->(sb)
+CREATE (sb)-[r2:CREATED_BY]->(u)
+RETURN sb,u
+
+MATCH (u:User),(sb:Songbook)
+WHERE u.username = 'csatari' AND sb.title = 'Másik énekeskönyvem'
+CREATE (u)-[r:CREATED]->(sb)
+CREATE (sb)-[r2:CREATED_BY]->(u)
+RETURN sb,u
+
+MATCH (u:User),(sb:Songbook)
+WHERE u.username = 'csatari2' AND sb.title = 'ABC'
+CREATE (u)-[r:CREATED]->(sb)
+CREATE (sb)-[r2:CREATED_BY]->(u)
+RETURN sb,u
+
+--user-songbook relation SEES,SHARED_WITH
+
+MATCH (u:User),(sb:Songbook)
+WHERE u.username = 'csatari' AND sb.title = 'ABC'
+CREATE (u)-[r:SEES]->(sb)
+CREATE (sb)-[r2:SHARED_WITH]->(u)
+RETURN sb,u

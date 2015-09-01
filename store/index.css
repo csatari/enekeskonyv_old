@@ -120,3 +120,53 @@ body {
 .card-content {
 	width:100%;
 }
+.song-songbook-adder {
+	position: absolute;
+	z-index:10;
+	right: 0;
+}
+.song-songbook-adder-button {
+	border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+div.footer {
+	position:fixed;
+	bottom: 0;
+	width:100%;
+	padding-left: 20px;
+	z-index:10;
+	height: 75px;
+}
+.footer-container {
+	line-height: 80px;
+}
+.footer-title {
+	color:white;
+	font-size:30px;
+	display: block;
+    line-height: 78px !important;
+    text-align: center;
+}
+.footer-song-number {
+	color:white;
+	font-size:23px;
+	float: left;
+	margin-top:-56px;
+}
+.footer-buttons {
+	float: right;
+	line-height: 87px;
+    margin-right: 6px;
+    margin-top: -77px;
+}
+.dark-icon {
+	color:#4F6D7A; /* témák miatt html-ben is megvan*/
+}
+.footer-title-button {
+	background-color: red;
+}
+.footer-songbook-id {
+	display:none;
+}

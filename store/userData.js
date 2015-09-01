@@ -30,6 +30,7 @@ var UserData = {
 		});
 	},
 	getSongbooks: function(sessionid,afterGood,afterBad) {
+		//NEEDED: id,title
 		$.ajax({method: "POST", 
 				url: Config.url+Config.userDataPage, 
 				data: {"sessionid": sessionid, "get-songbooks": ""}

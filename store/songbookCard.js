@@ -9,7 +9,7 @@ var SongbookCard = {
 		});
 		return retitem;
 	},
-	addCard: function(id_, userid_, title_, public_, username_, permissions_, permissionName_) {
+	addCard: function(id_, userid_, title_, public_, username_, permissions_, permissionName_, songNumber_) {
 		SongbookCard.cards.push({
 			id: id_,
 			userid:userid_,
@@ -17,7 +17,8 @@ var SongbookCard = {
 			public:public_,
 			username:username_,
 			permissions:permissions_,
-			permissionName:permissionName_
+			permissionName:permissionName_,
+			songNumber:songNumber_
 		});
 	},
 	createCardCollection: function() {
@@ -33,12 +34,12 @@ var SongbookCard = {
 		$('.js-songbooks-root').html("");
 		SongbookCard.cards.map(function(item) {
 	    	if($('#'+item.id+'.js-songbook-card').length == 0) {
-		        $('.js-songbooks-root').append(SongbookCard.cardHtml(item.id,item.userid,item.title,item.public,item.username,item.permissions, item.permissionName));
+		        $('.js-songbooks-root').append(SongbookCard.cardHtml(item.id,item.userid,item.title,item.public,item.username,item.permissions, item.permissionName, item.songNumber));
 	    	}
 		});
 		jQuery('.tooltipped').tooltip({delay: 50});
 	},
-	cardHtml: function(id,userid,title,public,username,permissions,permissionName) {
+	cardHtml: function(id,userid,title,public,username,permissions,permissionName,songNumber) {
 		var textsHTML = "";
 
 		/*var labelsHTML = "";
@@ -92,7 +93,7 @@ var SongbookCard = {
 			'<div class="card-content waves-effect waves-dark">\n' +
 				'<span class="card-title black-text">' + title + '</span>\n' + 
 				'<div class="card-owner">' + username + '</div>' +
-				'<p>' + '154 ' + Config.songs + '</p>' +
+				'<p>' + songNumber + ' ' + Config.songs + '</p>' +
 			'</div>\n' +
     		'<div class="card-action">\n' +
     			'<table>\n' +

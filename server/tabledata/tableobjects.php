@@ -94,6 +94,7 @@ class SongbookTable implements JsonSerializable {
     public $username; //csak az adminoknak kell plusz információnak
     public $permissions; //csak plusz információ, hogy milyen jog megengedett az adott usernek
     public $permissionlevel; // csak plusz információ, ki tudja deríteni belőle a kliens a jog nevét
+    public $songnumber; //csak plusz információ a gyorsabb betöltés érdekében
 
     function __construct($array) {
         $this->id = $array[SongbookTable::$idName];
@@ -111,7 +112,8 @@ class SongbookTable implements JsonSerializable {
             'public' => $this->public,
             'username' => $this->username,
             'permissions' => $this->permissions,
-            'permissionlevel' => $this->permissionlevel
+            'permissionlevel' => $this->permissionlevel,
+            'songnumber' => $this->songnumber
         ];
     }
 }
@@ -126,7 +128,7 @@ class SongbookSharedTable implements JsonSerializable {
 
     function __construct($array) {
         $this->userid = $array[SongbookSharedTable::$useridName];
-        $this->title = $array[SongbookSharedTable::$songbookidName];
+        $this->songbookid = $array[SongbookSharedTable::$songbookidName];
     }
 
     public function jsonSerialize()
@@ -134,6 +136,29 @@ class SongbookSharedTable implements JsonSerializable {
         return [
             'userid' => $this->userid,
             'songbookid' => $this->songbookid
+        ];
+    }
+}
+
+class SongInSongbookTable implements JsonSerializable {
+
+    public static $tableName = "song_in_songbook";
+    public static $songbookIdName = "songbook";
+    public static $songIdName = "song";
+
+    public $songbook;
+    public $song;
+
+    function __construct($array) {
+        $this->songbook = $array[SongInSongbookTable::$songbookIdName];
+        $this->song = $array[SongInSongbookTable::$songIdName];
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'songbook' => $this->songbook,
+            'song' => $this->song
         ];
     }
 }

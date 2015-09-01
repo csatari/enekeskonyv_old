@@ -9,7 +9,9 @@
 	<!-- Vextab css -->
     <link href="vendors/VexTab/vextab.css" rel="stylesheet" type="text/css">
     <link href="vendors//VexTab//tabdiv.css" media="screen" rel="Stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- external <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!-- internal --><link href="vendors/fonts/icon.css" rel="stylesheet">
     
 </head>
 <body class="body-background">
@@ -237,7 +239,24 @@
 			-->
         </div>
 	</div>
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<div class="footer z-depth-2 waves-effect waves-dark js-footer" style="background-color: #64b5f6;height: 0px">
+		<span class="footer-songbook-id js-footer-songbook-id">0</span>
+		<span class="footer-title js-footer-title">
+			Énekeskönyv neve
+		</span>
+		<span class="footer-song-number js-footer-song-number">0 ének</span>
+	    <span class="footer-buttons">
+			<span class="waves-effect waves-dark btn-floating btn-large activator tooltipped config-footer-tooltip-download" data-position="top" data-delay="50" data-tooltip="Letöltés_" style="background-color: #Ffffff;">
+	        	<i class="material-icons dark-icon" style="color:#4F6D7A">get_app</i>
+	    	</span>
+	    	<span class="waves-effect waves-dark btn-floating btn-large song-button activator tooltipped js-footer-close config-footer-tooltip-close" data-position="left" data-delay="50" data-tooltip="Befejezés_" style="background-color: #Ffffff;">
+	        	<i class="material-icons dark-icon" style="color:#4F6D7A">clear</i>
+	    	</span>
+	    </span>
+	</div>
+	<!-- external <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+	<!-- internal --><script type="text/javascript" src="vendors/jquery-1.11.3.min.js"></script>
+
 	<script type="text/javascript" src="config.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 	<script type="text/javascript" src="registration.js"></script>
@@ -252,6 +271,9 @@
 	<script type="text/javascript" src="songbookCard.js"></script>
 	<script type="text/javascript" src="search.js"></script>
 	<script type="text/javascript" src="themes.js"></script>
+	<script type="text/javascript" src="songbooks.js"></script>
+	<script type="text/javascript" src="songbookData.js"></script>
+	<script type="text/javascript" src="footer.js"></script>
 	<script type="text/javascript" src="vendors/jquery.color.js"></script>
 	<script type="text/javascript" src="vendors/colorpicker/js/colorpicker.js"></script>
 	<!--<script type="text/javascript" src="vendors/masonry/masonry.pkgd.min.js"></script>-->

@@ -10,6 +10,7 @@ var Config = {
 	userDataPage: "userData.php",
 	getDataPage: "getData.php",
 	songDataPage: "songData.php",
+	songbookDataPage: "songbookData.php",
 
 	//stringek
 	usernameExists: "Már létezik ilyen nevű felhasználónév!",
@@ -36,6 +37,7 @@ var Config = {
 	rename: 'Átnevezés',
 	share: 'Megosztás',
 	download: 'Letöltés',
+	exit: "Befejezés",
 	User:"Felhasználó",
 	Owner:"Tulajdonos",
 	Shared:"Megosztott",
@@ -92,5 +94,7 @@ var Config = {
 		$(".conf-choosen-theme-public").html("Publikus");
 		$(".conf-public").html("Publikus");
 		$(".conf-default").html("Alapbeállítás");
+		$(".config-footer-tooltip-download").attr("data-tooltip",Config.download);
+		$(".config-footer-tooltip-close").attr("data-tooltip",Config.exit);
 	}
 };

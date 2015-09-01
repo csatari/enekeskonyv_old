@@ -80,9 +80,10 @@ var SideNav = {
 		$(".js-page").load("songbooks.html", function() {
 			Config.runConfig();
 			jQuery('.button-collapse').sideNav('hide');
-			jQuery.getScript("songbooks.js").done(function() {
+			/*jQuery.getScript("songbooks.js").done(function() {
 				Songbooks.showAllVisibleSongbooks();
-			});
+			});*/
+			Songbooks.showAllVisibleSongbooks();
 		});
 	}
 };

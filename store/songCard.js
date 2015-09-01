@@ -164,6 +164,11 @@ var SongCard = {
 		}	
 		var html = 
 		'<div class="card song-card js-song-card" id="' + id +'">\n' +
+			'<span class="song-songbook-adder">\n' +
+				'<span class="waves-effect waves-light btn-floating btn-large activator song-songbook-adder-button" style="background-color: #4F6D7A;">\n' +
+        			'<i class="material-icons">add</i>\n' +
+        		'</span>\n' +
+			'</span>\n' +
 			'<div class="card-content waves-effect waves-dark">\n' +
 				'<span class="card-title black-text">' + title + '</span>\n'
 				 + textsHTML + 

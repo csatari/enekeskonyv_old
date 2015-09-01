@@ -109,6 +109,7 @@ class Songbook {
                 $songbookOwner = $users->getById($tabla->userid);
                 $tabla->username = $songbookOwner->firstname." ".$songbookOwner->lastname;
                 $tabla->permissionlevel  = $permlevel;
+                $tabla->songnumber = $this->countSongsFromSongbook($tabla->id);
                 array_push($sbArray,$tabla);
             }
             return $sbArray;
@@ -130,9 +131,63 @@ class Songbook {
                 $songbookOwner = $users->getById($tabla->userid);
                 $tabla->username = $songbookOwner->firstname." ".$songbookOwner->lastname;
                 $tabla->permissionlevel  = $permlevel;
+                $tabla->songnumber = $this->countSongsFromSongbook($tabla->id);
                 array_push($sbArray,$tabla);
             }
             return $sbArray;
         }
     }
+
+    // Song in Songbook functions -->
+
+    function addSongToSongbook($songbookid,$songid) {
+        $sql = "INSERT INTO ".SongInSongbookTable::$tableName." (".SongInSongbookTable::$songbookIdName.",".SongInSongbookTable::$songIdName.") VALUES (?,?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($songbookid,$songid));
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return true;
+    }
+
+    function isSongInSongbook($songbookid,$songid) {
+        $sql = "SELECT * FROM ".SongInSongbookTable::$tableName." WHERE ".
+                SongInSongbookTable::$songbookIdName." = ? AND ".SongInSongbookTable::$songIdName." = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($songbookid,$songid));
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        $count = $stmt->rowCount();
+        return ($count == 0 ? false : true);
+    }
+
+    function removeSongFromSongbook($songbookid,$songid) {
+        $sql = "DELETE FROM ".SongInSongbookTable::$tableName." WHERE ".
+                SongInSongbookTable::$songbookIdName." = ? AND ".SongInSongbookTable::$songIdName." = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($songbookid,$songid));
+        $stmt->fetch(PDO::FETCH_ASSOC);
+        return true;
+    }
+
+    function getAllSongsFromSongbook($songbookid) {
+        $sql = "SELECT * FROM ".SongInSongbookTable::$tableName." WHERE ".SongInSongbookTable::$songbookIdName." = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($songbookid));
+        $resultArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $songInSongbookArray = array();
+        foreach($resultArray as $result) {
+            $tabla = new SongInSongbookTable($result);
+            array_push($songInSongbookArray,$tabla);
+        }
+        return $songInSongbookArray;
+    }
+
+    function countSongsFromSongbook($songbookid) {
+        $sql = "SELECT COUNT(*) FROM ".SongInSongbookTable::$tableName." WHERE ".
+                SongInSongbookTable::$songbookIdName." = ?";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(array($songbookid));
+        return $stmt->fetch(PDO::FETCH_NUM)[0];
+    }
+
+    // <-- Song in Songbook functions
+
 };

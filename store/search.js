@@ -8,6 +8,7 @@ var Search = {
 			function(result) {
 				SongCard.cards = [];
 				result.map(function(item) {
+					console.log(item);
 					SongCard.addCard(item.id,item.title, item.song,item.labels, item.permissions);
 				});
 				SongCard.drawCards();
