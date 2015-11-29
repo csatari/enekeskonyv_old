@@ -90,11 +90,13 @@ var SongbookCard = {
 		}
 		var html = 
 		'<div class="card songbook-card js-songbook-card" id="' + id +'">\n' +
-			'<div class="card-content waves-effect waves-dark">\n' +
-				'<span class="card-title black-text">' + title + '</span>\n' + 
-				'<div class="card-owner">' + username + '</div>' +
-				'<p>' + songNumber + ' ' + Config.songs + '</p>' +
-			'</div>\n' +
+			'<span class="js-songbook-title">\n' +
+				'<div class="card-content waves-effect waves-dark">\n' +
+					'<span class="card-title black-text">' + title + '</span>\n' + 
+					'<div class="card-owner">' + username + '</div>' +
+					'<p>' + songNumber + ' ' + Config.songs + '</p>' +
+				'</div>\n' +
+			'</span>\n' +
     		'<div class="card-action">\n' +
     			'<table>\n' +
     				'<tr>\n' +

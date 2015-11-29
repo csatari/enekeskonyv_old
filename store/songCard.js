@@ -6,6 +6,29 @@ $(function(){
 	$(document).on('click','.song-label',function(){
 		Search.addWordToSearchbar($(this).text());
 	});
+	$(document).on('click','.js-song-add-remove',function(){
+		if(Footer.songbook.id != 0) {
+			var id = $(this).parent().parent().attr("id");
+			var in_songbook = $(this).attr("id");
+			console.log(id+": add-remove " + in_songbook);
+			if(in_songbook == 1) {
+				SongbookData.removeSongFromSongbook(Login.getSessionId(),id,Footer.songbook.id,
+					function() {
+						SongCard.getCardById(id).in_songbook = 0;
+						SongCard.drawCards();
+						Footer.setSongNumber(Footer.songbook.songNumber-1);
+					},function(){});
+			}
+			else {
+				SongbookData.addSongToSongbook(Login.getSessionId(),id,Footer.songbook.id,
+					function() {
+						SongCard.getCardById(id).in_songbook = 1;
+						SongCard.drawCards();
+						Footer.setSongNumber(Footer.songbook.songNumber+1);
+					},function(){});
+			}
+		}
+	});
 });
 
 var SongCard = {
@@ -26,13 +49,14 @@ var SongCard = {
 		    columnWidth: 200
 		});*/
 	},
-	addCard: function(id_, title_, text_, labels_, permissions_) {
+	addCard: function(id_, title_, text_, labels_, permissions_, in_songbook_) {
 		SongCard.cards.push({
 			id: id_,
 			title:title_,
 			text:text_,
 			labels:labels_,
-			permissions:permissions_
+			permissions:permissions_,
+			in_songbook:in_songbook_
 		});
 	},
 	drawCards: function() {
@@ -97,13 +121,14 @@ var SongCard = {
 		$('.js-song-card-collection').html("");
 		SongCard.cards.map(function(item) {
 	    	if($('#'+item.id+'.js-song-card').length == 0) {
-		        $('.js-song-card-collection').append(SongCard.cardHtml(item.id,item.title,item.text,item.labels,item.permissions));
+		        $('.js-song-card-collection').append(SongCard.cardHtml(item.id,item.title,item.text,
+		        														item.labels,item.permissions, item.in_songbook));
 	    	}
 		});
 		jQuery('.tooltipped').tooltip({delay: 50});
 
 	},
-	cardHtml: function(id,title,text,labels,permissions) {
+	cardHtml: function(id,title,text,labels,permissions,in_songbook) {
 		var textsHTML = "";
 		var textSplit = text.split("\n");
 		var textdotdotdot = "";
@@ -161,14 +186,26 @@ var SongCard = {
 			    	'<i class="material-icons">call_split</i>' +
 			    '</span>';
 			}
-		}	
+		}
+		var song_adder_iconHTML = "";
+		if(in_songbook == 1) {
+			song_adder_iconHTML = "remove";
+		}
+		else {
+			song_adder_iconHTML = "add";
+		}
+		
+		var song_adderHTML = "";
+		if(Footer.visibility) {
+			song_adderHTML = '<span class="song-songbook-adder">\n' +
+				'<span class="waves-effect waves-light btn-floating btn-large song-songbook-adder-button js-song-add-remove" style="background-color: #4F6D7A;" id="' + in_songbook + '">\n' +
+        			'<i class="material-icons">' + song_adder_iconHTML + '</i>\n' +
+        		'</span>\n' +
+			'</span>\n';
+		}
 		var html = 
 		'<div class="card song-card js-song-card" id="' + id +'">\n' +
-			'<span class="song-songbook-adder">\n' +
-				'<span class="waves-effect waves-light btn-floating btn-large activator song-songbook-adder-button" style="background-color: #4F6D7A;">\n' +
-        			'<i class="material-icons">add</i>\n' +
-        		'</span>\n' +
-			'</span>\n' +
+			song_adderHTML +
 			'<div class="card-content waves-effect waves-dark">\n' +
 				'<span class="card-title black-text">' + title + '</span>\n'
 				 + textsHTML + 

@@ -1,0 +1,107 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="vendors/materialize/css/materialize.css" media="screen,projection">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" media="screen" type="text/css" href="vendors/colorpicker/css/colorpicker.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<!-- Vextab css -->
+    <link href="vendors/VexTab/vextab.css" rel="stylesheet" type="text/css">
+    <link href="vendors//VexTab//tabdiv.css" media="screen" rel="Stylesheet" type="text/css">
+
+    <!-- external <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+    <!-- internal --><link href="vendors/fonts/icon.css" rel="stylesheet">
+    
+</head>
+<body class="body-background">
+	<!-- songbook id -->
+	<span class="js-songbook-id songbook-id">10</span>
+	<span class="js-songbook-downloadid songbook-downloadid">f7e5339b9f77e1a7cfeff9e5e823236d8c98be6d294dc3d53a4ee0d6acd891b09734af04d4b5a192e26de29a94b0f973f9637200e4f2bdff35b3f9ccc620c17c</span>
+	<!-- sidenav -->
+	<ul id="slide-out" class="side-nav">
+		<li class="logo" id="logo">
+			<div class="logo-container brand-logo">
+				<img src="resources/musical-notes.png" />
+				<div class="js-user-details"></div>
+			</div>
+		</li>
+		<li class="bold js-logged-in"><a class="waves-effect waves-light-blue js-settings conf-settings">Beállítások_</a></li>
+	</ul>
+	<!-- felső kereső sáv -->
+	<nav class="searchbar-background">
+		<div class="nav-wrapper">
+			<form>
+				<a id="side-nav-button" href="#" data-activates="slide-out" class="button-collapse show-on-large"><i class="mdi-navigation-menu"></i></a>
+				<div class="input-field center-align search-bar">
+					<input id="search" type="text" required class="js-search" autocomplete="off">
+					<label for="search"><i class="mdi-action-search"></i></label>
+				</div>
+			</form>
+
+		</div>
+		<div class="progress search-progress js-search-progress">
+			<div class="indeterminate search-progress-indeterminate"></div>
+		</div>
+	</nav>
+	
+	<!-- egy szöveges dialog -->
+	<div class="modal js-modal-textbox">
+		<div class="modal-content">
+			<form class="col s12">
+				<h4 class="js-modal-textbox-title"></h4>
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="text" id="textbox-text"/> 
+						<label for="textbox-text" class="conf-text js-modal-textbox-textname">Szöveg</label>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="js-modal-textbox-cancel modal-action waves-effect waves-light-blue btn-flat conf-cancel">Mégse_</a>
+			<a href="#!" class="js-modal-textbox-ok modal-action waves-effect waves-light-blue btn-flat conf-ok">OK</a>
+		</div>
+	</div>
+	<!-- page -->
+	<div class="js-page page">
+		<div class="js-song-card-collection">
+        </div>
+	</div>
+
+	<div class="footer z-depth-2 waves-effect waves-dark js-footer" style="background-color: #64b5f6;height: 0px">
+		<span class="footer-songbook-id js-footer-songbook-id">0</span>
+		<span class="footer-title js-footer-title">
+			Énekeskönyv neve
+		</span>
+		<span class="footer-song-number js-footer-song-number">0 ének</span>
+	    <span class="footer-buttons">
+			<span class="waves-effect waves-dark btn-floating btn-large activator tooltipped config-footer-tooltip-download" data-position="top" data-delay="50" data-tooltip="Letöltés_" style="background-color: #Ffffff;">
+	        	<i class="material-icons dark-icon" style="color:#4F6D7A">get_app</i>
+	    	</span>
+	    	<span class="waves-effect waves-dark btn-floating btn-large song-button activator tooltipped js-footer-close config-footer-tooltip-close" data-position="left" data-delay="50" data-tooltip="Befejezés_" style="background-color: #Ffffff;">
+	        	<i class="material-icons dark-icon" style="color:#4F6D7A">clear</i>
+	    	</span>
+	    </span>
+	</div>
+	<!-- external <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+	<!-- internal --><script type="text/javascript" src="vendors/jquery-1.11.3.min.js"></script>
+
+	<script type="text/javascript" src="config.js"></script>
+	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="common.js"></script>
+	<script type="text/javascript" src="sidenav.js"></script>
+	<script type="text/javascript" src="modaltextbox.js"></script>
+	<script type="text/javascript" src="userData.js"></script>
+	<script type="text/javascript" src="getData.js"></script>
+	<script type="text/javascript" src="songData.js"></script>
+	<script type="text/javascript" src="songCard.js"></script>
+	<script type="text/javascript" src="search.js"></script>
+	<script type="text/javascript" src="downloader.js"></script>
+	<script type="text/javascript" src="database.js"></script>
+	<script type="text/javascript" src="vendors/jquery.color.js"></script>
+	<script type="text/javascript" src="vendors/colorpicker/js/colorpicker.js"></script>
+	<!--<script type="text/javascript" src="vendors/masonry/masonry.pkgd.min.js"></script>-->
+	<script type="text/javascript" src="vendors/materialize/js/materialize.js"></script>
+
+</body>
+</html>

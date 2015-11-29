@@ -1,0 +1,196 @@
+
+
+getData:
+	sessionid needed
+
+	allLanguages - Lekéri az összes nyelvet
+
+		URI: allLanguages=?
+
+		response: [{"id":{int} A nyelv azonosítója,"name":{string} A nyelv neve}]
+
+songbookData:
+	sessionid needed
+
+	get-songbook-data - Lekéri az énekeskönyv adatait id szerint
+
+		URI: get-songbook-data=?&
+			 songbook={int} Az énekesköny azonosítója
+
+		response: {"title": {string} Énekeskönyv címe, "public": {0|1} publikus-e, "id": {int} Énekeskönyv id, "userid": {int} Énekeskönyv tulajdonosa,
+					"username": {string} Énekeskönyv tulajdonosának neve, "songnumber": {int} Énekeskönyvben lévő énekek száma,
+					"permissionlevel": {1..4} A felhasználónak az énekeskönyvhöz való joga, "permissions": {[1..9]} A felhasználónak az énekeskönyvhöz való jogai felsorolva }
+				  error - ha nem találja az adott id-jű énekeskönyvet
+
+	get-songbook-count - Lekéri az énekeskönyvben található énekek számát
+
+		URI: get-songbook-count=?&
+			 songbook={int} Az énekeskönyv azonosítója
+
+		response: {int} Az énekek száma
+
+	add-song-to-songbook - Hozzáadja az éneket az énekeskönyvhöz
+
+		URI: add-song-to-songbook=?&
+			 songbook={int} Az énekeskönyv azonosítója&
+			 song={int} Az ének azonosítója
+
+		response: true - Ha lefutott
+				  false - Ha nincs jog
+
+	remove-song-from-songbook - Kiveszi az éneket az énekeskönyvből
+
+		URI: remove-song-from-songbook=?&
+			 songbook={int} Az énekeskönyv azonosítója&
+			 song={int} Az ének azonosítója
+
+		response: true - Ha lefutott
+				  false - Ha nincs jog
+
+songData:
+	sessionid needed
+
+	addSong - Hozzáad vagy módosít egy éneken
+
+		URI: addSong=?&
+			 title={string} Az ének címe&
+			 text={string} Az ének szövege&
+			 lang={int} Az ének nyelvének azonosítója&
+			 otherlang={int} Másik nyelven ugyanezen ének azonosítója&
+			 labels={string,string,...} Címkék vesszővel felsorolva&
+			 comment={string} Komment leírása&
+			 notes={string} Az ének kottája&
+			 songid={int} Új verziójú ének azonosítója, ha új ének, akkor ez 0
+
+		response:	id - ha sikeres
+					error- ha nem sikeres
+
+	getSong - Lekérdez egy éneket
+
+		URI: getSong={int} Az ének azonosítója
+
+		response: {"id":{int} Az ének azonosítója,"version":{int} Verziószám,"creator":{int} A készítő azonosítója,
+				   "title":{string} Az ének címe,"song":{string} Ének leírása,"sheet_music": Kotta,"language": A nyelv azonosítója,
+				   "other_languages":{int} Egy másik nyelven az ének, "labels":[string,string,...] Címkék, "comment":{string}Komment,
+				   "permissions": {[int,int]} Jogaim felsorolása az énekhez}
+				   error - ha nem találja
+
+	searchSong - Megkeres énekeket
+
+		URI: searchSong?&
+			 title={string} A keresés&
+			 songbook={int} Énekeskönyv azonosítója, amire lekérdezem, hogy benne van-e az ének
+
+		response: [{"id":{int} Az ének azonosítója,"version":{int} Verziószám,"creator":{int} A készítő azonosítója,
+				   "title":{string} Az ének címe,"song":{string} Ének leírása,"sheet_music": Kotta,"language": A nyelv azonosítója,
+				   "other_languages":{int} Egy másik nyelven az ének, "labels":[string,string,...] Címkék, "comment":{string}Komment,
+				   "permissions": {[int,int]} Jogaim felsorolása az énekhez,
+				   "in_songbook": {0|1} 1, ha benne van, egyébként 0}]
+
+userData:
+	sessionid needed
+
+	name - Visszaadja a teljes nevet
+
+		URI: name=?
+
+		response: {"firstname": {string} Keresztnév, "lastname": {string} Vezetéknév}
+
+	get-songbooks - Lekéri az összes énekeskönyvét a usernek
+
+		URI: get-songbooks=?
+
+		response: [{"title": {string} Énekeskönyv címe, "public": {0|1} publikus-e, "id": {int} Énekeskönyv id, "userid": {int} Énekeskönyv tulajdonosa,
+					"username": {string} Énekeskönyv tulajdonosának neve, "songnumber": {int} Énekeskönyvben lévő énekek száma,
+					"permissionlevel": {1..4} A felhasználónak az énekeskönyvhöz való joga, "permissions": {[1..9]} A felhasználónak az énekeskönyvhöz való jogai felsorolva }]
+
+	add-songbook - Hozzáad egy énekeskönyvet
+
+		URI: add-songbook={string}Énekeskönyv címe
+
+		response: true - sikeres
+				  error
+
+	get-all-visible-songbooks - Lekéri az összes olyan énekeskönyvet, amit láthat a user
+
+		URI: get-all-visible-songbooks=?
+
+		response: [{"title": {string} Énekeskönyv címe, "public": {0|1} publikus-e, "id": {int} Énekeskönyv id, "userid": {int} Énekeskönyv tulajdonosa,
+					"username": {string} Énekeskönyv tulajdonosának neve, "songnumber": {int} Énekeskönyvben lévő énekek száma,
+					"permissionlevel": {1..4} A felhasználónak az énekeskönyvhöz való joga, "permissions": {[1..9]} A felhasználónak az énekeskönyvhöz való jogai felsorolva }]
+
+	get-themes - Lekéri az összes témáját a usernek
+
+		URI: get-themes=?
+
+		response: [{"id": {int} Téma azonosítója, "title": {string} Téma címe, "public": {0|1} Téma publikus-e, "theme": {string} Téma leírása egy előre 					definiált alakban}]
+
+	add-theme - Hozzáad (ha 0 a themeid) vagy módosít egy témán
+
+		Hozzáadás
+
+		URI: add-theme=?&
+			 theme-id=0&
+			 theme-name={string} Téma neve&
+			 theme-public={0|1} Publikus-e a téma&
+			 theme={string} Téma előre definiált alakban
+
+		response: true
+				  error
+
+		Módosítás
+
+		URI: add-theme=?&
+			 theme-id={int} Módosítandó téma azonosítója&
+			 theme-name={string} Téma neve&
+			 theme-public={0|1} Publikus-e a téma&
+			 theme={string} Téma előre definiált alakban
+
+		response: true
+
+	set-theme - Beállítja, hogy a user az adott témát használja
+
+		URI: set-theme={int} Téma azonosítója
+
+		response: true
+
+	get-theme - Lekéri a user éppen beállított témájának az id-jét
+
+		URI: get-theme=?
+
+		response: {int} Beállított téma id-je
+
+userLogin:
+	sessionid not needed
+
+	username and password - Bejelentkezteti a felhasználót és visszaadja a sessionid-t, ha helyesek az adatok
+
+		URI: username={string} Felhasználónév&
+			 password={string} Jelszó
+
+		response: {"sessionid": {string} Sessionid}
+				  error
+	logout - Kijelentkezteti a felhasználót
+
+		URI: logout=?
+
+		response: True
+
+userRegistration:
+	session not needed
+
+	username - Lekérdezi, hogy az adott username használatban van-e
+
+		URI: username={string} Felhasználónév
+
+		response: true|false
+
+	firstname - Hozzáadja a felhasználókhoz a usert aka regisztrálja
+
+		URI: firstname={string} Keresztnév&
+			 lastname={string} Vezetéknév&
+			 username={string} Felhasználónév&
+			 email={string} Email&
+			 password={string} Jelszó
+
+		response: true|false

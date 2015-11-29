@@ -41,12 +41,13 @@ $(function(){
 
 var Login = {
 	sendLogin: function(username,password,afterGood,afterBad) {
+		console.log("Elküldöm + "+ Config.url+Config.loginPage)
 		$.ajax({method: "POST", 
 				url: Config.url+Config.loginPage, 
 				data: {"username": username, "password": password}
 			})
 		.done(function(result) {
-			console.log(result);
+			console.log("result: "+result);
 			var res = JSON.parse(result);
 			console.log("session: "+result);
 			if(res["error"] == "" || res["error"] == undefined) {
@@ -102,7 +103,9 @@ var Login = {
 				data: {"sessionid": sessionid}
 			})
 		.done(function(result) {
+			console.log(result)
 			var res = JSON.parse(result);
+			console.log(res)
 			if(res) {
 				afterGood();
 			}

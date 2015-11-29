@@ -4,12 +4,14 @@ $(function(){
 var Search = {
 	searchSong: function(titlePart) {
 		Search.toggleSearchProgress(true);
-		SongData.searchSong(Login.getSessionId(),titlePart,
+		console.log(Footer.songbook.id)
+		SongData.searchSong(Login.getSessionId(),titlePart,Footer.songbook.id,
 			function(result) {
 				SongCard.cards = [];
+				console.log(result)
 				result.map(function(item) {
 					console.log(item);
-					SongCard.addCard(item.id,item.title, item.song,item.labels, item.permissions);
+					SongCard.addCard(item.id,item.title, item.song,item.labels, item.permissions, item.in_songbook);
 				});
 				SongCard.drawCards();
 				Search.toggleSearchProgress(false);

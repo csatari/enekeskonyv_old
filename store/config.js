@@ -4,13 +4,15 @@ $(function(){
 
 var Config = {
 	//szerverrel kommunikáló configok
-	url: "../server/",
+	url: "http://localhost:5000",
+	//url: "../server/",
 	registrationPage: "userRegistration.php",
-	loginPage: "userLogin.php",
-	userDataPage: "userData.php",
-	getDataPage: "getData.php",
-	songDataPage: "songData.php",
-	songbookDataPage: "songbookData.php",
+	//loginPage: "userLogin.php",
+	loginPage: "/userLogin/",
+	userDataPage: "/userData/",
+	getDataPage: "/getData/",
+	songDataPage: "/songData/",
+	songbookDataPage: "/songbookData/",
 
 	//stringek
 	usernameExists: "Már létezik ilyen nevű felhasználónév!",
@@ -93,7 +95,7 @@ var Config = {
 		$(".conf-choosen-theme-name").html("Név");
 		$(".conf-choosen-theme-public").html("Publikus");
 		$(".conf-public").html("Publikus");
-		$(".conf-default").html("Alapbeállítás");
+		//$(".conf-default").html("Alapbeállítás");
 		$(".config-footer-tooltip-download").attr("data-tooltip",Config.download);
 		$(".config-footer-tooltip-close").attr("data-tooltip",Config.exit);
 	}

@@ -21,10 +21,11 @@ class Theme(BaseClass):
 											  return t, ID(t) as id, ID(u) as creator""" % (sessionid))
 		return record
 	def save_theme(self,themeid,sessionid,name,public,theme):
-		if themeid == "0":
+		print(themeid)
+		if themeid == 0:
 			#Új téma
 			if self.is_theme_exists(name):
-				return 0
+				return "0"
 			record = self.graph.cypher.execute("""match (u:User)
 												  where u.session = '%s'
 												  CREATE (t:Theme { title: '%s', public: %s, theme:'%s' })
@@ -34,11 +35,13 @@ class Theme(BaseClass):
 		else:
 			#Módosítás
 			record = self.graph.cypher.execute("""match (t:Theme),(u:User), (t:Theme)-[r:CREATED_BY]->(creator:User)
-												  where ID(t) = %s and u.session = '%s'
+												  where ID(t) = %s and u.session = '%s' and not has(t.default)
 												  set t.title = '%s', t.public = %s, t.theme = '%s'
 												  delete r
 												  CREATE (t)-[r2:CREATED_BY]->(u)
 												  return ID(t) as id""" % (themeid,sessionid,name,public,theme))
+			print(record.one)
+			
 			return record.one
 	def is_theme_exists(self,themename):
 		record = self.graph.cypher.execute("""match (t:Theme)
@@ -46,10 +49,12 @@ class Theme(BaseClass):
 											  return t""" % (themename))
 		return len(record) > 0
 	def set_theme(self,sessionid,themeid):
-		record = self.graph.cypher.execute("""match (t:Theme),(u:User)-[r:CHOSE]->(t2:Theme)
-											  where ID(t) = %s and u.session = '%s'
-											  delete r
-											  CREATE (u)-[:CHOSE]->(t)""" % (themeid,sessionid))
+		record = self.graph.cypher.execute("""match (t:Theme),(u:User)
+											where ID(t) = %s and u.session = '%s'
+											optional match (u:User)-[r:CHOSE]->(t2:Theme)
+											where u.session = '%s'
+											delete r
+											CREATE (u)-[:CHOSE]->(t)""" % (themeid,sessionid,sessionid))
 		return
 	def get_theme(self,sessionid):
 		record = self.graph.cypher.execute("""match (u:User)-[r:CHOSE]->(t:Theme)

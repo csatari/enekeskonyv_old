@@ -6,8 +6,8 @@ Fontosak:
 - keresésnél legyen egy indeterminate progressbar a kereső alatt X
 - az énekeknél ha csak a sorrend változik, akkor is frissüljenek az énekek X
 - amikor a beállításokba lépek, akkor válassza ki a beállított témámat, illetve ha váltok témát, akkor mentse el X
-- Szerkesztésnél lehetnek majd egyéb funkciók: Módosítás, Új verzió, Törlés
-- jogok legyenek meg az adatbázisban, meg kitalálva, hogy kinek mikor milyen jog jár és mit lehet vele csinálni
+- Szerkesztésnél lehetnek majd egyéb funkciók: Módosítás, Új verzió, Törlés X
+- jogok legyenek meg az adatbázisban, meg kitalálva, hogy kinek mikor milyen jog jár és mit lehet vele csinálni X
 
 
 Következő lépések:
@@ -29,16 +29,12 @@ Következő lépések:
 	- ha van, akkor jelenítse meg valahol
 	- új verzió készítése -> jelenjen meg a songs táblában, hogy az egy létező ének másik verziója
 	- request elfogadása esetén módosuljon a tábla
-<<<<<<< HEAD
 	- a szervertől való lekérdezések is legyenek ellenőrizve jogokra
-=======
->>>>>>> origin/master
 - tesztelni, hogy a szerver jó énekeskönyveket ad-e vissza X
 - énekeskönyvek keresése, oldalsávban legyen egy összes énekeskönyv menüpont, ami rákeres az énekeskönyvekre X
 - jelenjen meg, hogy kié az énekeskönyv X
 - az énekeskönyveknek legyen külön oldala: hozza ki kártyákon a következő adatokkal: 
   Énekeskönyv neve, Tulajdonos, Jogom hozzá (megtekintés (felhasználó), tulajdonos, szerkesztő (megosztott), admin), énekek  száma, beállítások gomb X
-<<<<<<< HEAD
   publikus/privát
 - A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés X
 - legyen adatbázis, amiben tárolom, hogy melyik énekeskönyvhöz melyik énekek tartoznak
@@ -58,26 +54,39 @@ Következő lépések:
 	- kilépés gombra tűnjön el animációval X
 	- szerveren lekérhető az összes éneke X
 	- énekeskönyv nevére kattintva hozza be az énekeit X
-=======
 - A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés X
-- legyen adatbázis, amiben tárolom, hogy melyik énekeskönyvhöz melyik énekek tartoznak
-- jelenjen meg az énekeskönyveknél, hogy hány ének van benne
+- legyen adatbázis, amiben tárolom, hogy melyik énekeskönyvhöz melyik énekek tartoznak X
+- jelenjen meg az énekeskönyveknél, hogy hány ének van benne X
 - Ha rányomok az énekeskönyvre, akkor válassza ki (ha felhasználó, akkor csak az énekeket mutassa belőle), ez látszódjon, hogy ki van választva (footer pl)
->>>>>>> origin/master
 - minden egyes éneknél legyen plusz vagy mínusz gomb, attól függően, hogy benne van-e már az énekeskönyvben, ha ki van választva énekeskönyv
 	- design-ja a plusz-mínusz gombnak X
-	- legyen egy plusz paramétere a songcard-nak, hogy van-e plusz-mínusz
-	- ki és bekapcsolható a gomb
-	- ha kilép az énekeskönyvből, akkor eltűnik a plusz-mínusz gomb
-	- állítható, hogy plusz vagy mínusz
-	- mínusz jelenik meg, ha benne van a kijelölt énekeskönyvben, egyébként plusz
-	- ha plusz gombra nyom, akkor hozzáadja a kijelölt énekeskönyvhöz
-	- mínusz gombnál törli
-- kiválasztott énekeskönyv esetében legyen egy letöltés és egy befejezés gomb
+	- a szerver mindig elküldi, hogy a kiválasztott énekeskönyvnek tagja-e az ének X
+	- ha ki van választva énekeskönyv, akkor megjelenik a +/- gomb X
+	- ha benne van, akkor - gombként jelenik meg, egyébként + gombként X
+	- szerveren legyen énekeskönyvhöz adás és kivétel X
+	- kezelje le a jogot is rá X
+	- kliensen a rest hívás X
+	- a +/- gombokra adja hozzá/vegye ki az énekeskönyvből X
+- kiválasztott énekeskönyv esetében legyen egy letöltés és egy befejezés gomb X
 
-Kliens:
-- legyen meg az alapja, hogy hogy néz ki
-- legyenek meg benne a szükséges énekek id-i
+-------------------------------------Kliens-----------------------------------
+- legyen meg az alapja, hogy hogy néz ki X
+- legyenek meg benne a szükséges énekek id-i X
+- tudjon letölteni a szerverről X
+- a szerver generáljon egy letöltő id-t, amivel le tudunk tölteni az énekeskönyvbe X
+- jelenjen meg a kliensben a letöltő id X
+- töltse fel az adatbázisát a letöltött énekekkel X
+- tudjon keresni az adatbázisában id,cím,label szerint X
+- működjön a kereső, úgy mint a store-ban X
+- design az ének megnyitásra
+- be lehessen lépni az énekbe
+- legyen egy szép háttér az ének megjelenítéséhez
+- legyen footer, amin vannak az énekhez szükséges beállítások
+
+
+
+
+
 
 #A49E8D (háttér v lapok)
 #504136 (címkék)
@@ -108,3 +117,62 @@ Jogok tárolása adatbázisban:
 - énekeskönyv mellett ott a tulajdonos
 - új tábla, ahol tárolódik, hogy melyik énekeskönyvhöz tartozik megosztott jogú user és ki az
 - énekeskönyv mellett tárolódik, hogy publikus-e
+
+
+Neo4j pythonra való átállás:
+
+18/18
+- getData
+	- allLanguages X
+- songData
+	- addSong
+		- to_json_one - kiírni json formátumban (ahogy az előzőt is) X
+	- getSong X
+	- searchSong X
+		- hashtag és szavak elválasztása X
+		- labelek alapján keresés X
+		- nyelvek alapján keresés X
+		- énekben keresés X
+		- mindegyikre a találatok összeadása, egy tömbbe berakása X
+		- id tömbből énekek készítése X
+		- ének kiegészítése plusz adatokkal (to_json feladata) X
+- songbookData
+	- get-songbook-count X
+		- összeszámlálni az énekeskönyvben lévő énekek számát X
+	- get-songbook-data X
+		- songbook to_json X
+		- egy énekeskönyv adatainak lekérése X
+		- to_json, to_json_one refaktor X
+	- get-all-songs-from-songbook X
+		- összes énekeskönyvi ének lekérése X
+		- azok kiírása X
+	- a többi?
+- userData
+	- name X
+	- get-songbooks X
+	- add-songbook X
+	- get-all-visible-songbooks X
+	- get-themes X
+	- add-theme X
+	- set-theme X
+	- get-theme X
+- userLogin 
+	- username&password X
+- userRegistration
+	- username X
+	- firstname X
+
+- kijelentkezés X
+- set_theme működjön alapbeállításra! (hozzá kéne adni csak az adatbázishoz, és törölni, hogy fixen benne legyen a kliensben) X
+	- adatbázisban default-nak jelölve X
+	- ha default, akkor nem lehet módosítani X
+- sessionid-t nézze meg, hogy létezik: userLogin-nál X
+- témát ha változtatok, akkor is módosuljon X
+- bejelentkezés és regisztráció ott marad (lehet, csak a kijelentkezés miatt) X
+- labelekben felsorolja a nyelvet is X
+
+-------------------------------------------------BUGOK----------------------------------------------
+
+- kijelentkezés után alapbeállítás téma legyen --
+- jelentkeztessen ki a store-ból, ha lejárt a sessionid (a hibaüzenetet írja ki és egységesen kezelje)
+

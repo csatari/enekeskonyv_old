@@ -5,10 +5,10 @@ from data.user import User
 
 def validate(arg,graph):
 	if "sessionid" not in arg:
-		error.get_error('no_sessionid')
+		print(error.get_error('no_sessionid'))
 		return False
 	else:
-		return check_if_valid_session(arg["sessionid"].value,graph)
+		return check_if_valid_session(arg["sessionid"],graph)
 
 def check_if_valid_session(sessionid,graph):
 	user = User(graph)

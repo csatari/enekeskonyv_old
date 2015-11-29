@@ -2,7 +2,7 @@ $(function(){
 	$(".js-footer-close").click(function() {
 		Footer.toggleVisibility(false);
 	});
-	$(".js-footer").click(function() {
+	$(".js-footer-title").click(function() {
 		Songbooks.showAllSongbookSongs(Footer.songbook.id);
 	});
 });
@@ -13,6 +13,7 @@ var Footer = {
 		title: "",
 		songNumber: 0
 	},
+	visibility: false,
 	downloadData: function(id) {
 		//download data for songbook by id
 		SongbookData.getSongbookData(Login.getSessionId(),id,
@@ -34,6 +35,7 @@ var Footer = {
 			}, 100, function() {
 				// Animation complete.
 			});
+			Footer.visibility = true;
 		}
 		else {
 			$( "div.js-footer" ).animate({
@@ -41,12 +43,18 @@ var Footer = {
 			}, 100, function() {
 				// Animation complete.
 			});
+			Footer.visibility = false;
+			Footer.songbook.id = 0;
 		}
 	},
 	setData: function(title,songNumber) {
 		$(".js-footer-title").text(title);
 		$(".js-footer-song-number").text(songNumber + " " + Config.songs);
 		Footer.songbook.title = title;
+		Footer.songbook.songNumber = songNumber;
+	},
+	setSongNumber: function(songNumber) {
+		$(".js-footer-song-number").text(songNumber + " " + Config.songs);
 		Footer.songbook.songNumber = songNumber;
 	}
 };
