@@ -41,7 +41,7 @@ RETURN r
 
 MATCH (a:Song),(b:Song)
 WHERE a.title = 'x' AND b.title = 'y'
-CREATE (b)-[r:OTHER_LANGUAGE]->(a)
+CREATE (b)-[r:OTHER_LANGUAGE]->(a)-[r2:OTHER_LANGUAGE]->(b)
 RETURN r
 
 --label node
@@ -90,6 +90,8 @@ CREATE (u:User { session:'dsa', lastname:'Csatári2',firstname:'Albert2',usernam
 --theme node
 
 CREATE (t:Theme { title: 'Rózsaszín', public:1, theme:'Kereső háttér:searchbar-background:background-color:#e765f5;Háttér:body-background:background-color:#F0F8FF;Kör gomb háttér:circle-button-background:background-color:#d038f2;Kártya háttér:card-panel:background-color:#FFFFFF' })
+
+CREATE (t:Theme { title: 'Alapbeállítás', public:1, theme:'Kereső háttér:searchbar-background:background-color:#e765f5;Háttér:body-background:background-color:#F0F8FF;Kör gomb háttér:circle-button-background:background-color:#d038f2;Kártya háttér:card-panel:background-color:#FFFFFF', default:1 })
 
 --user-song relation CREATED, CREATED_BY
 
@@ -140,3 +142,44 @@ WHERE u.username = 'csatari' AND sb.title = 'ABC'
 CREATE (u)-[r:SEES]->(sb)
 CREATE (sb)-[r2:SHARED_WITH]->(u)
 RETURN sb,u
+
+
+
+--add new version of song
+
+MATCH (s_old:Song),(l:Language)
+WHERE ID(s_old) = 3 AND ID(l) = 1
+OPTIONAL MATCH (s_other:Song)
+WHERE ID(s_other) = 0
+CREATE (s:Song { title: 'ez egy angol új', song: 'aaaa', sheet_music: 'bbbb', comment: 'cccc'})
+CREATE (s)-[lr:LANGUAGE]->(l)
+CREATE (s_old)-[r3:NEXT_VERSION]->(s)-[r4:PREVIOUS_VERSION]->(s_old)
+WITH s_other,ID(s) as songid,s
+WHERE s_other is not null
+CREATE (s)-[r:OTHER_LANGUAGE]->(s_other)-[r2:OTHER_LANGUAGE]->(s)
+RETURN s
+
+	--EZ A JÓ!!!! ha nincs s_other, akkor nem rakja be, egyébként meg igen
+	
+MATCH (l:Language),(u:User)
+WHERE ID(l) = %s AND ID(u) = %s
+OPTIONAL MATCH (s_other:Song)
+WHERE ID(s_other) = %s
+OPTIONAL MATCH (s_old:Song)
+WHERE ID(s_old) = %s
+CREATE (s:Song { title: '%s', song: '%s', sheet_music: '%s', comment: '%s'})
+CREATE (s)-[lr:LANGUAGE]->(l)
+CREATE (u)-[r_u:CREATED]->(s)
+CREATE (s)-[r2_u:CREATED_BY]->(u)
+FOREACH (a IN CASE WHEN s_old IS NULL THEN [] ELSE [s_old] END | 
+	CREATE (a)-[r3:NEXT_VERSION]->(s)-[r4:PREVIOUS_VERSION]->(a)
+)
+FOREACH (a IN CASE WHEN s_other IS NULL THEN [] ELSE [s_other] END | 
+	CREATE (s)-[r:OTHER_LANGUAGE]->(a)-[r2:OTHER_LANGUAGE]->(s)
+)
+RETURN ID(s) as songid
+
+--delete one node and all relations
+start n=node(26)
+match n-[r]-()
+delete n,r
