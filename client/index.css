@@ -5,6 +5,20 @@ body {
 	font-size:28px;
 	margin-left: 15px;
 }
+#searchbar-back-button {
+	font-size:28px;
+	display:none !important;
+	width:64px;
+	border-radius:50%;
+	-webkit-border-radius:50%;
+}
+.searchbar-back-button-icon {
+	margin-left:18px;
+}
+.searchbar-button {
+	float: left;
+    position: relative;
+}
 ul.side-nav {
 	overflow: scroll;
 }

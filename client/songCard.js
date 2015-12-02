@@ -109,6 +109,5 @@ var SongCard = {
     		'</div>\n' +
 		'</div>';
 		return html;
-
 	}
 };

@@ -78,10 +78,32 @@ Következő lépések:
 - töltse fel az adatbázisát a letöltött énekekkel X
 - tudjon keresni az adatbázisában id,cím,label szerint X
 - működjön a kereső, úgy mint a store-ban X
-- design az ének megnyitásra
-- be lehessen lépni az énekbe
-- legyen egy szép háttér az ének megjelenítéséhez
-- legyen footer, amin vannak az énekhez szükséges beállítások
+- Ne nginx-szel legyen megnyitva, hanem offline. Működjön file:// protokollal
+- Title-t hozzáadni X
+Szerverrel való kapcsolat ellenőrzése:
+	- legyen vizsgáló függvény, ami nézi, hogy van-e szerver X
+	- ha még nincs adatbázis, akkor ne hozzon létre üreset X
+	- legyen egy nagy hibaüzenet, hogy nincs szerver
+	- ha már sikerült letölteni, de nincs szerver, akkor csak alul egy sarokban jelenjen meg, hogy nincs szerver (piros warning jel)
+	- ha sok hiba után elérhető a szerver, akkor változzon át a piros warning jel zöld pipává
+	- ha egy éneket nézek, akkor legyen láthatatlan a hibajelző ikon
+	- letöltéshez követeljen szervert
+	- letöltésnél mutassa, hogy hol tart
+	- kérdezzen le egy listát, hogy melyik éneknek melyik a legfrissebb verziója
+	- legyen egy hely, ahol mutatja, hogy melyik éneket frissítették
+Ének:
+	- design az ének megnyitásra
+		- felül a sáv átalakul és vissza gomb lesz X
+		- a keresősáv megmarad X
+		- 5 mp után tűnjön el X
+		- ha az egér megmozdul, akkor jöjjön elő X
+		- legyen egy szép háttér az ének megjelenítéséhez X
+		- legyen footer, amin vannak az énekhez szükséges beállítások
+		- ha ének van megnyitva és keresek, akkor lépjen ki az énekből
+		- az éneknek legyen a megszokott alakja (sans serif, teljes képernyőn)
+	- be lehessen lépni az énekbe
+	- jobbra gombra vándoroljon át jobbra a kottára
+	- balra gombra pedig menjen vissza az énekre
 
 
 

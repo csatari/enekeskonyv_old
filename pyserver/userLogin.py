@@ -24,7 +24,7 @@ def run(arguments):
 		print(sb_c.get_download_id(10))
 		return "True"
 
-	elif "sessionid"in arguments: #Ellenőrzi, hogy az adott id megtalálható-e még
+	elif "sessionid" in arguments: #Ellenőrzi, hogy az adott id megtalálható-e még
 
 		user_class = User(db.graph)
 		res = user_class.is_sessionid_exists(arguments["sessionid"])

@@ -14,12 +14,12 @@ $(function(){
   $('.js-song-edit-button').click(function() {
     console.log("clicked?");
   })
-  $(".js-page").load("song.html", function() {
+  /*$(".js-page").load("song.html", function() {
       Config.runConfig();
       jQuery.getScript("song.js").done(function() {
         console.log("song.html betöltés");
       });
-  });
+  });*/
 });
 
 var Index = {
@@ -27,5 +27,9 @@ var Index = {
     $('#js-registration-result').text(string);
     Registration.setRegistrationResultIcon(false);
     jQuery('#js-registration-result-modal').openModal();
+  },
+  clearPage: function() {
+    $(".js-song-card-collection").html("");
+    $(".js-song-page").html("");
   }
 };

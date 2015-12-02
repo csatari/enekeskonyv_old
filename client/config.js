@@ -73,7 +73,7 @@ var Config = {
 		$(".conf-ok").html("OK");
 		$(".conf-cancel").html("Mégse");
 		$(".conf-text").html("Szöveg");
-		$(".conf-editor").html("Szerkesztő");
+		$(".conf-editor").html("Szerkesztő!!");
 		$(".conf-title").html("Cím");
 		$(".conf-chord").html("Akkord");
 		$(".conf-verse").html("Versszak");

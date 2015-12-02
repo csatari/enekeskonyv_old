@@ -18,7 +18,7 @@ var Search = {
 	    return keys.sort(function(a,b){return obj[a]-obj[b]});
 	},
 	searchSong: function(titlePart,result) {
-		Search.toggleSearchProgress(true);
+		Searchbar.toggleSearchProgress(true);
 		SongCard.cards = [];
 		var parts = titlePart.split(" ");
 		Search.counterArray = [];
@@ -30,7 +30,7 @@ var Search = {
 				Search.drawAllSongs(Search.getSortedKeys(Search.counterArray).reverse(),
 					function() {
 						SongCard.drawCards();
-						Search.toggleSearchProgress(false);
+						Searchbar.toggleSearchProgress(false);
 					});
 			}
 		};
@@ -96,14 +96,6 @@ var Search = {
 			searchedElements = searchedElements + word;
 			$(".js-search").val(searchedElements);
 			Search.searchSong($(".js-search").val());
-		}
-	},
-	toggleSearchProgress: function(enabled) {
-		if(enabled) {
-			$(".js-search-progress").css("display","block");
-		}
-		else {
-			$(".js-search-progress").css("display","none");
 		}
 	}
 };

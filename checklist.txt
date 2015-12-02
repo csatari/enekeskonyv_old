@@ -1,0 +1,6 @@
+Checklist:
+
+- Neo4j elindít: E:\nginx\html\enekeskonyv\enekeskonyvdb
+- Szerver elindít: E:\ngingx\html\enekeskonyv\serverpy\python flaskr.py
+- Kliens elindít: E:\nginx\html\enekeskonyv\client\index.html
+- Sublime text
