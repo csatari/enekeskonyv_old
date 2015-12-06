@@ -1,9 +1,16 @@
-div.card-title {
-	font-size:30px;
-}
-div.card-body {
-	margin-top: 20px;
-}
-div.card-panel {
+div.song-root {
 	margin-top:30px;
+	position:fixed;
+}
+div.song-title {
+	font-size:35px;
+	margin-bottom:10px;
+}
+div.song-text {
+	font-family: Consolas, monospace;
+	font-weight: bold;
+}
+div.note-root {
+	margin-top: 30px;
+	position:fixed;
 }

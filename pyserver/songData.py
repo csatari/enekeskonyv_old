@@ -16,7 +16,7 @@ def run(arguments):
 		return str(result)
 	if "getSong" in arguments: #Lekér egy éneket id alapján
 		song_class = Song(db.graph)
-		return song_class.to_json_one(song_class.get_by_id(arguments["getSong"]),arguments["sessionid"])
+		return song_class.to_json_one(song_class.get_by_id(arguments["getSong"]),arguments["sessionid"],arguments["songbookid"])
 	if "searchSong" in arguments: #Megkeres egy éneket tag vagy cím alapján
 		song_class = Song(db.graph)
 		result = song_class.search_in_songs(arguments["title"],arguments["sessionid"],arguments["songbook"])

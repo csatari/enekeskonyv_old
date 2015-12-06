@@ -13,33 +13,28 @@ var Database = {
 	db_table_name: "song",
 	firstTime: function() {
 		Downloader.downloadSongs(function(result) {
-			var objectStore = Database.db.createObjectStore(Database.db_table_name, {keyPath: "id"});
-			objectStore.createIndex("title", "title", { unique: false });
-			objectStore.createIndex("labels", "labels", { unique: false });
 
-			objectStore.transaction.oncomplete = function(event) {
-				var transaction = Database.db.transaction([Database.db_table_name], "readwrite");
-				transaction.oncomplete = function(event) {
-					//console.log("All done!");
-				};
+			var transaction = Database.db.transaction([Database.db_table_name], "readwrite");
+			transaction.oncomplete = function(event) {
+				//console.log("All done!");
+			};
 
-				transaction.onerror = function(event) {
-					// Don't forget to handle errors!
+			transaction.onerror = function(event) {
+				// Don't forget to handle errors!
+			};
+			var objectStore = transaction.objectStore(Database.db_table_name);
+			for (var i = 0; i < result.length; i++) {
+			    var labels_temp = [];
+			    for(var j = 0; j < result[i].labels.length; j++) {
+			    	labels_temp.push(result[i].labels[j].toLowerCase());
+			    }
+			    result[i].labels = labels_temp;
+			    var request = objectStore.add(result[i]);
+				request.onsuccess = function(event) {
+					//console.log(event);
 				};
-				var objectStore = transaction.objectStore(Database.db_table_name);
-				for (var i = 0; i < result.length; i++) {
-				    var labels_temp = [];
-				    for(var j = 0; j < result[i].labels.length; j++) {
-				    	labels_temp.push(result[i].labels[j].toLowerCase());
-				    }
-				    result[i].labels = labels_temp;
-				    var request = objectStore.add(result[i]);
-					request.onsuccess = function(event) {
-						//console.log(event);
-					};
-				    
-				}	
-			}
+			    
+			}	
 		});
 	},
 	openDatabase: function() {
@@ -48,21 +43,35 @@ var Database = {
 		request.onerror = function(event) {	};
 		request.onsuccess = function(event) {
 			Database.db = event.target.result;
-			Database.refreshDatabase();
+			if(Database.isDatabaseCreated()) {
+				//Database.refreshDatabase();
+				console.log("adatbázis frissítése - TODO")
+			}
+			
+		};
+		request.onupgradeneeded = function(event) { 
+			var db = event.target.result;
+			var objectStore = db.createObjectStore(Database.db_table_name, {keyPath: "id"});
+			objectStore.createIndex("title", "title", { unique: false });
+			objectStore.createIndex("labels", "labels", { unique: false });
+			objectStore.transaction.oncomplete = function(event) {
+				Database.firstTimeWhenServerAvailable();
+			};
+			
 		};
 	},
-	refreshDatabase: function() {
+	isDatabaseCreated: function() {
+		if($.inArray(Database.db_table_name,Database.db.objectStoreNames) < 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	},
+	firstTimeWhenServerAvailable: function() {
 		//ha van szerver, akkor továbbmegyek
 		Server.callWhenServerAvailable(function() {
-			console.log($.inArray(Database.db_table_name,Database.db.objectStoreNames));
-			//ha nincs még adatbázis, akkor
-			if($.inArray(Database.db_table_name,Database.db.objectStoreNames) < 0) {
-				Database.firstTime();
-			}
-			else {
-				console.log("már letöltöttem");
-			}
-			//ha már van adatbázis, akkor
+			Database.firstTime();
 		});
 		
 

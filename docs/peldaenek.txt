@@ -1,0 +1,24 @@
+options stave-distance=90 space=10 width=896
+
+tabstave notation=true tablature=false time=4/4 key=G
+  notes :8 ## B/3 | :4 G-G-F-F/4 | G/4 :8 G-E/4 :2 t E/4 | :4 B-B/3 :8 D#/4 :4d D/4 | :2d F/4 :8 ## B/3 
+  text :4, ,|,Em, ,Am, ,|,Em, ,Am, ,|,H7, , , ,|,Em
+  text ++,.11,:8,1.,A,|,mély-, , ből, ,hoz-, ,zád, ,|,száll, ,sza-,vam, , , , ,|, , , , , , , , ,|, , , , , , , ,A
+  text ++,.13,:8,2.,Ha,|,aj-, ,kam, ,vé-, ,tett, ,|,el-, ,le-,ned, , , , ,|,Krisz-, ,tus, ,ke-,gyel-, , ,|,mezz!, , , , , , ,A
+  text ++,.15,:8,3.,Ha,|,ar-, ,cod, ,fé-, ,nyét, ,|,el-, ,fe-,dem, , , , ,|, , , , , , , , ,|, , , , , , , ,Te
+tabstave tablature=false notation=true key=G
+  notes :4 G-G-F-F/4 | G/4 :8 G-E/4 :2 t E/4 | :4 B-B/3 :8 D#/4 :4d D/4 | :2d F/4 :4 ##
+  text :4,Em, ,Am, ,|,Em, ,Am, ,|,H7, , , ,|,Em
+  text ++,.11,:8,baj-, ,ban, ,lel-, ,kem, ,|,társ-, ,ta-,lan, ,|
+  text ++,.13,:8,jó, ,hírt, ,zeng-, ,jem, ,|,csak, ,ve-,led, , , , ,|,Krisz-, ,tus, ,ke-,gyel-, , ,|,mezz!
+  text ++,.15,:8,új-, ,ból, ,szó-, ,líts, ,|,Is-, ,te-,nem
+options stave-distance=50
+tabstave tablature=false notation=true key=G
+  notes :8 F/4 :4d F/4 :8 F/4 :4d F/4 | :8 A/4 :4d A/4 :8 A/4 :4d A/4 | :2 B/4 :4d B/4 :8 A/4 | :8 B/4 :4d B/4 :8 A/4 :4d s F/4
+  text :4,Em, , , ,|,Am, , , ,|,G, , , ,|,H7
+  text ++,.11,:8,Se-,gíts!, , ,Se-,gíts!, , ,|,Ne,hagyj!, , ,Ne,hagyj!, , ,|,Nézd, , , ,rám-, , ,tör,|,a,bűn, , ,már
+tabstave tablature=false notation=true key=G
+  notes :8 G/4 :4d F/4 :8 G/4 :4d F/4 | :8 G/4 :4d F/4 :8 G/4 :4d F/4 | :4 B-B/3 :8 D#/4 :4d D/4 | :2d F/4 :4 ##
+  text :4,Em, , , ,|,C7, , , ,|,H7, , , ,|,Em
+  text ++,.11,:8,Te,adj!, , ,Te,adj!, , ,|,E-,rőt!, , ,E-,rőt!, , ,|,Krisz-, ,tus, ,ke-,gyel-, , ,|,mezz!
+

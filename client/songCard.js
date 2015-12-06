@@ -6,6 +6,10 @@ $(function(){
 	$(document).on('click','.song-label',function(){
 		Search.addWordToSearchbar($(this).text());
 	});
+	$(document).on('click','.js-song-clickable',function() {
+		var id = $(this).parent().attr('id');
+		SongCard.songClicked(id);
+	});
 });
 
 var SongCard = {
@@ -30,8 +34,10 @@ var SongCard = {
 			labels:labels_
 		});
 	},
+	songClicked: function(songId) {
+		Song.drawSong(songId);
+	},
 	drawCards: function() {
-
 
 		if($('.js-song-card-collection').html() == undefined) {
 			SongCard.createCardCollection();
@@ -94,7 +100,7 @@ var SongCard = {
 		}
 		var html = 
 		'<div class="card song-card js-song-card" id="' + id +'">\n' +
-			'<div class="card-content waves-effect waves-dark">\n' +
+			'<div class="card-content waves-effect waves-dark js-song-clickable">\n' +
 				'<span class="card-title black-text">' + title + '</span>\n'
 				 + textsHTML + 
 			'</div>\n' +

@@ -60,6 +60,13 @@ nav {
 div.search-bar {
 	margin-left:71px;
 }
+.search-bar input[type=text]:focus {
+	border-bottom: 0px solid #000;
+	box-shadow: 0 0px 0 0 #000;
+}
+.search-bar input {
+	width:94%;
+}
 /* custom wave */
 .waves-effect.waves-light-blue .waves-ripple {
  /* The alpha value allows the text and background color
@@ -156,21 +163,7 @@ div.footer {
 .footer-container {
 	line-height: 80px;
 }
-.footer-title {
-	color:white;
-	font-size:30px;
-	display: block;
-    line-height: 78px !important;
-    text-align: center;
-}
-.footer-song-number {
-	color:white;
-	font-size:23px;
-	float: left;
-	margin-top:-56px;
-}
 .footer-buttons {
-	float: right;
 	line-height: 87px;
     margin-right: 6px;
     margin-top: -77px;
@@ -189,4 +182,11 @@ div.footer {
 }
 .songbook-downloadid {
 	display:none;
+}
+.fab {
+	bottom:-60px;
+	right:24px;
+}
+.fab-toggler-button, .fab-toggler-button:hover {
+	background-color:#64b5f6;
 }

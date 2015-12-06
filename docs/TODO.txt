@@ -78,7 +78,7 @@ Következő lépések:
 - töltse fel az adatbázisát a letöltött énekekkel X
 - tudjon keresni az adatbázisában id,cím,label szerint X
 - működjön a kereső, úgy mint a store-ban X
-- Ne nginx-szel legyen megnyitva, hanem offline. Működjön file:// protokollal
+- Ne nginx-szel legyen megnyitva, hanem offline. Működjön file:// protokollal X
 - Title-t hozzáadni X
 Szerverrel való kapcsolat ellenőrzése:
 	- legyen vizsgáló függvény, ami nézi, hogy van-e szerver X
@@ -91,6 +91,7 @@ Szerverrel való kapcsolat ellenőrzése:
 	- letöltésnél mutassa, hogy hol tart
 	- kérdezzen le egy listát, hogy melyik éneknek melyik a legfrissebb verziója
 	- legyen egy hely, ahol mutatja, hogy melyik éneket frissítették
+		
 Ének:
 	- design az ének megnyitásra
 		- felül a sáv átalakul és vissza gomb lesz X
@@ -98,14 +99,36 @@ Szerverrel való kapcsolat ellenőrzése:
 		- 5 mp után tűnjön el X
 		- ha az egér megmozdul, akkor jöjjön elő X
 		- legyen egy szép háttér az ének megjelenítéséhez X
-		- legyen footer, amin vannak az énekhez szükséges beállítások
+		- legyen footer, amin vannak az énekhez szükséges beállítások X
 		- ha ének van megnyitva és keresek, akkor lépjen ki az énekből
-		- az éneknek legyen a megszokott alakja (sans serif, teljes képernyőn)
-	- be lehessen lépni az énekbe
-	- jobbra gombra vándoroljon át jobbra a kottára
-	- balra gombra pedig menjen vissza az énekre
+		- az éneknek legyen a megszokott alakja (sans serif, teljes képernyőn) X
+	- be lehessen lépni az énekbe X
+	- jobbra gombra vándoroljon át jobbra a kottára X
+	- balra gombra pedig menjen vissza az énekre X
+	
+	- jelenjen meg az ének akkordok szépen kiemelve
+	- ne látszódjanak a tag-ek
+	- lehessen nagyítani,kicsinyíteni
+	- lehessen transzponálni
+	- automatikusan illeszkedjen a képernyőre
 
+Kotta:
+	- jelenjen meg a kotta
+	- legyen a kottának saját kezelő osztálya
+	- lehessen nagyítani (scale)
+	- lehessen kiszélesíteni (width)
+	- lehessen invertálni
+	- invertálva is működjön a nagyítás/szélesítés, azaz a konverzió
+	- lehessen transzponálni 
+		- felső akkordokat ismerje fel
+		- felső akkordokat transzponálja fel-le
+		- hangjegyeket ismerje fel
+		- transzponálja a hangjegyek fel-le
+	- automatikusan illeszkedjen a képernyőre
 
+Verziókezelés:
+	- Ha a szerverről lekérek egy éneket, akkor annak csak a legfrissebb verzióját adja vissza
+	- Ha egy ének benne van egy énekeskönyvben, akkor minden újabb verziójú éneke is kerüljön bele
 
 
 

@@ -32,9 +32,10 @@ var SongData = {
 		});
 	},
 	getSong: function(sessionid, songId, afterGood, afterBad) {
+		console.log("get");
 		$.ajax({method: "POST", 
 			url: Config.url+Config.songDataPage, 
-			data: {"sessionid": sessionid, "getSong": songId}
+			data: {"sessionid": sessionid, "getSong": songId, "songbookid": Footer.songbook.id}
 		})
 		.done(function(result) {
 			var res = JSON.parse(result);

@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<link rel="stylesheet" type="text/css" href="song.css">
 	<link rel="stylesheet" media="screen" type="text/css" href="vendors/colorpicker/css/colorpicker.css" />
+	<link href="vendors/VexTab/vextab.css" rel="stylesheet" type="text/css">
+	<link href="vendors//VexTab//tabdiv.css" media="screen" rel="Stylesheet" type="text/css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<!-- Vextab css -->
     <link href="vendors/VexTab/vextab.css" rel="stylesheet" type="text/css">
@@ -76,22 +78,30 @@
         </div>
 	</div>
 
-	<div class="footer z-depth-2 waves-effect waves-dark js-footer" style="background-color: #64b5f6;height: 0px">
-		<span class="footer-songbook-id js-footer-songbook-id">0</span>
-		<span class="footer-title js-footer-title">
-			Énekeskönyv neve
-		</span>
-		<span class="footer-song-number js-footer-song-number">0 ének</span>
-	    <span class="footer-buttons">
-			<span class="waves-effect waves-dark btn-floating btn-large activator tooltipped config-footer-tooltip-download" data-position="top" data-delay="50" data-tooltip="Letöltés_" style="background-color: #Ffffff;">
-	        	<i class="material-icons dark-icon" style="color:#4F6D7A">get_app</i>
-	    	</span>
-	    	<span class="waves-effect waves-dark btn-floating btn-large song-button activator tooltipped js-footer-close config-footer-tooltip-close" data-position="left" data-delay="50" data-tooltip="Befejezés_" style="background-color: #Ffffff;">
-	        	<i class="material-icons dark-icon" style="color:#4F6D7A">clear</i>
-	    	</span>
-	    </span>
+	<div class="fab js-fab fixed-action-btn horizontal click-to-toggle">
+		<a class="btn-floating btn-large fab-toggler-button">
+			<i class="large mdi-navigation-menu"></i>
+		</a>
+		<ul>
+			<li><a class="waves-effect waves-dark btn-floating red tooltipped" data-position="top" data-delay="50" data-tooltip="Nagyítás_">
+				<i class="material-icons">zoom_in</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="Kicsinyítés_">
+				<i class="material-icons">zoom_out</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating green tooltipped js-invert-button" data-position="top" data-delay="50" data-tooltip="Invertálás_">
+				<i class="material-icons">visibility</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating blue tooltipped" data-position="top" data-delay="50" data-tooltip="Elsötétítés_">
+				<i class="material-icons">visibility_off</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating red tooltipped" data-position="top" data-delay="50" data-tooltip="Versszak_">
+				<i class="material-icons">view_stream</i></a>
+			</li>
+		</ul>
 	</div>
 	<!-- external <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+	<script type="text/javascript" src="vendors/Vextab/vextab-div.js"></script>
 	<!-- internal --><script type="text/javascript" src="vendors/jquery-1.11.3.min.js"></script>
 
 	<script type="text/javascript" src="config.js"></script>
@@ -108,8 +118,9 @@
 	<script type="text/javascript" src="database.js"></script>
 	<script type="text/javascript" src="server.js"></script>
 	<script type="text/javascript" src="song.js"></script>
-	<script type="text/javascript" src="footer.js"></script>
+	<script type="text/javascript" src="fab.js"></script>
 	<script type="text/javascript" src="searchbar.js"></script>
+	<script type="text/javascript" src="sheet.js"></script>
 	<script type="text/javascript" src="vendors/jquery.color.js"></script>
 	<script type="text/javascript" src="vendors/colorpicker/js/colorpicker.js"></script>
 	<!--<script type="text/javascript" src="vendors/masonry/masonry.pkgd.min.js"></script>-->
