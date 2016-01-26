@@ -29,7 +29,9 @@
 				<div class="js-user-details"></div>
 			</div>
 		</li>
-		<li class="bold js-logged-in"><a class="waves-effect waves-light-blue js-settings conf-settings">Beállítások_</a></li>
+		<li class="bold js-logged-in">
+			<a class="waves-effect waves-light-blue js-combo-settings conf-keyboard-combo">Billentyű kombinációk_</a>
+		</li>
 	</ul>
 	<!-- felső kereső sáv -->
 	<nav class="searchbar-background js-searchbar-background">
@@ -83,23 +85,77 @@
 			<i class="large mdi-navigation-menu"></i>
 		</a>
 		<ul>
-			<li><a class="waves-effect waves-dark btn-floating red tooltipped" data-position="top" data-delay="50" data-tooltip="Nagyítás_">
-				<i class="material-icons">zoom_in</i></a>
+			<li><a class="waves-effect waves-dark btn-floating red tooltipped js-paragraph-back" data-position="top" data-delay="50" data-tooltip="Hasáb vissza_">
+				<i class="material-icons">undo</i></a>
 			</li>
-			<li><a class="waves-effect waves-dark btn-floating yellow darken-1 tooltipped" data-position="top" data-delay="50" data-tooltip="Kicsinyítés_">
-				<i class="material-icons">zoom_out</i></a>
+			<li><a class="waves-effect waves-dark btn-floating yellow darken-1 tooltipped js-paragraph-next" data-position="top" data-delay="50" data-tooltip="Hasáb_">
+				<i class="material-icons">redo</i></a>
 			</li>
-			<li><a class="waves-effect waves-dark btn-floating green tooltipped js-invert-button" data-position="top" data-delay="50" data-tooltip="Invertálás_">
+			<li><a class="waves-effect waves-dark btn-floating blue tooltipped js-transpose-up" data-position="top" data-delay="50" data-tooltip="Transzponálás fel_">
+				<i class="material-icons">arrow_upward</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating green darken-2 tooltipped js-transpose-down" data-position="top" data-delay="50" data-tooltip="Transzponálás le_">
+				<i class="material-icons">arrow_downward</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating red tooltipped js-invert-button" data-position="top" data-delay="50" data-tooltip="Invertálás_">
 				<i class="material-icons">visibility</i></a>
 			</li>
-			<li><a class="waves-effect waves-dark btn-floating blue tooltipped" data-position="top" data-delay="50" data-tooltip="Elsötétítés_">
-				<i class="material-icons">visibility_off</i></a>
-			</li>
-			<li><a class="waves-effect waves-dark btn-floating red tooltipped" data-position="top" data-delay="50" data-tooltip="Versszak_">
+			<li><a class="waves-effect waves-dark btn-floating yellow darken-2 tooltipped js-verse-mode" data-position="top" data-delay="50" data-tooltip="Versszak_">
 				<i class="material-icons">view_stream</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating blue tooltipped js-comment" data-position="top" data-delay="50" data-tooltip="Megjegyzések_">
+				<i class="material-icons">comment</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating green tooltipped js-print" data-position="top" data-delay="50" data-tooltip="Nyomtatási kép_">
+				<i class="material-icons">print</i></a>
+			</li>
+			<li><a class="waves-effect waves-dark btn-floating red tooltipped js-chord" data-position="top" data-delay="50" data-tooltip="Akkord_">
+				<i class="material-icons">queue_music</i></a>
 			</li>
 		</ul>
 	</div>
+	<!-- result modal page -->
+	<div id="js-registration-result-modal" class="modal">
+		<div class="modal-content">
+			<h4 class="js-registration-result-modal-title"></h4>
+			<div class="valign-wrapper">
+				<i class="small mdi-action-done light-green-text accent-3 js-registration-result-good"></i>
+				<i class="small mdi-action-report-problem red-text accent-3 js-registration-result-bad"></i>
+				<span class="valign" id="js-registration-result"></span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class=" modal-action modal-close waves-effect waves-light-blue btn-flat">OK</a>
+		</div>
+	</div>
+	<!--keyboard combo modal-->
+	<div id="js-keyboard-combo-modal" class="modal modal-fixed-footer">
+		<div class="modal-content">
+			<div class="row js-combo-list">
+				<div class="input-field col s12" id="1">
+					<input id="combo-darken" data="1" type="text" class="js-combo-darken js-combo-input">
+					<label class="active conf-combo-darken" for="combo-darken">Elsötétítés_</label>
+				</div>
+				<div class="input-field col s12">
+					<input id="combo-transpose-up" data="2" type="text" class="js-combo-transpose-up js-combo-input">
+					<label class="active conf-combo-transpose-up" for="combo-transpose-up">Transzponálás fel_</label>
+				</div>
+				<div class="input-field col s12">
+					<input id="combo-transpose-down" data="3" type="text" class="js-combo-transpose-down js-combo-input">
+					<label class="active conf-combo-transpose-down" for="combo-transpose-down">Transzponálás le_</label>
+				</div>
+				<div class="input-field col s12">
+					<input id="combo-verse-mode" data="4" type="text" class="js-combo-verse-mode js-combo-input">
+					<label class="active conf-combo-verse-mode" for="combo-verse-mode">Versszakos mód_</label>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat js-combo-save">Mentés_</a>
+		</div>
+	</div>
+	<span class="key-combos js-key-combos">
+	</span>
 	<!-- external <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
 	<script type="text/javascript" src="vendors/Vextab/vextab-div.js"></script>
 	<!-- internal --><script type="text/javascript" src="vendors/jquery-1.11.3.min.js"></script>
@@ -118,9 +174,11 @@
 	<script type="text/javascript" src="database.js"></script>
 	<script type="text/javascript" src="server.js"></script>
 	<script type="text/javascript" src="song.js"></script>
+	<script type="text/javascript" src="songText.js"></script>
 	<script type="text/javascript" src="fab.js"></script>
 	<script type="text/javascript" src="searchbar.js"></script>
 	<script type="text/javascript" src="sheet.js"></script>
+	<script type="text/javascript" src="settings.js"></script>
 	<script type="text/javascript" src="vendors/jquery.color.js"></script>
 	<script type="text/javascript" src="vendors/colorpicker/js/colorpicker.js"></script>
 	<!--<script type="text/javascript" src="vendors/masonry/masonry.pkgd.min.js"></script>-->

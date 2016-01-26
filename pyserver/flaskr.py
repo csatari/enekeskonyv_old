@@ -14,7 +14,7 @@ from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 
-
+print("Initialization")
 
 app = Flask(__name__)
 
@@ -95,10 +95,19 @@ def songbD():
 def downloadD():
     return downloadData.run(request.values)
 
-if __name__ == "__main__":
-    app.debug = True
-    app.run(host="127.0.0.1", port=5000, threaded=True)
+@app.route("/kill/", methods=['GET','POST', 'OPTIONS'])
+@crossdomain(origin='*')
+def kill():
+    IOLoop.instance().stop()
+    print("Server killed at port: ",port)
+    return "Killed"
 
-    #http_server = HTTPServer(WSGIContainer(app))
-    #http_server.listen(5000)
-    #IOLoop.instance().start()
+port = 5000
+http_server = None
+if __name__ == "__main__":
+    #app.debug = True
+    #app.run(host="127.0.0.1", port=5000, threaded=True)
+    http_server = HTTPServer(WSGIContainer(app))
+    http_server.listen(port)
+    print("Server started at port: ",port)
+    IOLoop.instance().start()

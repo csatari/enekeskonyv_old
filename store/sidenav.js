@@ -56,7 +56,7 @@ var SideNav = {
 	goToEdit: function(after) {
 		$(".js-page").load("edit.html", function() {
 			Config.runConfig();
-			jQuery.getScript("vendors/Vextab/vextab-div.js").done(function() {
+			jQuery.getScript("vendors/VexTab/vextab-div.js").done(function() {
 					jQuery.getScript("edit.js").done(function() {
 						if(after != undefined) {
 							after();

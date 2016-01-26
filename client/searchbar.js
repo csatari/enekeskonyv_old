@@ -32,6 +32,7 @@ var Searchbar = {
 	backButtonClicked: function() {},
 	toggleVisibility: function(visible) {
 		if(visible) {
+			$( ".js-searchbar-background" ).css("display","block");
 			$( ".js-searchbar-background" ).animate({
 				height: "64px"
 			}, 500, function() {});
@@ -40,7 +41,9 @@ var Searchbar = {
 		else {
 			$( ".js-searchbar-background" ).animate({
 				height: "0px"
-			}, 500, function() {});
+			}, 500, function() {
+				$( ".js-searchbar-background" ).css("display","none");
+			});
 			Searchbar.visibility = false;
 		}
 	}

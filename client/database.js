@@ -30,22 +30,58 @@ var Database = {
 			    }
 			    result[i].labels = labels_temp;
 			    var request = objectStore.add(result[i]);
+			    console.log(result[i]);
 				request.onsuccess = function(event) {
-					//console.log(event);
+					console.log(event);
+				};
+				request.onerror = function(event) {
+					console.log("error");
 				};
 			    
 			}	
 		});
 	},
+	refreshDatabase: function() {
+		Downloader.downloadSongs(function(result) {
+			var transaction = Database.db.transaction([Database.db_table_name], "readwrite");
+			transaction.oncomplete = function(event) {
+				//console.log("All done!");
+			};
+
+			transaction.onerror = function(event) {
+				// Don't forget to handle errors!
+			};
+			var objectStore = transaction.objectStore(Database.db_table_name);
+			var getter = function(id) {
+				var request = objectStore.get(result[id].id);
+				request.onsuccess = function(event) {
+					//nincs még benne
+					if(request.result == undefined) {
+						var addRequest = objectStore.add(result[id]);
+						addRequest.onsuccess = function(event) {
+							if(id < result.length-1) {
+								getter(id+1);
+							}
+						};
+					}
+					else {
+						if(id < result.length-1) {
+							getter(id+1);
+						}
+					}
+				};
+			};
+			getter(0);
+		});
+		Settings.Save.updateHtml();
+	},
 	openDatabase: function() {
-		console.log("openDatabase");
 		var request = indexedDB.open(Database.db_name);
 		request.onerror = function(event) {	};
 		request.onsuccess = function(event) {
 			Database.db = event.target.result;
 			if(Database.isDatabaseCreated()) {
-				//Database.refreshDatabase();
-				console.log("adatbázis frissítése - TODO")
+				Database.refreshDatabase();
 			}
 			
 		};
@@ -54,10 +90,11 @@ var Database = {
 			var objectStore = db.createObjectStore(Database.db_table_name, {keyPath: "id"});
 			objectStore.createIndex("title", "title", { unique: false });
 			objectStore.createIndex("labels", "labels", { unique: false });
+			db.createObjectStore(Settings.Save.db_table_name, {keyPath: "id"});
+
 			objectStore.transaction.oncomplete = function(event) {
 				Database.firstTimeWhenServerAvailable();
 			};
-			
 		};
 	},
 	isDatabaseCreated: function() {
@@ -73,8 +110,6 @@ var Database = {
 		Server.callWhenServerAvailable(function() {
 			Database.firstTime();
 		});
-		
-
 	},
 	getById: function(id,result) {
 		var transaction = Database.db.transaction([Database.db_table_name]);
@@ -87,11 +122,13 @@ var Database = {
 			result(request.result);
 		};
 	},
+	//Megj: csak a legfrissebb verziójú énekeket adja vissza
 	getByTitlePart: function(titlepart,result) {
 		var transaction = Database.db.transaction([Database.db_table_name]);
 		var objectStore = transaction.objectStore(Database.db_table_name);
 		var request = objectStore.openCursor();
 		var resultArray = [];
+		
 		request.onsuccess = function(event) {
 			var cursor = event.target.result;
 			if(cursor) {
@@ -101,7 +138,8 @@ var Database = {
 				cursor.continue();
 			}
 			else {
-				result(resultArray);
+				Database.checkIfAllNewest(resultArray,result);
+				//result(resultArray);
 			}
 		};
 	},
@@ -114,16 +152,66 @@ var Database = {
 			var cursor = event.target.result;
 			if(cursor) {
 				if(cursor.value.labels != undefined) {
-					if (cursor.value.labels.indexOf(label.toLowerCase()) !== -1) {  
+					var labels = Database.toLowerAll(cursor.value.labels);
+					if (labels.indexOf(label.toLowerCase()) !== -1) {  
 						resultArray.push(cursor.value.id);
 					}
 				}
 				cursor.continue();
 			}
 			else {
-				result(resultArray);
+				Database.checkIfAllNewest(resultArray,result);
+				//result(resultArray);
 			}
 		};
+	},
+	checkIfAllNewest: function(array,resultFunction) {
+		var onlyNewResultArray = [];
+		checker = function(id) {
+			if(id < array.length) {
+				Database.isNewestSong(array[id],function(is) {
+					if(is) {
+						onlyNewResultArray.push(array[id]);
+					}
+					checker(id+1);
+				});
+			}
+			else {
+				resultFunction(onlyNewResultArray);
+			}
+		};
+
+		checker(0);
+
+	},
+	isNewestSong: function(songid,result) {
+		Database.getById(songid,function(song) {
+			var version_thread = song.oldest_version;
+			var version = song.version;
+
+			var transaction = Database.db.transaction([Database.db_table_name]);
+			var objectStore = transaction.objectStore(Database.db_table_name);
+			var request = objectStore.openCursor();
+			var highestVersion = 0;
+			request.onsuccess = function(event) {
+				var cursor = event.target.result;
+				if(cursor) {
+					if(cursor.value.oldest_version == version_thread && cursor.value.version > highestVersion) {
+						highestVersion = cursor.value.version;
+					}
+					cursor.continue();
+				}
+				else {
+					result(highestVersion == version);
+				}
+			};
+		});
+	},
+	toLowerAll: function(array) {
+		for (var i = 0; i < array.length; i++) {
+			array[i] = array[i].toLowerCase();
+		};
+		return array;
 	},
 	test: function() {
 		Database.getById(4,function(result) {

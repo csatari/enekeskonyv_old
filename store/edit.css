@@ -20,3 +20,19 @@ div.card-panel {
 	font-family: Consolas, monospace;
 	overflow-y: auto;
 }
+.verse-to-delete {
+	float:right;
+}
+.verse-to-delete-icon {
+	color: #C10000;
+}
+.fab-delete {
+	display:none;
+}
+.fab-verse-delete {
+	background-color: green;
+	display:none;
+}
+.verse-clear {
+	float:right;
+}

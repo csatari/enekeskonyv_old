@@ -1,6 +1,10 @@
 body {
 	margin: 0;
 }
+::-webkit-scrollbar { 
+    display: none; 
+}
+
 #side-nav-button {
 	font-size:28px;
 	margin-left: 15px;
@@ -189,4 +193,7 @@ div.footer {
 }
 .fab-toggler-button, .fab-toggler-button:hover {
 	background-color:#64b5f6;
+}
+.key-combos {
+	display: none;
 }

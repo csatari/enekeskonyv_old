@@ -6,7 +6,7 @@ var Config = {
 	//szerverrel kommunikáló configok
 	url: "http://localhost:5000",
 	//url: "../server/",
-	registrationPage: "userRegistration.php",
+	registrationPage: "/userRegistration/",
 	//loginPage: "userLogin.php",
 	loginPage: "/userLogin/",
 	userDataPage: "/userData/",
@@ -28,6 +28,9 @@ var Config = {
 
 	giveTitle: "Cím megadása",
 	newSongSuccessful: "A mentés sikeres",
+	verse: "Versszak",
+	refrain: "Refrén",
+	bridge: "Átvezető",
 
 
 	edit: "Módosítás",

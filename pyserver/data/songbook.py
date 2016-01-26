@@ -93,6 +93,7 @@ class Songbook(BaseClass):
 		all_songs = []
 		for row in record:
 			song = song_class.get_by_id(row.songid)
+			song.oldest_version = song_class.get_oldest_version_of_song(row.songid)
 			all_songs.append(song)
 		return all_songs
 

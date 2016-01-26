@@ -30,6 +30,8 @@ var Config = {
 	giveTitle: "Cím megadása",
 	newSongSuccessful: "A mentés sikeres",
 
+	noVerses: "Nincsenek beállítva versszakok ehhez az énekhez",
+
 
 	edit: "Módosítás",
 	editRequest: "Módosítás kérése",
@@ -96,8 +98,14 @@ var Config = {
 		$(".conf-choosen-theme-name").html("Név");
 		$(".conf-choosen-theme-public").html("Publikus");
 		$(".conf-public").html("Publikus");
+		$(".conf-keyboard-combo").html("Billentyűzet kombinációk");
 		//$(".conf-default").html("Alapbeállítás");
 		$(".config-footer-tooltip-download").attr("data-tooltip",Config.download);
 		$(".config-footer-tooltip-close").attr("data-tooltip",Config.exit);
+
+		$(".conf-combo-darken").html("Elsötétítés");
+		$(".conf-combo-transpose-up").html("Transzponálás fel");
+		$(".conf-combo-transpose-down").html("Transzponálás le");
+		$(".conf-combo-verse-mode").html("Versszakos mód");
 	}
 };

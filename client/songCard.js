@@ -66,7 +66,11 @@ var SongCard = {
 		$('.js-song-card-collection').html("");
 		SongCard.cards.map(function(item) {
 	    	if($('#'+item.id+'.js-song-card').length == 0) {
-		        $('.js-song-card-collection').append(SongCard.cardHtml(item.id,item.title,item.text,item.labels));
+	    		var textHtml = SongText.TextChordTransposing.deleteChordLines(item.text);
+	    		textHtml = SongText.AutomaticMatching.deleteTags(textHtml,"rbva");
+	    		textHtml = SongText.TextChordTransposing.deleteEmptyLines(textHtml);
+	    		textHtml = SongText.webizeNewlines(textHtml);
+		        $('.js-song-card-collection').append(SongCard.cardHtml(item.id,item.title,textHtml,item.labels));
 	    	}
 		});
 		jQuery('.tooltipped').tooltip({delay: 50});
@@ -74,19 +78,20 @@ var SongCard = {
 	},
 	cardHtml: function(id,title,text,labels) {
 		var textsHTML = "";
-		var textSplit = text.split("\n");
+		var textSplit = text.split("</br>");
 		var textdotdotdot = "";
 		if(textSplit.length > 4) {
 			textdotdotdot = "...";
 		}
 		var counter = 0;
+
 		textSplit.map(function(item) {
 			if(counter < 4) {
 				if(counter == 3) {
-					textsHTML = textsHTML + '<p>' + item + textdotdotdot + '</p>';
+					textsHTML = textsHTML + '</br>' + item + textdotdotdot;
 				}
 				else {
-					textsHTML = textsHTML + '<p>' + item +'</p>';
+					textsHTML = textsHTML + '</br>' + item;
 				}
 			}
 			counter++;

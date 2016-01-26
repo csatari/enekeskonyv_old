@@ -5,9 +5,10 @@ from data.user import User
 import data.songbook
 
 def run(arguments):
+	print("authenticating")
 	db.authenticate()
 	if "username" and "password" in arguments: #Bejelentkezteti a felhasználót és visszaadja a sessionid-t, ha helyesek az adatok
-
+		print("login")
 		user_class = User(db.graph)
 		return(user_class.start_login(arguments["username"],arguments["password"]))
 

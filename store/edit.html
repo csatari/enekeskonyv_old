@@ -33,6 +33,33 @@
 		<div class="divider"></div>
 		<div class="row card-preview">
 		</div>
+		<div class="row verse-editor">
+			<div class="col s6">
+				<ul class="collapsible verse-from js-verse-from" data-collapsible="expendable">
+					<!--<li>
+						<div class="collapsible-header">2. versszak</div>
+						<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+					</li>
+					<li>
+						<div class="collapsible-header">Refrén</div>
+						<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+					</li>
+					<li>
+						<div class="collapsible-header">1. versszak</div>
+						<div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+					</li>-->
+				</ul>
+			</div>
+      		<div class="col s6">
+      			<ul class="collapsible verse-to js-verse-to" data-collapsible="expendable">
+				</ul>
+				<div class="verse-clear js-verse-clear">
+					<a class="waves-effect waves-light btn blue lighten-2 js-verse-clear-button">
+						<i class="material-icons left">clear_all</i>Törlés_
+					</a>
+				</div>
+      		</div>
+		</div>
 	</div>
 	<div class="card-panel">
 		<div class="card-title conf-notes">Kotta_</div>
@@ -102,7 +129,11 @@ notes C-D-E-F-G-A-B/4 | C-D-E-F-G-A-B/4 | C-D-E-F-G-A-B/4</div>
 	</div>
 	<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
 		<a class="waves-effect waves-light btn-floating btn-large js-edit-button circle-button-background" style="background-color: #F44336;">
-			<i class="large mdi-editor-mode-edit"></i>
+			<i class="large mdi-editor-mode-edit js-fab-edit"></i>
+		</a>
+		<a class="waves-effect waves-light btn-floating btn-large fab-verse-delete js-fab-verse-delete"
+			>
+			<i class="large material-icons fab-delete js-fab-delete">delete</i>
 		</a>
 	</div>
 </div>

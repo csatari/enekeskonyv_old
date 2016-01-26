@@ -99,7 +99,6 @@ var Registration = {
 			Registration.clearError();
 		}
 	},
-
 	sendRegistration: function(lastname,firstname,username,email,password,afterGood,afterBad) {
 		$.ajax({method: "POST", 
 				url: Config.url+Config.registrationPage, 

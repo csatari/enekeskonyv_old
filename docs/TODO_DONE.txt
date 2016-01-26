@@ -1,0 +1,429 @@
+Store:
+- kitalálni a jogokat, pontosabban specifikálni: hogy lehet az lenni, mi jár vele, hogy lehet megszüntetni X
+- email verifikációs üzenetet küldeni
+- kijelentkezés X
+Fontosak:
+- keresésnél legyen egy indeterminate progressbar a kereső alatt X
+- az énekeknél ha csak a sorrend változik, akkor is frissüljenek az énekek X
+- amikor a beállításokba lépek, akkor válassza ki a beállított témámat, illetve ha váltok témát, akkor mentse el X
+- Szerkesztésnél lehetnek majd egyéb funkciók: Módosítás, Új verzió, Törlés X
+- jogok legyenek meg az adatbázisban, meg kitalálva, hogy kinek mikor milyen jog jár és mit lehet vele csinálni X
+
+
+Következő lépések:
+- legyen meg a kliensen az összes énekművelet valahol X
+- le lehessen kérdezni, hogy milyen jogom van adott énekre vonatkozólag X
+- jog alapján jelenítse meg a műveleteket (kliens oldalon kezelve) X
+- csinálja meg a műveleteket (+szerver oldali jogellenőrzés)
+	- módosítás -> új sorként kerüljön be a táblába új verziószámmal X
+		- nyissa meg a szerkesztőt, amiben már be van állítva az id X
+		- töltse be a szerkesztőbe az adatokat X
+		- a szerver tudjon új verziójú éneket menteni X
+		- küldje el az adatokat a szerverre X
+	- csak a legfrissebb énekek között keressen X
+	- a készítés is azért legyen ellenőrizve jogilag X
+  eddig fontos
+	- songrequest tábla elkészítése, plusz a hozzá tartozó műveletek
+	- jelenjen meg a request a táblában
+	- kérdezze le egy embernek, hogy van-e requestje bizonyos időnként
+	- ha van, akkor jelenítse meg valahol
+	- új verzió készítése -> jelenjen meg a songs táblában, hogy az egy létező ének másik verziója
+	- request elfogadása esetén módosuljon a tábla
+	- a szervertől való lekérdezések is legyenek ellenőrizve jogokra
+- tesztelni, hogy a szerver jó énekeskönyveket ad-e vissza X
+- énekeskönyvek keresése, oldalsávban legyen egy összes énekeskönyv menüpont, ami rákeres az énekeskönyvekre X
+- jelenjen meg, hogy kié az énekeskönyv X
+- az énekeskönyveknek legyen külön oldala: hozza ki kártyákon a következő adatokkal: 
+  Énekeskönyv neve, Tulajdonos, Jogom hozzá (megtekintés (felhasználó), tulajdonos, szerkesztő (megosztott), admin), énekek  száma, beállítások gomb X
+  publikus/privát
+- A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés X
+- legyen adatbázis, amiben tárolom, hogy melyik énekeskönyvhöz melyik énekek tartoznak
+	- plusz az ehhez hozzátartozó függvények: hozzáadás, exist, kiszedés, énekeskönyv összes éneke, hány ének van egy énekeskönyvben X
+	- rest api szerver X
+	- rest api kliens /
+- jelenjen meg az énekeskönyveknél, hogy hány ének van benne X
+- minden külsős js requirement legyen meg belsős fájlként is X
+- Ha rányomok az énekeskönyvre, akkor válassza ki (ha felhasználó, akkor csak az énekeket mutassa belőle), ez látszódjon, hogy ki van választva (footer pl) X
+	- footerben a következő adatok jelenjenek meg: 
+		énekeskönyv neve X, 
+		énekek száma, X
+		letöltés, X
+		kilépés a szerkesztésből X
+	- énekeskönyv nevén legyen látható, hogy kattintható X
+	- dinamikusan jelenjen meg (saját js page) X
+	- kilépés gombra tűnjön el animációval X
+	- szerveren lekérhető az összes éneke X
+	- énekeskönyv nevére kattintva hozza be az énekeit X
+- A beállításokban a következők legyenek: átnevezés, törlés, megosztás, letöltés X
+- legyen adatbázis, amiben tárolom, hogy melyik énekeskönyvhöz melyik énekek tartoznak X
+- jelenjen meg az énekeskönyveknél, hogy hány ének van benne X
+- Ha rányomok az énekeskönyvre, akkor válassza ki (ha felhasználó, akkor csak az énekeket mutassa belőle), ez látszódjon, hogy ki van választva (footer pl) X
+- minden egyes éneknél legyen plusz vagy mínusz gomb, attól függően, hogy benne van-e már az énekeskönyvben, ha ki van választva énekeskönyv
+	- design-ja a plusz-mínusz gombnak X
+	- a szerver mindig elküldi, hogy a kiválasztott énekeskönyvnek tagja-e az ének X
+	- ha ki van választva énekeskönyv, akkor megjelenik a +/- gomb X
+	- ha benne van, akkor - gombként jelenik meg, egyébként + gombként X
+	- szerveren legyen énekeskönyvhöz adás és kivétel X
+	- kezelje le a jogot is rá X
+	- kliensen a rest hívás X
+	- a +/- gombokra adja hozzá/vegye ki az énekeskönyvből X
+- kiválasztott énekeskönyv esetében legyen egy letöltés és egy befejezés gomb X
+
+-------------------------------------Kliens-----------------------------------
+- legyen meg az alapja, hogy hogy néz ki X
+- legyenek meg benne a szükséges énekek id-i X
+- tudjon letölteni a szerverről X
+- a szerver generáljon egy letöltő id-t, amivel le tudunk tölteni az énekeskönyvbe X
+- jelenjen meg a kliensben a letöltő id X
+- töltse fel az adatbázisát a letöltött énekekkel X
+- tudjon keresni az adatbázisában id,cím,label szerint X
+- működjön a kereső, úgy mint a store-ban X
+- Ne nginx-szel legyen megnyitva, hanem offline. Működjön file:// protokollal X
+- Title-t hozzáadni X
+- Az ének keresője enterre nyomva keressen újra, ne töltse újra magát X
+
+Szerverrel való kapcsolat ellenőrzése:
+	- legyen vizsgáló függvény, ami nézi, hogy van-e szerver X
+	- ha még nincs adatbázis, akkor ne hozzon létre üreset X
+	- legyen egy nagy hibaüzenet, hogy nincs szerver
+	- ha már sikerült letölteni, de nincs szerver, akkor csak alul egy sarokban jelenjen meg, hogy nincs szerver (piros warning jel)
+	- ha sok hiba után elérhető a szerver, akkor változzon át a piros warning jel zöld pipává
+	- ha egy éneket nézek, akkor legyen láthatatlan a hibajelző ikon
+	- letöltéshez követeljen szervert
+	- letöltésnél mutassa, hogy hol tart
+	- kérdezzen le egy listát, hogy melyik éneknek melyik a legfrissebb verziója
+	- legyen egy hely, ahol mutatja, hogy melyik éneket frissítették
+
+Store:
+	- szerkesztőben lehessen beállítani versszaksorrendet is
+		- ez a sorrend legyen szoros kapcsolatban a beírt énekkel (ismerje fel, hogy hány versszak van) X
+		- 2 részletben jelenjen meg a versszaksorrend beállítása: X
+			- jobb oldalt maga a sorrend material-collapsible-expandable legyen X
+				- a cím legyen "1. versszak" (az eredeti sorrend szerint), "Refrén", "Átvezető" legyen X
+				- a szöveg pedig legyen az ének akkordok nélkül
+				- lehessen áthúzni a sorrendet X
+				- legyen egy X gomb a sor végén, amivel törölni lehet
+			- bal oldalt ugyanilyen sor X
+				- itt ajánlja fel, hogy melyik versszakot szeretnénk berakni következőnek X
+				- legyen fix, ha kihúzok belőle egy versszakot, akkor maradjon benne X
+		- http://jqueryui.com/sortable X
+			- inkább ez: http://rubaxa.github.io/Sortable/ X
+				- https://github.com/RubaXa/Sortable X 
+				- advanced, only pull (clone) no reordering X
+			- ez alapján lehessen egyikből a másikba húzogatni versszakokat X
+		- mentse is el (küldje el a szervernek)
+		- legyen egy frissítés gomb, amit ha benyomok, akkor 
+				
+	- az előnézet helyesen jelenjen meg (klienstől nyúljon le kódot)
+	- kottához kiegészítés:
+		- szóljon, ha problémája van a kotta leírójával
+		- valami ügyesebb editor
+			- számgombokkal ad hozzá hangokat
+				- fel le gombokkal változtat
+				- pageup-pagedown oktávot változtat
+			- más gombokkal a hang hosszának változtatása
+			- szünet beállítása
+			- ütemvonal beállítása
+			- kulcs beállítása
+	- itt is működjön:
+		- szöveges ének
+			- minden feature-rel
+		- kottás ének
+			- minden feature-rel
+	- énekeskönyv letöltése
+		- js minimalizálás
+		- téma beállítása
+	- keresőben kapcsolódó énekek
+		- az első X énekhez keressen hozzá kapcsolódó énekeket
+			- más nyelven
+			- azonos címkével ellátva (nem nyelv)
+	- a nyelv ne labelként tárolódjon, hanem külön (sehol)
+		- csak úgy jelenítse meg egyedül a SongCard-on
+
+Ének:
+	- design az ének megnyitásra
+		- felül a sáv átalakul és vissza gomb lesz X
+		- a keresősáv megmarad X
+		- 5 mp után tűnjön el X
+		- ha az egér megmozdul, akkor jöjjön elő X
+		- legyen egy szép háttér az ének megjelenítéséhez X
+		- legyen footer, amin vannak az énekhez szükséges beállítások X
+		- ha ének van megnyitva és keresek, akkor lépjen ki az énekből X
+		- az éneknek legyen a megszokott alakja (sans serif, teljes képernyőn) X
+	- be lehessen lépni az énekbe X
+	- jobbra gombra vándoroljon át jobbra a kottára X
+	- balra gombra pedig menjen vissza az énekre X
+	- automatikusan tűnjön el X
+	- enterre is tűnjön el, illetve jöjjön elő X
+		- éneknél X
+		- kottánál X
+	- A position fixed csak az animációnál legyen beállítva X
+		- kapcsoljon be animáció előtt X
+		- kapcsoljon ki rögtön utána X
+		- emiatt scrollozható lesz X
+	- Ha entert nyomok, akkor fixen tűnjön el a sáv X
+		- Ha újra entert nyomok, akkor jöjjön elő X
+	- legyen inicializáció a szöveges és a kottás énekhez is ?
+	- ha kilépek, akkor törölje az adatokat X
+	- ha az invertálás be van kapcsolva, akkor az maradjon is meg minden éneknél
+		- versszakos módban is legyen normális invertálás
+
+Szöveges ének:
+	- legyen egy ének, aminek a neve és a szövege is normális (mélyből hozzád) X
+		- sikeresen megjelenik a kliensen? X
+	- ne látszódjanak a tag-ek X
+	- jelenjen meg az ének akkordok szépen kiemelve X
+	- lehessen nagyítani,kicsinyíteni
+	- lehessen transzponálni X
+	- működjön az invertálás X
+	- amikor eltűnnek a sávok a cím is tűnjön el X
+	- automatikusan illeszkedjen a képernyőre enterre X
+	- lehessen hasábot csinálni
+		- sima billkombó (ctrl+s,ctrl+d) esetén egy sor átrakás X
+			-billentyűzet is menjen
+		- ctrl+alt kombó esetén versszakos átrakás ?
+	- versszakos vetítés X
+		- animáció kitalálása X
+		- működjenek előre a versszakok X
+		- működjenek hátra is X
+		- lépegetés billentyűvel X
+		- kilépni is lehessen X
+	- megjegyzés megjelenítése
+	- nyomtatási kép
+	- csak akkor mutassa a legoptimálisabb méretet, ha teljes képernyőn van (enter) X
+	- backspace-re, escape-re lépjen ki az énekből
+	- a refresh-ben legyen a transzponálás X
+	- a preview-ban törölje ki a tageket X
+		- html-é alakítja az éneket X
+		- törli az akkordokat X
+		- törli a maradék taget X
+		- törli az üres sorokat X
+	- akkordok kikapcsolása
+		- 3 mód:
+			- bekapcsolva
+			- csak az új részeken akkord (1. versszak, 1. refrén, átvezető)
+			- kikapcsolva
+
+Offline Beállítások:
+	- billentyű kombináció beállítások
+	- gyorsmenüben milyen gombok jelenjenek meg
+	- elsötétítés
+	- háttérkép beállítása
+		- több háttérkép beállításának a lehetősége
+		- billentyűkombinációra ezek diavetítése
+	- sablon beállítása
+		- a sablonokat a kliensen lehet beállítani
+			- létre lehet hozni egy névvel
+			- lehet hozzáadni és törölni belőle énekeket
+			- lehet a sorrenden módosítani
+			- egy gombbal végig lehet görgetni az énekeket versszakos módban
+			- legyen egy gomb, amivel be lehet állítani a következőket a sablonra:
+				- mutasson-e akkordokat
+				- legyen-e elsötétedés az énekek között
+				- versszakos vagy teljes mód legyen (akár énekenként be lehetne állítani)
+		- a store-ban is be lehet állítani egy megadott énekeskönyvhöz
+		- a kliens adatbázis frissítésekor letöltődnek a sablon adatok
+
+Kotta:
+	- jelenjen meg a kotta X
+	- legyen a kottának saját kezelő osztálya X
+	- lehessen nagyítani (scale) X
+	- lehessen kiszélesíteni (width) X
+	- lehessen invertálni X
+	- invertálva is működjön a nagyítás/szélesítés, azaz a konverzió X
+	- lehessen transzponálni X
+		- felső akkordokat ismerje fel X
+		- felső akkordokat transzponálja fel-le X
+		- hangjegyeket ismerje fel X
+		- transzponálja a hangjegyek fel-le X
+		- mielőtt transzponálna, de csak az alapnál, vizsgálja meg az előjegyzéseket, és írja be mindenhova X
+		- ismerje fel, hogy egy ütemen belül ugyanazt jelenti a kereszt X
+		- miután bekeresztezte az éneket, minden transzponálás után: X
+			- vegye ütemenként az éneket X
+			- ha egy tömbben van kereszt, azt a hangot vegye hozzá X
+			- ha ez a hang szerepel kereszt nélkül, akkor tegyen rá n módosítót (Cn/4) X
+		- maximum csak x transzponálást engedjen felfele és lefele X
+		- találjon ki egy előjegyzést transzponálás után: X
+			- menjen végig az összes hangon X
+			- számolja össze, hogy melyik hangon hányszor van kereszt, illetve hányszor nincs X
+			- ha egy hangon csak kereszt van, és X
+			- illeszkedik egy előjegyzésre X
+			- algoritmus előjegyzés kitalálásra: X
+				- menjen végig a megszámolt hangokon
+				- a sorrend: F C G D A E
+				- ha simát talál, akkor -1, keresztnél +1
+				- így lesz egy [-2,6,8,0,0,0] szerű tömb
+				- szedje le a nullákat a végéről
+				- [1,2,3,-5,7,0]; [-3,-5,6,0,0,0]; [5,4,-15,1,0,0]
+				- annyi kell az elejéről, amennyinek még pozitív az összege
+				- kész az előjegyzés
+			- állítsa be az előjegyzést, és törölje le a megfelelőkről a kereszteket X
+		- transzponálás menete: X
+			1 Első transzponálás: 
+				1.1 kereszt berakása, ahonnan hiányzik (vmi után) X
+				1.2 illetve natural-ok törlése X
+			Ismétlendő:
+			2 átvált C-be X
+				2.1 amelyik hang a kulcsban van, arra rak egy keresztet X
+				2.2 letöröl minden naturalt X
+			3 megemel minden hangot X
+			4 kitalálja az új előjegyzést X
+			5 állítsa be az új előjegyzést: X
+				5.1 kitalálja, hogy melyik hangokat érinti
+				5.2 amelyik hangon kereszt van, arról leszedi
+				5.3 amin nem volt, arra natural-t tesz
+		- egyelőre minden sorba be kell írni a key-t!!!
+	- automatikusan illeszkedjen a képernyőre enterre X
+		- Rögtön tűnjön el a felső-alsó sáv, ne várjon X
+		- Először a scale kiszámolása: Magasságban beleférjen a képernyőbe. Lehet csak számolással? Lehet! X
+		- Szélesség beállítása, hogy akkora legyen, mint a képernyő X
+		- Enterre működjön X
+	- nyomtatási kép
+	- kezelje a b-s előjegyzést is
+	- kezelje a 7 keresztes előjegyzést - sikerült?
+	- kezelje a 6 keresztes előjegyzést
+
+Verziókezelés:
+	- Fusson le egy adatbázis frissítő függvény megadott időközönként X
+		- megoldás: program indulásakor ellenőriz X
+	- Ha egy énekből készül egy újabb verzió, akkor az kerüljön bele az összes énekeskönyvbe, ami az eredetit tartalmazta X
+	- töltse le újra az összes éneket X
+	- ha van valami új, akkor azt mentse le X
+	- a szerver azt is adja vissza egy ének letöltésekor, hogy melyik a legrégebbi verziója az éneknek X
+		- ezzel tudom azonosítani, hogy mely énekek tartoznak egy verziószálhoz X
+	- a kliens egy énekből csak a legújabb verziót mutassa X
+
+Szerver hibajavítások:
+	- Ha már egyszer van egy language label, akkor ne rakja fel újra
+	- Ne küldje tovább a store-nak, hogy van rajta language label
+
+Kotta szerkesztés elvárás:
+	- Scale csak 1.0 lehet
+	- Szélesség?
+	- Kulcs legyen minden sorban ugyanaz? 
+	- Legyen minden sorban kulcs!
+	- Akkordok a text első sorában lehetnek vesszővel elválasztva
+	- Nem lehet b-s előjegyzést és 7 keresztes előjegyzést használni
+
+
+#A49E8D (háttér v lapok)
+#504136 (címkék)
+#689689 (címkék betűi)
+#B2E6D4 (háttér v lapok)
+#83E8BA (fölül csík) -- ez a szín jó egyedül
+
+Jogok:
+Énekekre vonatkozólag:
+1 - Felhasználó: 1,3,5,6
+2 - Készítő: 1,2,4,6,7
+3 - Admin: 1,2,4,6,7
+Énekeskönyvekre vonatkozólag:
+1 - Felhasználó: 1,ha publikus: 5,8
+2 - Tulajdonos: 1,2,3,4,5,6,7,8,9
+3 - Megosztott: 1,4,5,6,8
+4 - Admin: 1,2,3,4,5,6,7,8,9
+
+Műveletek énekekkel: 1:létrehozás, 2:módosítás, 3:módosítás requesttel, 4:törlés, 5:törlés requesttel, 6:új verzió (fork), 7:request elfogadása
+Műveletek énekeskönyvekkel: 1:létrehozás, 2:átnevezés, 3:törlés, 4:hozzáadás, 5:böngészés, 6:elem törlése, 7:megosztás, 8:letöltés, 9:publikus vagy privát
+
+Jogok tárolása adatbázisban:
+Énekekre:
+- Ének mellett ott van, hogy ki a készítő
+- A request egy songrequest táblába kerül, ha elfogadódik, akkor létrejön egy új ének, és növelődik a verziószám
+
+Énekeskönyvekre:
+- énekeskönyv mellett ott a tulajdonos
+- új tábla, ahol tárolódik, hogy melyik énekeskönyvhöz tartozik megosztott jogú user és ki az
+- énekeskönyv mellett tárolódik, hogy publikus-e
+
+
+Neo4j pythonra való átállás:
+
+18/18
+- getData
+	- allLanguages X
+- songData
+	- addSong
+		- to_json_one - kiírni json formátumban (ahogy az előzőt is) X
+	- getSong X
+	- searchSong X
+		- hashtag és szavak elválasztása X
+		- labelek alapján keresés X
+		- nyelvek alapján keresés X
+		- énekben keresés X
+		- mindegyikre a találatok összeadása, egy tömbbe berakása X
+		- id tömbből énekek készítése X
+		- ének kiegészítése plusz adatokkal (to_json feladata) X
+- songbookData
+	- get-songbook-count X
+		- összeszámlálni az énekeskönyvben lévő énekek számát X
+	- get-songbook-data X
+		- songbook to_json X
+		- egy énekeskönyv adatainak lekérése X
+		- to_json, to_json_one refaktor X
+	- get-all-songs-from-songbook X
+		- összes énekeskönyvi ének lekérése X
+		- azok kiírása X
+	- a többi?
+- userData
+	- name X
+	- get-songbooks X
+	- add-songbook X
+	- get-all-visible-songbooks X
+	- get-themes X
+	- add-theme X
+	- set-theme X
+	- get-theme X
+- userLogin 
+	- username&password X
+- userRegistration
+	- username X
+	- firstname X
+
+- kijelentkezés X
+- set_theme működjön alapbeállításra! (hozzá kéne adni csak az adatbázishoz, és törölni, hogy fixen benne legyen a kliensben) X
+	- adatbázisban default-nak jelölve X
+	- ha default, akkor nem lehet módosítani X
+- sessionid-t nézze meg, hogy létezik: userLogin-nál X
+- témát ha változtatok, akkor is módosuljon X
+- bejelentkezés és regisztráció ott marad (lehet, csak a kijelentkezés miatt) X
+- labelekben felsorolja a nyelvet is X
+
+-------------------------------------------------BUGOK----------------------------------------------
+
+- kijelentkezés után alapbeállítás téma legyen --
+- jelentkeztessen ki a store-ból, ha lejárt a sessionid (a hibaüzenetet írja ki és egységesen kezelje)
+- client: a database csak az utolsó elemre keres rá X
+- a versszakos animációban a before nem jelenik meg jó helyen X
+- store első indításnál nem működik a beállításban a témaváltás
+
+-------------------------------------------------FELADATOK------------------------------------------
+
+Szerver:
+	1. verzió:
+		- Versszakok sorrendjének kezelése
+	Később:
+
+Store:
+	1. verzió:
+		- Versszakok sorrendjének beállítása
+		- Énekeskönyv letöltése
+		- szöveges ének
+		- kotta
+		- jogok megfelelő kezelése
+	Később:
+		- kottaeditor
+		- keresőben kapcsolódó énekek
+Kliens:
+	1. verzió:
+		- kezelje a versszakok sorrendjét
+		- elsötétítés
+		- megjegyzés
+		- nyomtatási kép
+		- akkordok kikapcsolása
+		- Szerverrel való kapcsolat ellenőrzése
+	Később:
+		- beállítások
+			- billentyű kombinációk
+			- háttérkép
+		- sablon

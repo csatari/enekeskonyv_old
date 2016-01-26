@@ -1,6 +1,6 @@
 div.song-root {
 	margin-top:30px;
-	position:fixed;
+	/*position:fixed;*/
 }
 div.song-title {
 	font-size:35px;
@@ -13,4 +13,10 @@ div.song-text {
 div.note-root {
 	margin-top: 30px;
 	position:fixed;
+}
+span.song-chord {
+	color: rgb(33, 89, 214);
+}
+span.first-paragraph, span.second-paragraph {
+	float:left;
 }
